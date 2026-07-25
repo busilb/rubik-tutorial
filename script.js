@@ -102,9 +102,30 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // --- Practice counter ---
+  var practiceBtn = document.getElementById('practiceBtn');
+  var practiceCount = document.getElementById('practiceCount');
+  var count = 0;
+
+  if (practiceBtn && practiceCount) {
+    practiceBtn.addEventListener('click', function () {
+      count++;
+      practiceCount.textContent = count;
+      if (count >= 10) {
+        practiceBtn.textContent = '太棒了！你已经掌握了基本手法！';
+        practiceBtn.style.background = '#10B981';
+        practiceBtn.disabled = true;
+      } else if (count >= 6) {
+        practiceBtn.textContent = '魔方是不是回原了？继续！(' + (10 - count) + ' 遍)';
+      } else {
+        practiceBtn.textContent = '再来一遍！还剩 ' + (10 - count) + ' 遍';
+      }
+    });
+  }
+
   // --- Keyboard navigation ---
   var stepSections = [
-    'hero', 'basics', 'notation',
+    'hero', 'basics', 'holding', 'notation',
     'step1', 'step2', 'step3', 'step4',
     'step5', 'step6', 'step7'
   ];

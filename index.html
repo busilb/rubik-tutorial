@@ -22,8 +22,9 @@
   <ul>
     <li><a href="#hero" class="nav-link active" data-step="0">🏠 首页</a></li>
     <li><a href="#basics" class="nav-link" data-step="1">📖 认识魔方</a></li>
-    <li><a href="#notation" class="nav-link" data-step="2">🔤 转动符号</a></li>
-    <li><a href="#step1" class="nav-link" data-step="3">① 白色十字</a></li>
+    <li><a href="#holding" class="nav-link" data-step="2">🤲 怎么拿</a></li>
+    <li><a href="#notation" class="nav-link" data-step="3">🔤 转动符号</a></li>
+    <li><a href="#step1" class="nav-link" data-step="4">① 白色十字</a></li>
     <li><a href="#step2" class="nav-link" data-step="4">② 底层角块</a></li>
     <li><a href="#step3" class="nav-link" data-step="5">③ 中层棱块</a></li>
     <li><a href="#step4" class="nav-link" data-step="6">④ 黄色十字</a></li>
@@ -137,73 +138,234 @@
       </div>
     </div>
 
+    <div class="next-step">
+      <a href="#holding" class="next-button">下一步：学会怎么拿魔方 →</a>
+    </div>
+  </section>
+
+  <!-- ==================== 怎么拿魔方 ==================== -->
+  <section id="holding" class="step-section">
+    <div class="section-header" style="--accent: #10B981;">
+      <span class="step-badge">基础</span>
+      <h2>怎么拿魔方</h2>
+      <p class="step-desc">拿对了，转起来才顺手，公式才做得快</p>
+    </div>
+
     <div class="content-card">
-      <h3>拿魔方的姿势</h3>
-      <div class="hold-guide">
-        <div class="hold-diagram">
-          <div class="cube-net-mini">
-            <div class="net-face net-top">
-              <div class="grid3">
-                <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-                <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-                <span class="s y"></span><span class="s y"></span><span class="s y"></span>
+      <h3>标准姿势：双手托住魔方</h3>
+      <div class="holding-demo">
+        <div class="hand-diagram">
+          <div class="hand-box left-hand">
+            <div class="hand-label">左手</div>
+            <div class="finger-list">
+              <div class="finger-item">
+                <span class="finger-icon">👈 大拇指</span>
+                <span class="finger-pos">放在<strong>前面</strong>左侧</span>
               </div>
-              <span class="face-label">上 (U)</span>
-            </div>
-            <div class="net-middle">
-              <div class="net-face net-left">
-                <div class="grid3">
-                  <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-                  <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-                  <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-                </div>
-                <span class="face-label">左 (L)</span>
+              <div class="finger-item">
+                <span class="finger-icon">👈 食指</span>
+                <span class="finger-pos">搭在<strong>顶面</strong>左侧</span>
               </div>
-              <div class="net-face net-front">
-                <div class="grid3">
-                  <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-                  <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-                  <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-                </div>
-                <span class="face-label">前 (F)</span>
-              </div>
-              <div class="net-face net-right">
-                <div class="grid3">
-                  <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-                  <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-                  <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-                </div>
-                <span class="face-label">右 (R)</span>
-              </div>
-              <div class="net-face net-back">
-                <div class="grid3">
-                  <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-                  <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-                  <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-                </div>
-                <span class="face-label">后 (B)</span>
+              <div class="finger-item">
+                <span class="finger-icon">👈 其余三指</span>
+                <span class="finger-pos">托住<strong>左面</strong></span>
               </div>
             </div>
-            <div class="net-face net-bottom">
-              <div class="grid3">
-                <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-                <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-                <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+          </div>
+          <div class="hand-cube-visual">
+            <div class="cube-net-mini">
+              <div class="net-face net-top">
+                <div class="grid3">
+                  <span class="s y"></span><span class="s y"></span><span class="s y"></span>
+                  <span class="s y"></span><span class="s y"></span><span class="s y"></span>
+                  <span class="s y"></span><span class="s y"></span><span class="s y"></span>
+                </div>
+                <span class="face-label">上 (U) 黄色</span>
               </div>
-              <span class="face-label">下 (D)</span>
+              <div class="net-middle">
+                <div class="net-face net-left">
+                  <div class="grid3">
+                    <span class="s g"></span><span class="s g"></span><span class="s g"></span>
+                    <span class="s g"></span><span class="s g"></span><span class="s g"></span>
+                    <span class="s g"></span><span class="s g"></span><span class="s g"></span>
+                  </div>
+                  <span class="face-label">左 (L) 绿色</span>
+                </div>
+                <div class="net-face net-front">
+                  <div class="grid3">
+                    <span class="s r"></span><span class="s r"></span><span class="s r"></span>
+                    <span class="s r"></span><span class="s r"></span><span class="s r"></span>
+                    <span class="s r"></span><span class="s r"></span><span class="s r"></span>
+                  </div>
+                  <span class="face-label">前 (F) 红色</span>
+                </div>
+                <div class="net-face net-right">
+                  <div class="grid3">
+                    <span class="s b"></span><span class="s b"></span><span class="s b"></span>
+                    <span class="s b"></span><span class="s b"></span><span class="s b"></span>
+                    <span class="s b"></span><span class="s b"></span><span class="s b"></span>
+                  </div>
+                  <span class="face-label">右 (R) 蓝色</span>
+                </div>
+                <div class="net-face net-back">
+                  <div class="grid3">
+                    <span class="s o"></span><span class="s o"></span><span class="s o"></span>
+                    <span class="s o"></span><span class="s o"></span><span class="s o"></span>
+                    <span class="s o"></span><span class="s o"></span><span class="s o"></span>
+                  </div>
+                  <span class="face-label">后 (B) 橙色</span>
+                </div>
+              </div>
+              <div class="net-face net-bottom">
+                <div class="grid3">
+                  <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+                  <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+                  <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+                </div>
+                <span class="face-label">下 (D) 白色</span>
+              </div>
+            </div>
+          </div>
+          <div class="hand-box right-hand">
+            <div class="hand-label">右手</div>
+            <div class="finger-list">
+              <div class="finger-item">
+                <span class="finger-icon">👉 大拇指</span>
+                <span class="finger-pos">放在<strong>前面</strong>右侧</span>
+              </div>
+              <div class="finger-item">
+                <span class="finger-icon">👉 食指</span>
+                <span class="finger-pos">搭在<strong>顶面</strong>右侧</span>
+              </div>
+              <div class="finger-item">
+                <span class="finger-icon">👉 其余三指</span>
+                <span class="finger-pos">托住<strong>右面</strong></span>
+              </div>
             </div>
           </div>
         </div>
-        <div class="hold-text">
-          <p>整个教程中，我们这样拿魔方：</p>
-          <ul>
-            <li><strong>白色面朝下</strong>（底面）</li>
-            <li><strong>黄色面朝上</strong>（顶面）</li>
-            <li><strong>红色面朝向你</strong>（前面）</li>
-          </ul>
-          <div class="tip-box">💡 教程中说的"上下左右前后"都是基于这个姿势，不要随便换方向哦！</div>
+      </div>
+      <div class="tip-box">💡 想象你在捧一碗饭：双手从两侧托住，大拇指在前，食指在上。魔方不会掉就对了！</div>
+    </div>
+
+    <div class="content-card">
+      <h3>固定方向：整个教程不要换！</h3>
+      <div class="orientation-rules">
+        <div class="orient-rule">
+          <div class="orient-icon">⬇️</div>
+          <div class="orient-text">
+            <strong>白色面永远朝下</strong>
+            <p>白色是底面。还原的时候从下往上，一层一层搞定。</p>
+          </div>
+        </div>
+        <div class="orient-rule">
+          <div class="orient-icon">⬆️</div>
+          <div class="orient-text">
+            <strong>黄色面永远朝上</strong>
+            <p>黄色在顶面。最后三步都在搞定这个面。</p>
+          </div>
+        </div>
+        <div class="orient-rule">
+          <div class="orient-icon">👀</div>
+          <div class="orient-text">
+            <strong>红色面朝向你</strong>
+            <p>红色是"前面"。公式里说的"前"就是红色面的方向。</p>
+          </div>
         </div>
       </div>
+      <div class="important-box">
+        ⚠️ 做公式的时候，不要翻转整个魔方！只转某一个面。如果教程说"整体转动"，会特别标注。
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>哪个手指转哪个面？</h3>
+      <p>这是最关键的——搞清楚每个面<strong>用哪个手指</strong>去转，做公式就不会手忙脚乱。</p>
+      <div class="finger-action-grid">
+        <div class="finger-action">
+          <div class="action-move">R（右面）</div>
+          <div class="action-finger">右手 中指+无名指</div>
+          <div class="action-how">三指向上推 ↑</div>
+        </div>
+        <div class="finger-action">
+          <div class="action-move reverse">R'（右撇）</div>
+          <div class="action-finger">右手 中指+无名指</div>
+          <div class="action-how">三指向下拉 ↓</div>
+        </div>
+        <div class="finger-action">
+          <div class="action-move">U（上面）</div>
+          <div class="action-finger">右手 食指</div>
+          <div class="action-how">食指向左推（拨）←</div>
+        </div>
+        <div class="finger-action">
+          <div class="action-move reverse">U'（上撇）</div>
+          <div class="action-finger">右手 大拇指</div>
+          <div class="action-how">大拇指向右推 →</div>
+        </div>
+        <div class="finger-action">
+          <div class="action-move">L（左面）</div>
+          <div class="action-finger">左手 中指+无名指</div>
+          <div class="action-how">三指向下拉 ↓</div>
+        </div>
+        <div class="finger-action">
+          <div class="action-move reverse">L'（左撇）</div>
+          <div class="action-finger">左手 中指+无名指</div>
+          <div class="action-how">三指向上推 ↑</div>
+        </div>
+        <div class="finger-action">
+          <div class="action-move">F（前面）</div>
+          <div class="action-finger">右手 大拇指</div>
+          <div class="action-how">大拇指顺时针拨 ↻</div>
+        </div>
+        <div class="finger-action">
+          <div class="action-move reverse">F'（前撇）</div>
+          <div class="action-finger">左手 大拇指</div>
+          <div class="action-how">大拇指逆时针拨 ↺</div>
+        </div>
+      </div>
+      <div class="tip-box">💡 最常用的就是 R 和 U——右手三指上下推（R/R'），右手食指和大拇指左右拨（U/U'）。先把这四个练熟！</div>
+    </div>
+
+    <div class="content-card">
+      <h3>练习：做 10 遍 R U R' U'</h3>
+      <p>先不用管魔方变成什么样，就练这个手感。</p>
+      <div class="practice-box">
+        <div class="practice-steps">
+          <div class="practice-step">
+            <span class="practice-num">1</span>
+            <div class="practice-detail">
+              <div class="formula-move">R</div>
+              <span>右手三指<strong>向上推</strong>右面</span>
+            </div>
+          </div>
+          <div class="practice-step">
+            <span class="practice-num">2</span>
+            <div class="practice-detail">
+              <div class="formula-move">U</div>
+              <span>右手食指<strong>向左拨</strong>顶面</span>
+            </div>
+          </div>
+          <div class="practice-step">
+            <span class="practice-num">3</span>
+            <div class="practice-detail">
+              <div class="formula-move reverse">R'</div>
+              <span>右手三指<strong>向下拉</strong>右面</span>
+            </div>
+          </div>
+          <div class="practice-step">
+            <span class="practice-num">4</span>
+            <div class="practice-detail">
+              <div class="formula-move reverse">U'</div>
+              <span>右手大拇指<strong>向右推</strong>顶面</span>
+            </div>
+          </div>
+        </div>
+        <div class="practice-counter">
+          <button class="counter-btn" id="practiceBtn">我做完一遍了！</button>
+          <span class="counter-text">已完成 <strong id="practiceCount">0</strong> / 10 遍</span>
+        </div>
+      </div>
+      <div class="tip-box">💡 做 6 遍 R U R' U' 魔方会回到原来的样子！不信你试试。</div>
     </div>
 
     <div class="next-step">
@@ -444,7 +606,7 @@
     <div class="content-card">
       <h3>核心公式：万能四步</h3>
       <div class="formula-box">
-        <div class="formula-name">基本公式（右下右上）</div>
+        <div class="formula-name">基本公式（右上右上）</div>
         <div class="formula-display">
           <span class="formula-move">R</span>
           <span class="formula-move">U</span>
@@ -452,6 +614,10 @@
           <span class="formula-move reverse">U'</span>
         </div>
         <p class="formula-desc">右面转 → 上面转 → 右面回 → 上面回</p>
+        <div class="memory-trick">
+          <span class="memory-label">记忆口诀</span>
+          <span class="memory-text">「上去 回来 上去 回来」—— 右手推上去，食指拨过去，右手拉回来，大拇指推回来</span>
+        </div>
       </div>
 
       <div class="tips-list">
@@ -534,6 +700,10 @@
           <span class="formula-move">F</span>
         </div>
         <p class="formula-desc">上 → 右 → 上撇 → 右撇 → 上撇 → 前撇 → 上 → 前</p>
+        <div class="memory-trick">
+          <span class="memory-label">记忆口诀</span>
+          <span class="memory-text">分两半记：前4步「上 右 回 回」= 把顶层让开；后4步「回 回 上 前」= 把棱块塞进去</span>
+        </div>
       </div>
 
       <div class="formula-box">
@@ -549,6 +719,10 @@
           <span class="formula-move reverse">F'</span>
         </div>
         <p class="formula-desc">上撇 → 左撇 → 上 → 左 → 上 → 前 → 上撇 → 前撇</p>
+        <div class="memory-trick">
+          <span class="memory-label">记忆口诀</span>
+          <span class="memory-text">和右插是"镜像"！右插用 R 和 F，左插用 L 和 F，方向全部反过来</span>
+        </div>
       </div>
     </div>
 
@@ -620,6 +794,10 @@
           <span class="formula-move reverse">F'</span>
         </div>
         <p class="formula-desc">前 → 右 → 上 → 右撇 → 上撇 → 前撇</p>
+        <div class="memory-trick">
+          <span class="memory-label">记忆口诀</span>
+          <span class="memory-text">「前开门 → 右上右上 → 前关门」—— F 开头 F' 结尾，中间就是你最熟的 R U R' U'</span>
+        </div>
       </div>
     </div>
 
@@ -701,6 +879,10 @@
           <span class="formula-move reverse">R'</span>
         </div>
         <p class="formula-desc">右 → 上 → 右撇 → 上 → 右 → 上×2 → 右撇</p>
+        <div class="memory-trick">
+          <span class="memory-label">记忆口诀</span>
+          <span class="memory-text">只用 R 和 U 两个动作！节奏是「右上回 · 上右上上回」—— 前半段是老朋友 R U R'，后半段多转一次上面</span>
+        </div>
       </div>
 
       <div class="tip-box">💡 U2 = 上面转两次（180度）。</div>
@@ -767,6 +949,10 @@
           <span class="formula-move">L</span>
         </div>
         <p class="formula-desc">上 → 右 → 上撇 → 左撇 → 上 → 右撇 → 上撇 → 左</p>
+        <div class="memory-trick">
+          <span class="memory-label">记忆口诀</span>
+          <span class="memory-text">「上右回左 · 上右回左」—— 两组完全一样的节奏！第一组是正方向（U R U' L'），第二组是反方向（U R' U' L）</span>
+        </div>
       </div>
     </div>
 
@@ -864,6 +1050,10 @@
           <span class="formula-move">R2</span>
         </div>
         <p class="formula-desc">右 → 上撇 → 右 → 上 → 右 → 上 → 右 → 上撇 → 右撇 → 上撇 → 右2</p>
+        <div class="memory-trick">
+          <span class="memory-label">记忆口诀</span>
+          <span class="memory-text">全程只用 R 和 U！节奏：「右·回 / 右·上 / 右·上 / 右·回 / 回·回 / 右右」—— 像打鼓一样记节奏</span>
+        </div>
       </div>
 
       <div class="formula-box">
@@ -882,6 +1072,10 @@
           <span class="formula-move reverse">R'</span>
         </div>
         <p class="formula-desc">右2 → 上 → 右 → 上 → 右撇 → 上撇 → 右撇 → 上撇 → 右撇 → 上 → 右撇</p>
+        <div class="memory-trick">
+          <span class="memory-label">记忆口诀</span>
+          <span class="memory-text">顺时针公式的"倒带"！顺的从 R 开头 R2 结尾，逆的从 R2 开头 R' 结尾，方向全反</span>
+        </div>
       </div>
     </div>
 
