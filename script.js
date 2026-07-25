@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // --- Keyboard navigation ---
   var stepSections = [
-    'hero', 'basics', 'holding', 'notation',
+    'hero', 'story', 'basics', 'holding', 'notation',
     'step1', 'step2', 'step3', 'step4',
     'step5', 'step6', 'step7'
   ];

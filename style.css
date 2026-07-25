@@ -1136,6 +1136,227 @@ footer {
 }
 
 /* ---------- Logic Explanation ---------- */
+
+/* ---------- Story Section ---------- */
+.story-card {
+  border-top: 3px solid #8B5CF6;
+}
+
+.house-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.house-floor {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.floor-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  padding: 16px;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.floor-desc {
+  flex: 1;
+  padding: 16px 20px;
+}
+
+.floor-desc strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.floor-desc p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.floor-3 { background: #FEF3C7; }
+.floor-3 .floor-label { background: #FDE68A; color: #92400E; }
+.floor-2 { background: #DBEAFE; }
+.floor-2 .floor-label { background: #93C5FD; color: #1E3A8A; }
+.floor-1 { background: #F3F4F6; }
+.floor-1 .floor-label { background: #D1D5DB; color: #374151; }
+
+/* Three moves */
+.three-moves {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+
+.move-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  min-width: 150px;
+}
+
+.move-open { background: #FEE2E2; }
+.move-insert { background: #D1FAE5; }
+.move-close { background: #DBEAFE; }
+
+.move-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(0,0,0,0.1);
+  color: var(--text);
+  font-weight: 800;
+  border-radius: 50%;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.move-text strong {
+  display: block;
+  font-size: 16px;
+}
+
+.move-text p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.move-arrow {
+  font-size: 24px;
+  color: var(--text-light);
+  font-weight: 700;
+}
+
+/* Analogy box */
+.analogy-box {
+  background: #FFFBEB;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 12px 0;
+}
+
+.analogy-box p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+/* Key formula explain */
+.key-formula-explain {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.key-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  background: #F8FAFC;
+  border-radius: 8px;
+}
+
+.key-text {
+  font-size: 15px;
+}
+
+/* Dice analogy */
+.dice-analogy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.dice-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: #F5F3FF;
+  border-radius: 10px;
+}
+
+.dice-num {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #8B5CF6;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 6px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.dice-step p {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* Learn method */
+.learn-method {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.learn-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px;
+  background: #F0FDF4;
+  border-radius: 10px;
+}
+
+.learn-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #10B981;
+  color: white;
+  font-weight: 700;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.learn-step strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.learn-step p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* ---------- Logic Explanation ---------- */
 .logic-card {
   border-left: 4px solid #8B5CF6;
 }
@@ -1339,6 +1560,27 @@ footer {
 
   .practice-counter {
     flex-direction: column;
+  }
+
+  .floor-label {
+    width: 80px;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .three-moves {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .move-arrow {
+    text-align: center;
+    transform: rotate(90deg);
+  }
+
+  .hand-diagram {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .section-header h2 {
