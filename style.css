@@ -1402,6 +1402,64 @@ footer {
 /* ---------- Scenario List ---------- */
 
 /* ---------- Facts List ---------- */
+
+/* ---------- Walkthrough Steps ---------- */
+.walkthrough {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.walk-step {
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.walk-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: #F0F9FF;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.walk-num {
+  display: inline-block;
+  padding: 4px 14px;
+  background: #3B82F6;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.walk-body {
+  padding: 20px;
+}
+
+.walk-body p {
+  margin: 6px 0;
+}
+
+.walk-body ul {
+  margin: 12px 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.walk-body li {
+  margin: 6px 0;
+  padding: 8px 12px;
+  background: #F8FAFC;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+/* ---------- Facts List ---------- */
 .facts-list {
   display: flex;
   flex-direction: column;

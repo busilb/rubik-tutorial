@@ -947,7 +947,104 @@
     </div>
 
     <div class="content-card">
-      <h3>核心公式：万能四步</h3>
+      <h3>前提：白色十字已经做好，白色面朝下</h3>
+      <div class="important-box">
+        ⚠️ 做角块之前，确保白色十字已经完成（底面十字 + 侧面颜色对齐中心块）。白色面朝下拿着。如果十字还没做好，先回上一步。
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>手把手操作：跟着做</h3>
+      <div class="walkthrough">
+        <div class="walk-step">
+          <div class="walk-header">
+            <span class="walk-num">第一步</span>
+            <strong>找到一个带白色的角块</strong>
+          </div>
+          <div class="walk-body">
+            <p>眼睛看顶层（黄色面那一层）的4个角。找到一个<strong>带白色</strong>的角块。</p>
+            <p>白色可能朝上、朝前、或朝侧面——没关系，只要看到白色就行。</p>
+            <div class="tip-box">💡 如果顶层4个角都没有白色——说明白色角块都卡在底层了。别慌，等下会教你怎么弄出来。</div>
+          </div>
+        </div>
+
+        <div class="walk-step">
+          <div class="walk-header">
+            <span class="walk-num">第二步</span>
+            <strong>看这个角块的3种颜色，它应该去哪？</strong>
+          </div>
+          <div class="walk-body">
+            <p>角块有3种颜色。一种是白色，另外两种告诉你它的"家"在哪。</p>
+            <p><strong>举例：</strong>你找到一个角块，3种颜色是 白色、红色、蓝色。</p>
+            <p>红色中心块在哪个面？蓝色中心块在哪个面？这两个面的<strong>交界处的底角</strong>就是它的家。</p>
+            <p>红色面在前、蓝色面在右 → 它的家就是<strong>底层右前角</strong>。</p>
+          </div>
+        </div>
+
+        <div class="walk-step">
+          <div class="walk-header">
+            <span class="walk-num">第三步</span>
+            <strong>转动顶层，让角块到"家"的正上方</strong>
+          </div>
+          <div class="walk-body">
+            <p>只转顶层（U或U'），把这个白色角块移到它的家的<strong>正上方</strong>。</p>
+            <p>接着上面的例子：它的家在底层右前角 → 把它转到<strong>顶层右前角</strong>。</p>
+            <div class="important-box">⚠️ 这一步只转顶层！不要转其他面，不然十字会乱。</div>
+          </div>
+        </div>
+
+        <div class="walk-step">
+          <div class="walk-header">
+            <span class="walk-num">第四步</span>
+            <strong>整体转动魔方，让角块在你的右前方</strong>
+          </div>
+          <div class="walk-body">
+            <p>整体旋转魔方（不是转某一面，是整个魔方一起转），让这个角块在你的<strong>右手前方</strong>的位置。</p>
+            <p>这样 R U R' U' 才能操作到这个角块。</p>
+          </div>
+        </div>
+
+        <div class="walk-step">
+          <div class="walk-header">
+            <span class="walk-num">第五步</span>
+            <strong>做 R U R' U'，做完看一眼，没好就再做</strong>
+          </div>
+          <div class="walk-body">
+            <div class="formula-display">
+              <span class="formula-move">R</span>
+              <span class="formula-move">U</span>
+              <span class="formula-move reverse">R'</span>
+              <span class="formula-move reverse">U'</span>
+            </div>
+            <p>做完<strong>完整4步</strong>后看一下底面：白色角块到底层了吗？白色朝下了吗？</p>
+            <ul>
+              <li>✅ 白色朝下，侧面颜色也对 → 这个角块搞定了！回第一步找下一个。</li>
+              <li>❌ 还没到位 → <strong>不要动其他面</strong>，原地再做一遍 R U R' U'。</li>
+              <li>最多做 <strong>5 遍</strong>一定会到位。</li>
+            </ul>
+            <div class="important-box">⚠️ 做的过程中看到十字"乱了"是正常的！做完4步十字会恢复。中间不要停下来。</div>
+          </div>
+        </div>
+
+        <div class="walk-step">
+          <div class="walk-header">
+            <span class="walk-num">特殊情况</span>
+            <strong>白色角块卡在底层怎么办？</strong>
+          </div>
+          <div class="walk-body">
+            <p>如果一个白色角块已经在底层，但颜色不对（白色没有朝下，或者侧面颜色对不上中心块）：</p>
+            <div class="scenario-steps">
+              <p>1. 整体转动魔方，让这个角块在你的<strong>右前方</strong></p>
+              <p>2. 做一遍 <code>R U R' U'</code> → 它会被弹到顶层</p>
+              <p>3. 现在就变成了正常情况，按第二步~第五步处理</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>核心公式：R U R' U'</h3>
       <div class="formula-box">
         <div class="formula-name">基本公式（右上右上）</div>
         <div class="formula-display">
@@ -985,31 +1082,6 @@
           </div>
         </div>
         <div class="tip-box">💡 关键概念：每做一次 R U R' U'，角块原地转120度。白色角块有3个面，所以最多做3次就一定能让白色朝下！（有时候要做1次、3次或5次）</div>
-      </div>
-
-      <div class="tips-list">
-        <div class="tip-item">
-          <span class="tip-num">1</span>
-          <div>
-            <strong>找到一个白色角块</strong>
-            <p>在顶层找到一个带白色的角块。如果在底层但位置不对，先用公式把它弄到顶层。</p>
-          </div>
-        </div>
-        <div class="tip-item">
-          <span class="tip-num">2</span>
-          <div>
-            <strong>把它移到正确位置的上方</strong>
-            <p>转动顶层（U），让这个角块到它应该去的位置的正上方。</p>
-            <p>比如：白-红-蓝角块应该在 红色面和蓝色面交界处 的上方。</p>
-          </div>
-        </div>
-        <div class="tip-item">
-          <span class="tip-num">3</span>
-          <div>
-            <strong>重复"右上右上"直到归位</strong>
-            <p>做 <strong>R U R' U'</strong>，做完一次看看角块到了没，没到就再做一次。最多做 5 次一定会到位！</p>
-          </div>
-        </div>
       </div>
 
       <div class="tip-box">💡 如果角块在底层但方向不对：对准它，做一次 R U R' U' 把它弹到顶层，再按上面的方法重新插入。</div>
