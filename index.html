@@ -3,1858 +3,1653 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>三阶魔方入门教程 - 30分钟学会还原魔方</title>
+  <title>魔方闯关大冒险 - 18关学会三阶魔方</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
 </head>
 <body>
 
-<!-- 侧边导航 -->
-<nav id="sidebar">
-  <div class="nav-header">
-    <div class="mini-cube">
-      <div class="mc-row"><span class="s r"></span><span class="s w"></span><span class="s b"></span></div>
-      <div class="mc-row"><span class="s g"></span><span class="s y"></span><span class="s o"></span></div>
-      <div class="mc-row"><span class="s w"></span><span class="s b"></span><span class="s r"></span></div>
-    </div>
-    <span class="nav-title">魔方教程</span>
+<!-- ===== 顶部固定进度条 ===== -->
+<div id="topbar">
+  <span class="topbar-logo">魔方闯关大冒险</span>
+  <div class="topbar-progress">
+    <div class="topbar-progress-fill" id="progress-fill"></div>
   </div>
-  <ul>
-    <li><a href="#hero" class="nav-link active" data-step="0">🏠 首页</a></li>
-    <li><a href="#quiz" class="nav-link" data-step="1">🎮 趣味闯关</a></li>
-    <li><a href="#why" class="nav-link" data-step="2">💡 为什么学</a></li>
-    <li><a href="#story" class="nav-link" data-step="3">🗺️ 全局地图</a></li>
-    <li><a href="#basics" class="nav-link" data-step="4">🧱 认识结构</a></li>
-    <li><a href="#holding" class="nav-link" data-step="5">🤲 怎么拿</a></li>
-    <li><a href="#warmup" class="nav-link" data-step="6">🏋️ 手感训练</a></li>
-    <li><a href="#step1" class="nav-link" data-step="7">① 白色十字</a></li>
-    <li><a href="#step2" class="nav-link" data-step="8">② 底层角块</a></li>
-    <li><a href="#step3" class="nav-link" data-step="9">③ 中层棱块</a></li>
-    <li><a href="#step4" class="nav-link" data-step="10">④ 黄色十字</a></li>
-    <li><a href="#step5" class="nav-link" data-step="11">⑤ 顶面全黄</a></li>
-    <li><a href="#step6" class="nav-link" data-step="12">⑥ 角块归位</a></li>
-    <li><a href="#step7" class="nav-link" data-step="13">⑦ 大功告成</a></li>
-  </ul>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-</nav>
-
-<!-- 移动端顶部导航 -->
-<div id="mobile-nav">
-  <button id="menu-toggle">☰</button>
-  <span class="mobile-title">三阶魔方教程</span>
-  <div class="mobile-progress">
-    <div class="mobile-progress-fill" id="mobileProgressFill"></div>
+  <div class="topbar-level">
+    <div class="topbar-level-icon" id="level-counter-icon">1</div>
+    <span id="level-counter">关卡 0/18</span>
   </div>
 </div>
 
+<!-- ===== 成就弹窗（脚本会自动创建，这里也放一个备用） ===== -->
+<div id="achievement-popup" class="achievement-popup"></div>
+
 <main>
 
-  <!-- ==================== 首页 ==================== -->
-  <section id="hero" class="hero-section">
-    <div class="hero-content">
-      <div class="cube-3d">
-        <div class="cube-3d-inner">
-          <div class="face front">
-            <div class="grid3">
-              <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-              <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-              <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-            </div>
-          </div>
-          <div class="face right">
-            <div class="grid3">
-              <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-              <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-              <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-            </div>
-          </div>
-          <div class="face top">
-            <div class="grid3">
-              <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-              <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-              <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-            </div>
-          </div>
-        </div>
+<!-- ============================================================ -->
+<!-- 第一阶段：认识魔方 (关卡 1-3)                                   -->
+<!-- ============================================================ -->
+
+<!-- ==================== 关卡 1：小探险家 ==================== -->
+<section id="level-1" class="level" data-level="1">
+  <div class="level-header">
+    <div class="level-badge">关卡 1</div>
+    <h2 class="level-title">小探险家</h2>
+    <div class="level-meta">
+      <span class="level-time">约 2 分钟</span>
+      <span class="level-xp">+30 XP</span>
+    </div>
+    <div class="phase-tag">第一阶段：认识魔方</div>
+  </div>
+
+  <div class="content-card">
+    <h3>欢迎来到魔方世界！</h3>
+    <p>在开始学习之前，先来回答三个小问题吧！</p>
+    <p>别怕答错，答错了也没关系——这只是帮你热热脑子。</p>
+  </div>
+
+  <div class="content-card quiz-card">
+    <h3>问题 1：魔方有几个面？</h3>
+    <div class="quiz-options" data-correct="2" data-qid="1-1">
+      <button class="quiz-btn" data-idx="1">4 个</button>
+      <button class="quiz-btn" data-idx="2">6 个</button>
+      <button class="quiz-btn" data-idx="3">8 个</button>
+      <button class="quiz-btn" data-idx="4">12 个</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="content-card quiz-card">
+    <h3>问题 2：每个面有几个小贴纸？</h3>
+    <div class="quiz-options" data-correct="3" data-qid="1-2">
+      <button class="quiz-btn" data-idx="1">4 个（2x2）</button>
+      <button class="quiz-btn" data-idx="2">6 个（2x3）</button>
+      <button class="quiz-btn" data-idx="3">9 个（3x3）</button>
+      <button class="quiz-btn" data-idx="4">16 个（4x4）</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="content-card quiz-card">
+    <h3>问题 3：魔方一共有多少个小贴纸？</h3>
+    <p>提示：每个面有 9 个贴纸，一共有 6 个面……</p>
+    <div class="quiz-options" data-correct="2" data-qid="1-3">
+      <button class="quiz-btn" data-idx="1">48 个</button>
+      <button class="quiz-btn" data-idx="2">54 个</button>
+      <button class="quiz-btn" data-idx="3">60 个</button>
+      <button class="quiz-btn" data-idx="4">36 个</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>魔方是一个正方体。正方体有 6 个面，每个面是 3x3 的方格，所以有 9 个贴纸。总共就是 6 x 9 = 54 个贴纸。</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-1" data-requires-quiz disabled>完成本关</button>
+</section>
+
+<!-- ==================== 关卡 2：积木大师 ==================== -->
+<section id="level-2" class="level locked" data-level="2">
+  <div class="level-header">
+    <div class="level-badge">关卡 2</div>
+    <h2 class="level-title">积木大师</h2>
+    <div class="level-meta">
+      <span class="level-time">约 3 分钟</span>
+      <span class="level-xp">+40 XP</span>
+    </div>
+    <div class="phase-tag">第一阶段：认识魔方</div>
+  </div>
+
+  <div class="content-card">
+    <h3>魔方里有三种"积木"</h3>
+    <p>虽然魔方看起来有 54 个贴纸，但其实它是由<strong>小方块</strong>组成的。每个小方块可能有 1 个、2 个、或 3 个颜色。我们来认识一下这三种方块：</p>
+  </div>
+
+  <div class="content-card">
+    <h3>第一种：中心块（6 个）</h3>
+    <div class="block-info">
+      <div class="block-demo">
+        <div class="piece-demo center-piece"><span class="s r" style="width:48px;height:48px;border-radius:6px;"></span></div>
       </div>
-      <h1>30分钟学会<br><span class="highlight">三阶魔方</span></h1>
-      <p class="subtitle">零基础也能学会 · 一步一步跟着做 · 你一定可以！</p>
-      <a href="#basics" class="cta-button">开始学习 →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 趣味闯关 ==================== -->
-  <section id="quiz" class="step-section">
-    <div class="section-header" style="--accent: #F59E0B; --accent-text: #333;">
-      <span class="step-badge">热身</span>
-      <h2>先来几道趣味题</h2>
-      <p class="step-desc">不用拿魔方，先用脑子"玩"一下</p>
-    </div>
-
-    <div class="content-card quiz-card" id="quizCard1">
-      <h3>第 1 题：魔方有几种颜色？</h3>
-      <div class="quiz-options" data-correct="2">
-        <button class="quiz-btn" data-idx="1">4 种</button>
-        <button class="quiz-btn" data-idx="2">6 种</button>
-        <button class="quiz-btn" data-idx="3">8 种</button>
-        <button class="quiz-btn" data-idx="4">9 种</button>
-      </div>
-      <div class="quiz-feedback" id="feedback1"></div>
-    </div>
-
-    <div class="content-card quiz-card" id="quizCard2">
-      <h3>第 2 题：魔方一共有多少个可以动的小块？</h3>
-      <div class="quiz-options" data-correct="3">
-        <button class="quiz-btn" data-idx="1">27 个（3×3×3）</button>
-        <button class="quiz-btn" data-idx="2">26 个</button>
-        <button class="quiz-btn" data-idx="3">20 个</button>
-        <button class="quiz-btn" data-idx="4">54 个</button>
-      </div>
-      <div class="quiz-feedback" id="feedback2"></div>
-    </div>
-
-    <div class="content-card quiz-card" id="quizCard3">
-      <h3>第 3 题：魔方的中心块有什么特点？</h3>
-      <div class="quiz-options" data-correct="2">
-        <button class="quiz-btn" data-idx="1">会跟着转动换位置</button>
-        <button class="quiz-btn" data-idx="2">永远不会换位置</button>
-        <button class="quiz-btn" data-idx="3">是魔方里最难搞的块</button>
-        <button class="quiz-btn" data-idx="4">有两种颜色</button>
-      </div>
-      <div class="quiz-feedback" id="feedback3"></div>
-    </div>
-
-    <div class="content-card quiz-card" id="quizCard4">
-      <h3>第 4 题：一个角块有几种颜色？</h3>
-      <div class="quiz-options" data-correct="3">
-        <button class="quiz-btn" data-idx="1">1 种</button>
-        <button class="quiz-btn" data-idx="2">2 种</button>
-        <button class="quiz-btn" data-idx="3">3 种</button>
-        <button class="quiz-btn" data-idx="4">6 种</button>
-      </div>
-      <div class="quiz-feedback" id="feedback4"></div>
-    </div>
-
-    <div class="content-card quiz-card" id="quizCard5">
-      <h3>第 5 题：还原魔方的世界纪录大约是多少？</h3>
-      <div class="quiz-options" data-correct="2">
-        <button class="quiz-btn" data-idx="1">5 秒</button>
-        <button class="quiz-btn" data-idx="2">3 秒多</button>
-        <button class="quiz-btn" data-idx="3">10 秒</button>
-        <button class="quiz-btn" data-idx="4">30 秒</button>
-      </div>
-      <div class="quiz-feedback" id="feedback5"></div>
-    </div>
-
-    <div class="content-card" id="quizResult" style="display:none;">
-      <div class="quiz-score">
-        <h3>闯关完成！</h3>
-        <p>答对 <strong id="scoreNum">0</strong> / 5 题</p>
-        <p class="quiz-comment" id="quizComment"></p>
+      <div class="block-desc">
+        <p><strong>只有 1 个颜色</strong>。每个面的正中间那个就是中心块。</p>
+        <p>中心块有个超厉害的特点：<strong>它永远不会动！</strong>不管你怎么转，它一直在原地。</p>
+        <p>一共有 <strong>6 个</strong>中心块（每面 1 个）。</p>
       </div>
     </div>
+  </div>
 
-    <div class="next-step">
-      <a href="#why" class="next-button">看看学魔方有什么好处 →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 为什么学 ==================== -->
-  <section id="why" class="step-section">
-    <div class="section-header" style="--accent: #EC4899;">
-      <span class="step-badge">动力</span>
-      <h2>学会魔方，你会收获什么？</h2>
-      <p class="step-desc">不只是一个技能，更是一种思维方式</p>
-    </div>
-
-    <div class="content-card">
-      <div class="benefit-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon">🧠</div>
-          <h4>空间想象力</h4>
-          <p>在脑子里"看到"一个立体的东西怎么变化——这个能力学数学、搞设计、做编程都用得上。</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">🎯</div>
-          <h4>拆解复杂问题</h4>
-          <p>魔方看起来超复杂，但拆成7步，每步只做一件事——这就是解决任何难题的思路。</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">💪</div>
-          <h4>耐心和专注</h4>
-          <p>第一次还原可能要1小时。但做出来那一刻，你会知道"坚持"是什么感觉。</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">🌟</div>
-          <h4>社交超能力</h4>
-          <p>在同学面前30秒还原一个魔方？那就是你最酷的时刻。</p>
-        </div>
+  <div class="content-card">
+    <h3>第二种：棱块（12 个）</h3>
+    <div class="block-info">
+      <div class="block-demo">
+        <div class="piece-demo"><span class="s r" style="width:48px;height:48px;border-radius:6px 0 0 6px;"></span><span class="s b" style="width:48px;height:48px;border-radius:0 6px 6px 0;"></span></div>
+      </div>
+      <div class="block-desc">
+        <p><strong>有 2 个颜色</strong>。它在两个面的<strong>交界处</strong>（边上）。</p>
+        <p>为什么是 12 个呢？每个面有 4 条边，但每条边被 2 个面<strong>共享</strong>。</p>
+        <p class="share-math">6 面 x 4 边 / 2 共享 = <strong>12 个</strong>棱块</p>
       </div>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>一个有趣的比喻</h3>
-      <p>还原魔方就像<strong>整理一个乱七八糟的房间</strong>：</p>
-      <div class="analogy-box">
-        <p>你不会一次性把所有东西都放好——你会<strong>先整理地板</strong>（底层），<strong>再收拾桌面</strong>（中层），<strong>最后摆好书架</strong>（顶层）。</p>
-        <p>每收拾好一个区域，你都能看到进展。这就是魔方的还原过程。</p>
-        <p>而且——<strong>你用的整理方法永远是同一套</strong>：「把东西拿出来 → 腾出位置 → 放进去 → 恢复原样」。</p>
+  <div class="content-card">
+    <h3>第三种：角块（8 个）</h3>
+    <div class="block-info">
+      <div class="block-demo">
+        <div class="piece-demo"><span class="s r" style="width:32px;height:48px;border-radius:6px 0 0 6px;"></span><span class="s b" style="width:32px;height:48px;border-radius:0;"></span><span class="s y" style="width:32px;height:48px;border-radius:0 6px 6px 0;"></span></div>
+      </div>
+      <div class="block-desc">
+        <p><strong>有 3 个颜色</strong>。它在三个面的<strong>交汇处</strong>（角上）。</p>
+        <p>每个面有 4 个角，每个角被 3 个面<strong>共享</strong>。</p>
+        <p class="share-math">6 面 x 4 角 / 3 共享 = <strong>8 个</strong>角块</p>
       </div>
     </div>
+  </div>
 
-    <div class="next-step">
-      <a href="#story" class="next-button">看看还原的全局地图 →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 全局地图 ==================== -->
-  <section id="story" class="step-section">
-    <div class="section-header" style="--accent: #8B5CF6;">
-      <span class="step-badge">先看这个</span>
-      <h2>魔方还原的全局地图</h2>
-      <p class="step-desc">在动手之前，先花2分钟看懂全貌——知道自己在哪，才不会迷路</p>
-    </div>
-
-    <div class="content-card story-card">
-      <h3>还原魔方 = 盖一栋三层小楼</h3>
-      <p>把整个魔方想象成一栋三层楼的房子，你从一楼往上盖：</p>
-
-      <div class="house-diagram">
-        <div class="house-floor floor-3">
-          <div class="floor-label">三楼（顶层）</div>
-          <div class="floor-desc">
-            <strong>铺屋顶</strong>
-            <p>第④⑤步：先搭十字梁，再铺满整个屋顶（黄色面）</p>
-            <p>第⑥⑦步：调整屋顶的瓦片位置，让四面墙壁全对齐</p>
-          </div>
-        </div>
-        <div class="house-floor floor-2">
-          <div class="floor-label">二楼（中层）</div>
-          <div class="floor-desc">
-            <strong>装窗户</strong>
-            <p>第③步：在四面墙上各装一扇窗（中层棱块）</p>
-          </div>
-        </div>
-        <div class="house-floor floor-1">
-          <div class="floor-label">一楼（底层）</div>
-          <div class="floor-desc">
-            <strong>打地基 + 立柱子</strong>
-            <p>第①步：在地上画十字框架（白色十字）</p>
-            <p>第②步：在四个角立柱子（底层角块）</p>
-          </div>
-        </div>
+  <div class="content-card">
+    <h3>加在一起看看</h3>
+    <div class="summary-count">
+      <div class="count-item">
+        <span class="count-num">6</span>
+        <span class="count-label">中心块<br><small>1色 · 不动</small></span>
       </div>
-
-      <div class="tip-box">💡 核心规则：<strong>盖上面的时候，不能拆下面的。</strong>公式的设计就是为了做到这一点——临时借用一下，用完放回去。</div>
-    </div>
-
-    <div class="content-card story-card">
-      <h3>所有公式都在做同一件事</h3>
-      <p>不管哪一步，公式的本质都是三个动作：</p>
-
-      <div class="three-moves">
-        <div class="move-card move-open">
-          <div class="move-num">1</div>
-          <div class="move-text">
-            <strong>打开</strong>
-            <p>把已经放好的东西<br>暂时移开，腾出位置</p>
-          </div>
-        </div>
-        <div class="move-arrow">→</div>
-        <div class="move-card move-insert">
-          <div class="move-num">2</div>
-          <div class="move-text">
-            <strong>放入</strong>
-            <p>把新的块<br>放到正确位置</p>
-          </div>
-        </div>
-        <div class="move-arrow">→</div>
-        <div class="move-card move-close">
-          <div class="move-num">3</div>
-          <div class="move-text">
-            <strong>关上</strong>
-            <p>把之前移开的东西<br>放回去，恢复原状</p>
-          </div>
-        </div>
+      <span class="count-plus">+</span>
+      <div class="count-item">
+        <span class="count-num">12</span>
+        <span class="count-label">棱块<br><small>2色 · 会动</small></span>
       </div>
-
-      <p>用生活来比喻：你想往书架中间插一本书——</p>
-      <div class="analogy-box">
-        <p>1. <strong>打开</strong>：把旁边的书推开，腾出一个缝</p>
-        <p>2. <strong>放入</strong>：把新书塞进去</p>
-        <p>3. <strong>关上</strong>：把旁边的书推回来</p>
-        <p>书架上其他书的位置没变，但多了一本新书。魔方公式就是这个原理。</p>
+      <span class="count-plus">+</span>
+      <div class="count-item">
+        <span class="count-num">8</span>
+        <span class="count-label">角块<br><small>3色 · 会动</small></span>
+      </div>
+      <span class="count-plus">=</span>
+      <div class="count-item count-total">
+        <span class="count-num">26</span>
+        <span class="count-label">小方块<br><small>（中间的轴不算）</small></span>
       </div>
     </div>
+  </div>
 
-    <div class="content-card story-card">
-      <h3>R U R' U' —— 万能钥匙</h3>
-      <p>整个魔方还原，核心就一把钥匙：<strong>R U R' U'</strong></p>
+  <div class="content-card quiz-card">
+    <h3>闯关测验：一共有多少个<strong>会动的</strong>方块？</h3>
+    <p>提示：中心块不会动哦！只有棱块和角块会动。</p>
+    <div class="quiz-options" data-correct="3" data-qid="2-1">
+      <button class="quiz-btn" data-idx="1">26 个</button>
+      <button class="quiz-btn" data-idx="2">24 个</button>
+      <button class="quiz-btn" data-idx="3">20 个</button>
+      <button class="quiz-btn" data-idx="4">18 个</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
 
-      <div class="key-formula-explain">
-        <div class="key-row">
-          <span class="formula-move">R</span>
-          <span class="key-text">右面向上推 → <strong>「打开右边的门」</strong></span>
-        </div>
-        <div class="key-row">
-          <span class="formula-move">U</span>
-          <span class="key-text">顶面转一下 → <strong>「把屋顶上的东西挪走」</strong></span>
-        </div>
-        <div class="key-row">
-          <span class="formula-move reverse">R'</span>
-          <span class="key-text">右面拉回来 → <strong>「关上右边的门」</strong>（门里的东西没变）</span>
-        </div>
-        <div class="key-row">
-          <span class="formula-move reverse">U'</span>
-          <span class="key-text">顶面转回来 → <strong>「把屋顶恢复原样」</strong></span>
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>会动的方块 = 棱块（12 个） + 角块（8 个） = 20 个。中心块虽然也是方块，但它们永远不动，所以不算。</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-2" data-requires-quiz disabled>完成本关</button>
+</section>
+
+<!-- ==================== 关卡 3：方向感 ==================== -->
+<section id="level-3" class="level locked" data-level="3">
+  <div class="level-header">
+    <div class="level-badge">关卡 3</div>
+    <h2 class="level-title">方向感</h2>
+    <div class="level-meta">
+      <span class="level-time">约 3 分钟</span>
+      <span class="level-xp">+40 XP</span>
+    </div>
+    <div class="phase-tag">第一阶段：认识魔方</div>
+  </div>
+
+  <div class="content-card">
+    <h3>魔方的 6 个方向</h3>
+    <p>我们用英文字母来代表 6 个面的转动。每个字母 = 那个面<strong>顺时针转 90 度</strong>。</p>
+    <p>带撇号（'）= 那个面<strong>逆时针转 90 度</strong>。</p>
+  </div>
+
+  <div class="content-card">
+    <div class="notation-card">
+      <div class="notation-letter">R</div>
+      <div class="notation-name">Right · 右面</div>
+      <div class="notation-desc">右手中指和无名指<strong>向上推</strong>右面。就像翻书页一样往上翻。</div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="notation-card">
+      <div class="notation-letter">L</div>
+      <div class="notation-name">Left · 左面</div>
+      <div class="notation-desc">左手中指和无名指<strong>向下拉</strong>左面。注意：左面的"顺时针"看起来是向下的（想象你站在左边看）。</div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="notation-card">
+      <div class="notation-letter">U</div>
+      <div class="notation-name">Up · 上面</div>
+      <div class="notation-desc">右手食指<strong>向左拨</strong>顶面。就像拨一个转盘。</div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="notation-card">
+      <div class="notation-letter">D</div>
+      <div class="notation-name">Down · 下面</div>
+      <div class="notation-desc">右手<strong>向右推</strong>底面。平时用得不多，知道就行。</div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="notation-card">
+      <div class="notation-letter">F</div>
+      <div class="notation-name">Front · 前面</div>
+      <div class="notation-desc">右手大拇指<strong>顺时针拨</strong>前面。前面就是正对着你的那个面。</div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="notation-card">
+      <div class="notation-letter">B</div>
+      <div class="notation-name">Back · 后面</div>
+      <div class="notation-desc">后面比较少用到。转的时候要想象你绕到后面去看——<strong>顺时针</strong>其实是从前面看的<strong>逆时针</strong>方向。</div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="important-box">
+      记住：字母后面加 ' （撇号）就是<strong>反方向</strong>转。比如 R 是右面向上推，R' 就是右面向下拉。
+    </div>
+    <div class="tip-box">
+      最常用的就 4 个动作：R、R'、U、U'。先把这 4 个练熟，后面就轻松了！
+    </div>
+  </div>
+
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>拿起你的魔方，把白色面朝下，红色面朝你。试着做 R（右面向上推）和 U（顶面向左拨）。多做几次感受一下！</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-3">完成本关</button>
+</section>
+
+<!-- ============================================================ -->
+<!-- 第二阶段：热身训练 (关卡 4-5)                                   -->
+<!-- ============================================================ -->
+
+<!-- ==================== 关卡 4：手感训练 ==================== -->
+<section id="level-4" class="level locked" data-level="4">
+  <div class="level-header">
+    <div class="level-badge">关卡 4</div>
+    <h2 class="level-title">手感训练</h2>
+    <div class="level-meta">
+      <span class="level-time">约 5 分钟</span>
+      <span class="level-xp">+50 XP</span>
+    </div>
+    <div class="phase-tag">第二阶段：热身训练</div>
+  </div>
+
+  <div class="content-card">
+    <h3>练习：R U R' U'</h3>
+    <p>这四步是魔方里<strong>最最最重要</strong>的基本手法。后面几乎每一步都会用到它。</p>
+    <p>现在不用管魔方变成什么样，只要练手感就好！</p>
+  </div>
+
+  <div class="content-card">
+    <div class="formula-display">
+      <span class="formula-move">R</span>
+      <span class="formula-move">U</span>
+      <span class="formula-move reverse">R'</span>
+      <span class="formula-move reverse">U'</span>
+    </div>
+    <div class="practice-steps">
+      <div class="practice-step">
+        <span class="practice-num">1</span>
+        <div class="practice-detail">
+          <div class="formula-move">R</div>
+          <span>右手三指<strong>向上推</strong></span>
         </div>
       </div>
-
-      <p>做完这4步，底层和中层<strong>完全没变</strong>，但顶层的某些块换了位置或方向。</p>
-      <p>这就是为什么<strong>做角块的时候十字不会被破坏</strong>——只要你完整做完4步，十字一定还在。</p>
-
-      <div class="important-box">
-        ⚠️ 关键提醒：做R U R' U' 的时候，做到一半（比如只做了R U）千万别停下来检查！必须做完整的4步再看结果。中间看到"乱了"是正常的——你只看到了"打开"的状态，还没"关上"呢。
-      </div>
-    </div>
-
-    <div class="content-card story-card">
-      <h3>为什么做6遍R U R' U' 魔方能还原？</h3>
-      <p>这是一个很有意思的数学问题，可以用骰子来理解：</p>
-
-      <div class="dice-analogy">
-        <div class="dice-step">
-          <span class="dice-num">每做1遍</span>
-          <p>右前角的角块<strong>原地转120度</strong>（像骰子翻了一下），但位置不变。</p>
-        </div>
-        <div class="dice-step">
-          <span class="dice-num">做3遍</span>
-          <p>角块转了 3 × 120 = 360度，<strong>朝向回来了</strong>。<br>但同时有3个角块在互相<strong>换位置</strong>，位置还没回来。</p>
-        </div>
-        <div class="dice-step">
-          <span class="dice-num">做6遍</span>
-          <p>再转3遍 → 位置也换回来了 → <strong>一切归位</strong>！</p>
+      <div class="practice-step">
+        <span class="practice-num">2</span>
+        <div class="practice-detail">
+          <div class="formula-move">U</div>
+          <span>右手食指<strong>向左拨</strong></span>
         </div>
       </div>
-
-      <div class="tip-box">💡 <strong>亲手试试：</strong>拿一个还原好的魔方，做3遍R U R' U'，停下来看——你会发现角块朝向对了，但位置不对（有3个角在"轮换"）。再做3遍，全部回来。这就是数学！</div>
-    </div>
-
-    <div class="content-card story-card">
-      <h3>先背还是先理解？</h3>
-      <p>最好的学习方法是<strong>三步走</strong>：</p>
-      <div class="learn-method">
-        <div class="learn-step">
-          <span class="learn-num">1</span>
-          <div>
-            <strong>先看全貌</strong>（你正在做的事）
-            <p>知道7步的大方向，知道每步在干什么。不用记细节。</p>
-          </div>
-        </div>
-        <div class="learn-step">
-          <span class="learn-num">2</span>
-          <div>
-            <strong>边看边做</strong>
-            <p>一步一步跟着教程做，可以对着公式看。不用背，做完一遍就行。</p>
-          </div>
-        </div>
-        <div class="learn-step">
-          <span class="learn-num">3</span>
-          <div>
-            <strong>做3遍，手就记住了</strong>
-            <p>第1遍：对着教程做，很慢。第2遍：偶尔看一眼。第3遍：手指自己会动了。</p>
-          </div>
+      <div class="practice-step">
+        <span class="practice-num">3</span>
+        <div class="practice-detail">
+          <div class="formula-move reverse">R'</div>
+          <span>右手三指<strong>向下拉</strong></span>
         </div>
       </div>
-      <div class="tip-box">💡 就像骑自行车——不是先理解物理学再骑的，而是扶着把手先骑起来，身体自然就学会平衡了。公式也一样，手做熟了，脑子自然就理解了。</div>
-    </div>
-
-    <div class="next-step">
-      <a href="#basics" class="next-button">好的，开始认识魔方！ →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 认识魔方 ==================== -->
-  <section id="basics" class="step-section">
-    <div class="section-header" style="--accent: #4A90D9;">
-      <span class="step-badge">基础</span>
-      <h2>认识你的魔方</h2>
-      <p class="step-desc">在开始之前，我们先来认识魔方的"零件"</p>
-    </div>
-
-    <div class="content-card">
-      <h3>先确认几个事实</h3>
-      <div class="facts-list">
-        <div class="fact-item">
-          <span class="fact-check">✓</span>
-          <span>魔方是一个<strong>正方体</strong></span>
-        </div>
-        <div class="fact-item">
-          <span class="fact-check">✓</span>
-          <span>正方体有 <strong>6 个面</strong></span>
-        </div>
-        <div class="fact-item">
-          <span class="fact-check">✓</span>
-          <span>正方体有 <strong>12 条棱</strong>（边）</span>
-        </div>
-        <div class="fact-item">
-          <span class="fact-check">✓</span>
-          <span>正方体有 <strong>8 个角</strong>（顶点）</span>
-        </div>
-        <div class="fact-item">
-          <span class="fact-check">✓</span>
-          <span>每个面正中间有 <strong>1 个中心块</strong>，共 6 个</span>
-        </div>
-      </div>
-      <div class="tip-box">💡 这些数字是正方体的几何性质，不用记——拿起魔方数一数就知道了。</div>
-    </div>
-
-    <div class="content-card">
-      <h3>魔方有 6 个面，6 种颜色</h3>
-      <div class="color-grid">
-        <div class="color-item"><div class="color-swatch white-swatch"></div><span>白色（底面）</span></div>
-        <div class="color-item"><div class="color-swatch yellow-swatch"></div><span>黄色（顶面）</span></div>
-        <div class="color-item"><div class="color-swatch red-swatch"></div><span>红色（前面）</span></div>
-        <div class="color-item"><div class="color-swatch orange-swatch"></div><span>橙色（后面）</span></div>
-        <div class="color-item"><div class="color-swatch blue-swatch"></div><span>蓝色（右面）</span></div>
-        <div class="color-item"><div class="color-swatch green-swatch"></div><span>绿色（左面）</span></div>
-      </div>
-      <p>对面的颜色是固定搭配的：白↔黄、红↔橙、蓝↔绿。</p>
-    </div>
-
-    <div class="content-card">
-      <h3>关键概念：「共享」</h3>
-      <p>这是理解魔方结构最重要的一个概念——</p>
-      <p>每个面确实有 4 个角、4 条棱。但是<strong>角块和棱块是被多个面共享的</strong>：</p>
-
-      <div class="share-explain">
-        <div class="share-card">
-          <div class="share-visual">
-            <div class="share-cube">
-              <span class="share-face face-a">面A</span>
-              <span class="share-face face-b">面B</span>
-              <span class="share-face face-c">面C</span>
-              <span class="share-block">角块</span>
-            </div>
-          </div>
-          <div class="share-text">
-            <h4>角块 = 3个面的交汇点</h4>
-            <p>一个角块同时属于<strong>3个面</strong>，所以它有3种颜色。</p>
-            <p>每面有4个角，但每个角被3个面共享：</p>
-            <p class="share-math"><strong>6面 × 4角 ÷ 3共享 = 8个角块</strong></p>
-          </div>
-        </div>
-
-        <div class="share-card">
-          <div class="share-visual">
-            <div class="share-cube">
-              <span class="share-face face-a">面A</span>
-              <span class="share-face face-b">面B</span>
-              <span class="share-block">棱块</span>
-            </div>
-          </div>
-          <div class="share-text">
-            <h4>棱块 = 2个面的交界线</h4>
-            <p>一个棱块同时属于<strong>2个面</strong>，所以它有2种颜色。</p>
-            <p>每面有4条棱，但每条棱被2个面共享：</p>
-            <p class="share-math"><strong>6面 × 4棱 ÷ 2共享 = 12个棱块</strong></p>
-          </div>
-        </div>
-
-        <div class="share-card">
-          <div class="share-visual">
-            <div class="share-cube">
-              <span class="share-face face-a">面A</span>
-              <span class="share-block">中心</span>
-            </div>
-          </div>
-          <div class="share-text">
-            <h4>中心块 = 只属于1个面</h4>
-            <p>中心块<strong>不跟任何面共享</strong>，只有1种颜色，而且<strong>永远不动</strong>。</p>
-            <p class="share-math"><strong>6面 × 1中心 = 6个中心块</strong></p>
-          </div>
+      <div class="practice-step">
+        <span class="practice-num">4</span>
+        <div class="practice-detail">
+          <div class="formula-move reverse">U'</div>
+          <span>右手大拇指<strong>向右推</strong></span>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>合计：6 + 12 + 8 = 26 个小块</h3>
-      <div class="summary-count">
-        <div class="count-item">
-          <span class="count-num">6</span>
-          <span class="count-label">中心块<br><small>1色 · 不动</small></span>
-        </div>
-        <span class="count-plus">+</span>
-        <div class="count-item">
-          <span class="count-num">12</span>
-          <span class="count-label">棱块<br><small>2色 · 会动</small></span>
-        </div>
-        <span class="count-plus">+</span>
-        <div class="count-item">
-          <span class="count-num">8</span>
-          <span class="count-label">角块<br><small>3色 · 会动</small></span>
-        </div>
-        <span class="count-plus">=</span>
-        <div class="count-item count-total">
-          <span class="count-num">26</span>
-          <span class="count-label">小块<br><small>（中间的轴不算）</small></span>
-        </div>
-      </div>
-
-      <div class="important-box">
-        ⚠️ 还原魔方 = 把 20 个会动的块（12棱 + 8角）放回正确的位置和朝向。中心块不用管——它们就是坐标。
-      </div>
-
-      <div class="tip-box">💡 <strong>动手验证：</strong>拿起魔方，数一数8个角（正方体的8个顶点），再数12条棱（正方体的12条边）。你会发现，数学和实物完全吻合。这不是需要"记"的知识，是你亲手能验证的事实。</div>
+  <div class="content-card">
+    <h3>目标：做 10 遍 R U R' U'</h3>
+    <p>每做完 4 步算 1 遍。点下面的按钮记录你做了几遍。</p>
+    <div class="practice-counter">
+      <button class="practice-btn counter-btn" id="practiceBtn4" data-target="10" data-counter-id="practice-4">我做完一遍了！</button>
+      <span class="counter-text">已完成 <strong class="practice-count" id="practiceCount4">0</strong> / 10 遍</span>
     </div>
-
-    <div class="next-step">
-      <a href="#holding" class="next-button">下一步：学会怎么拿魔方 →</a>
+    <div class="tip-box">
+      有趣的事实：做 <strong>6 遍</strong> R U R' U'，魔方会变回原来的样子！不信你试试。这就是数学的魔法！
     </div>
-  </section>
+  </div>
 
-  <!-- ==================== 怎么拿魔方 ==================== -->
-  <section id="holding" class="step-section">
-    <div class="section-header" style="--accent: #10B981;">
-      <span class="step-badge">基础</span>
-      <h2>怎么拿魔方</h2>
-      <p class="step-desc">拿对了，转起来才顺手，公式才做得快</p>
+  <div class="content-card">
+    <h3>记忆口诀</h3>
+    <div class="memory-trick">
+      <span class="memory-label">口诀</span>
+      <span class="memory-text">「推上去，拨过去，拉下来，推回来」—— 就像开门、放东西、关门、锁门。</span>
     </div>
-
-    <div class="content-card">
-      <h3>标准姿势：双手托住魔方</h3>
-      <div class="holding-demo">
-        <div class="hand-diagram">
-          <div class="hand-box left-hand">
-            <div class="hand-label">左手</div>
-            <div class="finger-list">
-              <div class="finger-item">
-                <span class="finger-icon">👈 大拇指</span>
-                <span class="finger-pos">放在<strong>前面</strong>左侧</span>
-              </div>
-              <div class="finger-item">
-                <span class="finger-icon">👈 食指</span>
-                <span class="finger-pos">搭在<strong>顶面</strong>左侧</span>
-              </div>
-              <div class="finger-item">
-                <span class="finger-icon">👈 其余三指</span>
-                <span class="finger-pos">托住<strong>左面</strong></span>
-              </div>
-            </div>
-          </div>
-          <div class="hand-cube-visual">
-            <div class="cube-net-mini">
-              <div class="net-face net-top">
-                <div class="grid3">
-                  <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-                  <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-                  <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-                </div>
-                <span class="face-label">上 (U) 黄色</span>
-              </div>
-              <div class="net-middle">
-                <div class="net-face net-left">
-                  <div class="grid3">
-                    <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-                    <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-                    <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-                  </div>
-                  <span class="face-label">左 (L) 绿色</span>
-                </div>
-                <div class="net-face net-front">
-                  <div class="grid3">
-                    <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-                    <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-                    <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-                  </div>
-                  <span class="face-label">前 (F) 红色</span>
-                </div>
-                <div class="net-face net-right">
-                  <div class="grid3">
-                    <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-                    <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-                    <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-                  </div>
-                  <span class="face-label">右 (R) 蓝色</span>
-                </div>
-                <div class="net-face net-back">
-                  <div class="grid3">
-                    <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-                    <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-                    <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-                  </div>
-                  <span class="face-label">后 (B) 橙色</span>
-                </div>
-              </div>
-              <div class="net-face net-bottom">
-                <div class="grid3">
-                  <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-                  <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-                  <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-                </div>
-                <span class="face-label">下 (D) 白色</span>
-              </div>
-            </div>
-          </div>
-          <div class="hand-box right-hand">
-            <div class="hand-label">右手</div>
-            <div class="finger-list">
-              <div class="finger-item">
-                <span class="finger-icon">👉 大拇指</span>
-                <span class="finger-pos">放在<strong>前面</strong>右侧</span>
-              </div>
-              <div class="finger-item">
-                <span class="finger-icon">👉 食指</span>
-                <span class="finger-pos">搭在<strong>顶面</strong>右侧</span>
-              </div>
-              <div class="finger-item">
-                <span class="finger-icon">👉 其余三指</span>
-                <span class="finger-pos">托住<strong>右面</strong></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tip-box">💡 想象你在捧一碗饭：双手从两侧托住，大拇指在前，食指在上。魔方不会掉就对了！</div>
+    <div class="memory-trick">
+      <span class="memory-label">原理</span>
+      <span class="memory-text">R U R' U' 的本质是"打开一扇门 → 移动里面的东西 → 关上门"。做完之后，底层和中层完全没变，只有顶层的某些块换了位置。</span>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>固定方向：整个教程不要换！</h3>
-      <div class="orientation-rules">
-        <div class="orient-rule">
-          <div class="orient-icon">⬇️</div>
-          <div class="orient-text">
-            <strong>白色面永远朝下</strong>
-            <p>白色是底面。还原的时候从下往上，一层一层搞定。</p>
-          </div>
-        </div>
-        <div class="orient-rule">
-          <div class="orient-icon">⬆️</div>
-          <div class="orient-text">
-            <strong>黄色面永远朝上</strong>
-            <p>黄色在顶面。最后三步都在搞定这个面。</p>
-          </div>
-        </div>
-        <div class="orient-rule">
-          <div class="orient-icon">👀</div>
-          <div class="orient-text">
-            <strong>红色面朝向你</strong>
-            <p>红色是"前面"。公式里说的"前"就是红色面的方向。</p>
-          </div>
-        </div>
-      </div>
-      <div class="important-box">
-        ⚠️ 做公式的时候，不要翻转整个魔方！只转某一个面。如果教程说"整体转动"，会特别标注。
-      </div>
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>不要看魔方变乱了就慌！只要完整做完 4 步就行。中途停下来看到"乱了"是正常的——你只做了一半呢！</p>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>哪个手指转哪个面？</h3>
-      <p>这是最关键的——搞清楚每个面<strong>用哪个手指</strong>去转，做公式就不会手忙脚乱。</p>
-      <div class="finger-action-grid">
-        <div class="finger-action">
-          <div class="action-move">R（右面）</div>
-          <div class="action-finger">右手 中指+无名指</div>
-          <div class="action-how">三指向上推 ↑</div>
-        </div>
-        <div class="finger-action">
-          <div class="action-move reverse">R'（右撇）</div>
-          <div class="action-finger">右手 中指+无名指</div>
-          <div class="action-how">三指向下拉 ↓</div>
-        </div>
-        <div class="finger-action">
-          <div class="action-move">U（上面）</div>
-          <div class="action-finger">右手 食指</div>
-          <div class="action-how">食指向左推（拨）←</div>
-        </div>
-        <div class="finger-action">
-          <div class="action-move reverse">U'（上撇）</div>
-          <div class="action-finger">右手 大拇指</div>
-          <div class="action-how">大拇指向右推 →</div>
-        </div>
-        <div class="finger-action">
-          <div class="action-move">L（左面）</div>
-          <div class="action-finger">左手 中指+无名指</div>
-          <div class="action-how">三指向下拉 ↓</div>
-        </div>
-        <div class="finger-action">
-          <div class="action-move reverse">L'（左撇）</div>
-          <div class="action-finger">左手 中指+无名指</div>
-          <div class="action-how">三指向上推 ↑</div>
-        </div>
-        <div class="finger-action">
-          <div class="action-move">F（前面）</div>
-          <div class="action-finger">右手 大拇指</div>
-          <div class="action-how">大拇指顺时针拨 ↻</div>
-        </div>
-        <div class="finger-action">
-          <div class="action-move reverse">F'（前撇）</div>
-          <div class="action-finger">左手 大拇指</div>
-          <div class="action-how">大拇指逆时针拨 ↺</div>
-        </div>
-      </div>
-      <div class="tip-box">💡 最常用的就是 R 和 U——右手三指上下推（R/R'），右手食指和大拇指左右拨（U/U'）。先把这四个练熟！</div>
+  <button class="complete-btn" id="complete-4" data-requires-practice disabled>完成本关</button>
+</section>
+
+<!-- ==================== 关卡 5：一面大师 ==================== -->
+<section id="level-5" class="level locked" data-level="5">
+  <div class="level-header">
+    <div class="level-badge">关卡 5</div>
+    <h2 class="level-title">一面大师</h2>
+    <div class="level-meta">
+      <span class="level-time">约 5 分钟</span>
+      <span class="level-xp">+50 XP</span>
     </div>
+    <div class="phase-tag">第二阶段：热身训练</div>
+  </div>
 
-    <div class="content-card">
-      <h3>练习：做 10 遍 R U R' U'</h3>
-      <p>先不用管魔方变成什么样，就练这个手感。</p>
-      <div class="practice-box">
-        <div class="practice-steps">
-          <div class="practice-step">
-            <span class="practice-num">1</span>
-            <div class="practice-detail">
-              <div class="formula-move">R</div>
-              <span>右手三指<strong>向上推</strong>右面</span>
-            </div>
-          </div>
-          <div class="practice-step">
-            <span class="practice-num">2</span>
-            <div class="practice-detail">
-              <div class="formula-move">U</div>
-              <span>右手食指<strong>向左拨</strong>顶面</span>
-            </div>
-          </div>
-          <div class="practice-step">
-            <span class="practice-num">3</span>
-            <div class="practice-detail">
-              <div class="formula-move reverse">R'</div>
-              <span>右手三指<strong>向下拉</strong>右面</span>
-            </div>
-          </div>
-          <div class="practice-step">
-            <span class="practice-num">4</span>
-            <div class="practice-detail">
-              <div class="formula-move reverse">U'</div>
-              <span>右手大拇指<strong>向右推</strong>顶面</span>
-            </div>
-          </div>
-        </div>
-        <div class="practice-counter">
-          <button class="counter-btn" id="practiceBtn">我做完一遍了！</button>
-          <span class="counter-text">已完成 <strong id="practiceCount">0</strong> / 10 遍</span>
-        </div>
-      </div>
-      <div class="tip-box">💡 做 6 遍 R U R' U' 魔方会回到原来的样子！不信你试试。</div>
-    </div>
-
-    <div class="next-step">
-      <a href="#warmup" class="next-button">下一步：练练手感 →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 手感训练 ==================== -->
-  <section id="warmup" class="step-section">
-    <div class="section-header" style="--accent: #F97316;">
-      <span class="step-badge">热身</span>
-      <h2>手感训练</h2>
-      <p class="step-desc">先别急着还原——练5分钟手感，后面会快10倍</p>
-    </div>
-
-    <div class="content-card">
-      <h3>挑战1：认识6个方向</h3>
-      <p>每个字母代表转动一个面，<strong>顺时针转90度</strong>（想象你正面对着那个面）。</p>
-      <div class="notation-grid">
-        <div class="notation-card">
-          <div class="notation-letter">R</div>
-          <div class="notation-name">Right 右面</div>
-          <div class="notation-desc">右手抓住右面<br>向上推（顺时针）</div>
-          <div class="notation-arrow">⤴</div>
-        </div>
-        <div class="notation-card">
-          <div class="notation-letter">L</div>
-          <div class="notation-name">Left 左面</div>
-          <div class="notation-desc">左手抓住左面<br>向下推（顺时针）</div>
-          <div class="notation-arrow">⤵</div>
-        </div>
-        <div class="notation-card">
-          <div class="notation-letter">U</div>
-          <div class="notation-name">Up 上面</div>
-          <div class="notation-desc">右手抓住顶面<br>向左推（顺时针）</div>
-          <div class="notation-arrow">⤺</div>
-        </div>
-        <div class="notation-card">
-          <div class="notation-letter">D</div>
-          <div class="notation-name">Down 下面</div>
-          <div class="notation-desc">右手抓住底面<br>向右推（顺时针）</div>
-          <div class="notation-arrow">⤻</div>
-        </div>
-        <div class="notation-card">
-          <div class="notation-letter">F</div>
-          <div class="notation-name">Front 前面</div>
-          <div class="notation-desc">右手抓住前面<br>顺时针转</div>
-          <div class="notation-arrow">↻</div>
-        </div>
-        <div class="notation-card">
-          <div class="notation-letter">B</div>
-          <div class="notation-name">Back 后面</div>
-          <div class="notation-desc">注意：后面的顺时针<br>跟前面方向相反</div>
-          <div class="notation-arrow">↺</div>
+  <div class="content-card">
+    <h3>挑战：拼出一个全白色的面</h3>
+    <p>把魔方打乱，然后试试能不能让一个面<strong>全部变成白色</strong>。</p>
+    <p>这一关<strong>不需要公式</strong>！凭感觉转就行。只要白色面的 9 个格子都是白色就算成功。</p>
+    <p>侧面颜色对不对不用管，那是后面的事。</p>
+    <div class="goal-visual">
+      <div class="cube-face-display">
+        <span class="face-title">目标：让一个面全白</span>
+        <div class="grid3 face-large">
+          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>带撇号 = 反方向</h3>
-      <div class="prime-explain">
-        <div class="prime-example">
-          <span class="formula-move">R</span>
-          <span class="prime-text">= 右面顺时针转</span>
+  <div class="content-card">
+    <div class="tip-box">大多数人 2-5 分钟就能做到。做到了就说明你已经有手感了！</div>
+    <div class="tip-box">如果太难了，先试试只拼出白色的"十字"（中间一横一竖），那就更简单。</div>
+  </div>
+
+  <div class="content-card" style="text-align:center;">
+    <p>做到了吗？</p>
+    <button class="counter-btn" id="didItBtn5" onclick="document.getElementById('complete-5').disabled=false;" style="margin-top:12px;font-size:18px;padding:16px 40px;">我做到了！</button>
+  </div>
+
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>小技巧：先找到白色中心块，把它朝上。然后一个一个把白色棱块和角块转到顶面。不要着急，慢慢来！</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-5" disabled>完成本关</button>
+</section>
+
+<!-- ============================================================ -->
+<!-- 第三阶段：白色十字 (关卡 6-8)                                   -->
+<!-- ============================================================ -->
+
+<!-- ==================== 关卡 6：白色十字 ==================== -->
+<section id="level-6" class="level locked" data-level="6">
+  <div class="level-header">
+    <div class="level-badge">关卡 6</div>
+    <h2 class="level-title">白色十字</h2>
+    <div class="level-meta">
+      <span class="level-time">约 5 分钟</span>
+      <span class="level-xp">+60 XP</span>
+    </div>
+    <div class="phase-tag">第三阶段：白色十字</div>
+  </div>
+
+  <div class="content-card">
+    <h3>目标：在底面拼出白色十字</h3>
+    <p>把白色面朝下。我们要在底面拼出一个<strong>白色十字</strong>——就是中间的十字形状全是白色。</p>
+    <div class="goal-visual">
+      <div class="cube-face-display">
+        <span class="face-title">底面（白色面朝下看）</span>
+        <div class="grid3 face-large">
+          <span class="s x"></span><span class="s w"></span><span class="s x"></span>
+          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+          <span class="s x"></span><span class="s w"></span><span class="s x"></span>
         </div>
-        <div class="prime-example">
-          <span class="formula-move reverse">R'</span>
-          <span class="prime-text">= 右面<strong>逆时针</strong>转（反过来）</span>
+        <p class="face-note">灰色 = 暂时不管</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h3>白色棱块可能在 4 种地方</h3>
+    <p>不管它在哪里，思路都一样：<strong>先弄到顶层 → 对准颜色 → 转到底面</strong>。</p>
+  </div>
+
+  <div class="content-card">
+    <details class="scenario-collapse">
+      <summary class="scenario-summary"><span class="scenario-badge">情况 A</span> 白色棱块在顶层，白色朝上——最简单！</summary>
+      <div class="scenario-body">
+        <p>你能在顶面看到一个白色贴纸。</p>
+        <div class="scenario-steps">
+          <p>1. 看这个棱块<strong>侧面</strong>的颜色（比如红色）</p>
+          <p>2. 转动顶层 U，让侧面颜色<strong>对准同颜色的中心块</strong></p>
+          <p>3. 对准后，把那个面转 180 度（比如前面就做 <code>F2</code>），白色就掉到底面了</p>
         </div>
       </div>
-      <div class="tip-box">💡 读法：R 读"右"，R' 读"右撇"。就这么简单！</div>
-    </div>
+    </details>
+  </div>
 
-    <div class="content-card">
-      <h3>数字 = 转多少次</h3>
-      <div class="prime-explain">
-        <div class="prime-example">
-          <span class="formula-move">R2</span>
-          <span class="prime-text">= 右面转 <strong>2 次</strong>（180度），也就是转半圈</span>
+  <div class="content-card">
+    <details class="scenario-collapse">
+      <summary class="scenario-summary"><span class="scenario-badge">情况 B</span> 白色棱块在顶层，白色朝侧面——需要翻转</summary>
+      <div class="scenario-body">
+        <p>白色不是朝上的，而是朝着你或者朝侧面。需要多一步来翻转它。</p>
+        <div class="scenario-steps">
+          <p>1. 把白色棱块转到你的正前方（转 U）</p>
+          <p>2. 做 <code>F U' R U</code>——把棱块翻转过来送到正确位置</p>
+        </div>
+        <div class="memory-trick">
+          <span class="memory-label">原理</span>
+          <span class="memory-text">F 把棱块从顶层拉下来，U' 让右面腾出位置，R 把棱块推上去（白色现在朝下了），U 恢复顶层。</span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="content-card">
+    <details class="scenario-collapse">
+      <summary class="scenario-summary"><span class="scenario-badge">情况 C</span> 白色棱块在中间层——先弹出来</summary>
+      <div class="scenario-body">
+        <p>棱块卡在中间那一层了，需要先把它弹到顶层。</p>
+        <div class="scenario-steps">
+          <p>1. 让这个棱块在你的右前方位置</p>
+          <p>2. 做 <code>R U R'</code>——棱块弹到顶层了</p>
+          <p>3. 变成了情况 A 或 B，按上面的方法处理</p>
+        </div>
+        <div class="memory-trick">
+          <span class="memory-label">原理</span>
+          <span class="memory-text">R 打开右面把棱块带上去，U 移走它不让它掉回来，R' 关上右面恢复原状。</span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="content-card">
+    <details class="scenario-collapse">
+      <summary class="scenario-summary"><span class="scenario-badge">情况 D</span> 白色棱块在底层但颜色不对——取出来重放</summary>
+      <div class="scenario-body">
+        <p>棱块已经在底面了，白色也朝下，但侧面颜色跟中心块对不上。</p>
+        <div class="scenario-steps">
+          <p>1. 让这个棱块在你的正前方</p>
+          <p>2. 做 <code>F2</code> 把它弹到顶层</p>
+          <p>3. 变成了情况 A，重新对准颜色再 F2 送回去</p>
+        </div>
+        <div class="memory-trick">
+          <span class="memory-label">原理</span>
+          <span class="memory-text">F2 把底面和顶面的棱块互换。取出来重新对颜色，再放回去就好了。</span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>一次只找一个白色棱块！先找最简单的情况 A 做掉，再处理其他的。全部做完大概需要处理 4 个棱块。</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-6">完成本关</button>
+</section>
+
+<!-- ==================== 关卡 7：十字检查 ==================== -->
+<section id="level-7" class="level locked" data-level="7">
+  <div class="level-header">
+    <div class="level-badge">关卡 7</div>
+    <h2 class="level-title">十字检查</h2>
+    <div class="level-meta">
+      <span class="level-time">约 2 分钟</span>
+      <span class="level-xp">+30 XP</span>
+    </div>
+    <div class="phase-tag">第三阶段：白色十字</div>
+  </div>
+
+  <div class="content-card">
+    <h3>检查你的白色十字</h3>
+    <p>做完十字之后，要确认 5 件事情都对了才算真正完成。用下面的清单一项一项检查：</p>
+  </div>
+
+  <div class="content-card">
+    <div class="checklist" id="checklist7">
+      <label class="checklist-item">
+        <input type="checkbox" class="checklist-check" data-list="7">
+        <span class="checkmark"></span>
+        <span>白色面朝下，底面中间形成了十字形（4 个棱块 + 中心块是白色）</span>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="checklist-check" data-list="7">
+        <span class="checkmark"></span>
+        <span>前面那个白色棱块的侧面颜色跟前面中心块一样（比如都是红色）</span>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="checklist-check" data-list="7">
+        <span class="checkmark"></span>
+        <span>右面那个白色棱块的侧面颜色跟右面中心块一样（比如都是蓝色）</span>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="checklist-check" data-list="7">
+        <span class="checkmark"></span>
+        <span>后面那个白色棱块的侧面颜色跟后面中心块一样（比如都是橙色）</span>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="checklist-check" data-list="7">
+        <span class="checkmark"></span>
+        <span>左面那个白色棱块的侧面颜色跟左面中心块一样（比如都是绿色）</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="side-check">
+      <div class="side-check-item">
+        <div class="grid3 small-face">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s r"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s r"></span><span class="s x"></span>
+        </div>
+        <span>前面 ✓</span>
+      </div>
+      <div class="side-check-item">
+        <div class="grid3 small-face">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s b"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s b"></span><span class="s x"></span>
+        </div>
+        <span>右面 ✓</span>
+      </div>
+      <div class="side-check-item">
+        <div class="grid3 small-face">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s o"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s o"></span><span class="s x"></span>
+        </div>
+        <span>后面 ✓</span>
+      </div>
+      <div class="side-check-item">
+        <div class="grid3 small-face">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s g"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s g"></span><span class="s x"></span>
+        </div>
+        <span>左面 ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>如果底面十字有了但侧面颜色不对，说明棱块放错了位置。把它用 F2 弹出来，对准正确的中心块再 F2 放回去。</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-7" data-requires-checklist disabled>完成本关</button>
+</section>
+
+<!-- ==================== 关卡 8：十字急救 ==================== -->
+<section id="level-8" class="level locked" data-level="8">
+  <div class="level-header">
+    <div class="level-badge">关卡 8</div>
+    <h2 class="level-title">十字急救</h2>
+    <div class="level-meta">
+      <span class="level-time">约 3 分钟</span>
+      <span class="level-xp">+40 XP</span>
+    </div>
+    <div class="phase-tag">第三阶段：白色十字</div>
+  </div>
+
+  <div class="content-card">
+    <h3>遇到棱块"卡住"了怎么办？</h3>
+    <p>有时候白色棱块会卡在奇怪的地方，或者放了一个棱块之后另一个被顶走了。别慌！这里教你怎么急救。</p>
+  </div>
+
+  <div class="content-card">
+    <h3>情况 1：棱块卡在中间层</h3>
+    <p>白色棱块夹在中间那一层的两个面之间。</p>
+    <div class="scenario-steps">
+      <p>1. 整体转动魔方，让这个棱块在你的<strong>右前方</strong></p>
+      <p>2. 做 <code>R U R'</code>——棱块被弹到顶层了</p>
+      <p>3. 现在回到关卡 6 的方法，从顶层把它送到正确位置</p>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h3>情况 2：棱块在底面但方向反了</h3>
+    <p>白色在侧面而不是在底面。</p>
+    <div class="scenario-steps">
+      <p>1. 让这个棱块在你的正前方</p>
+      <p>2. 做 <code>F2</code> 把它弹到顶层</p>
+      <p>3. 做 <code>U</code> 移走它（给别的棱块让路）</p>
+      <p>4. 做 <code>F2</code> 把原来的空位补回来</p>
+      <p>5. 再回到关卡 6 的方法处理刚才弹出来的棱块</p>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h3>情况 3：放了一个棱块，另一个被顶走了</h3>
+    <p>这是最常见的问题！解决方法：</p>
+    <div class="scenario-steps">
+      <p>1. 做 F2 送棱块到底面之前，先用 U 把顶层的碍事棱块<strong>移走</strong></p>
+      <p>2. 做 F2 放好之后，再用 U 把之前移走的棱块<strong>转回来</strong></p>
+      <p>3. 最后处理那个被转回来的棱块</p>
+    </div>
+    <div class="tip-box">
+      核心原则：<strong>一次只管一个！</strong>放好一个再放下一个。要有耐心。
+    </div>
+  </div>
+
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>白色十字是最需要动脑子的一步，没有固定公式，靠的是观察和灵活应变。多练几次就会越来越快！</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-8">完成本关</button>
+</section>
+
+<!-- ============================================================ -->
+<!-- 第四阶段：底层角块 (关卡 9-10)                                  -->
+<!-- ============================================================ -->
+
+<!-- ==================== 关卡 9：找到角块的家 ==================== -->
+<section id="level-9" class="level locked" data-level="9">
+  <div class="level-header">
+    <div class="level-badge">关卡 9</div>
+    <h2 class="level-title">找到角块的家</h2>
+    <div class="level-meta">
+      <span class="level-time">约 3 分钟</span>
+      <span class="level-xp">+40 XP</span>
+    </div>
+    <div class="phase-tag">第四阶段：底层角块</div>
+  </div>
+
+  <div class="content-card">
+    <h3>角块怎么找"家"？</h3>
+    <p>每个白色角块有 3 种颜色。其中一种是白色，另外两种颜色告诉你它应该去哪里。</p>
+    <p>比如一个角块有<strong>白色、红色、蓝色</strong>：</p>
+    <div class="scenario-steps">
+      <p>红色中心块在前面，蓝色中心块在右面</p>
+      <p>所以这个角块的"家"在 → <strong>底层的右前角</strong>（前面和右面的交界处）</p>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h3>操作方法</h3>
+    <div class="tips-list">
+      <div class="tip-item">
+        <span class="tip-num">1</span>
+        <div>
+          <strong>在顶层找白色角块</strong>
+          <p>看顶层的 4 个角，找到一个带白色的角块。</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">2</span>
+        <div>
+          <strong>看它的 3 种颜色</strong>
+          <p>白色 + 另外两种颜色。另外两种颜色决定了它的"家"在哪个角。</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">3</span>
+        <div>
+          <strong>用 U 把它转到"家"的正上方</strong>
+          <p>只转顶层，把角块移到正确位置的正上方。</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>挑战2：读懂一个公式</h3>
+  <div class="content-card quiz-card">
+    <h3>测验：一个白色、绿色、橙色的角块，它的"家"在哪里？</h3>
+    <div class="quiz-options" data-correct="2" data-qid="9-1">
+      <button class="quiz-btn" data-idx="1">底层右前角（前面和右面交界）</button>
+      <button class="quiz-btn" data-idx="2">底层左后角（左面和后面交界）</button>
+      <button class="quiz-btn" data-idx="3">底层左前角（前面和左面交界）</button>
+      <button class="quiz-btn" data-idx="4">底层右后角（右面和后面交界）</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>绿色中心块在左面，橙色中心块在后面。左面和后面的交界处就是左后角！</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-9" data-requires-quiz disabled>完成本关</button>
+</section>
+
+<!-- ==================== 关卡 10：万能公式 ==================== -->
+<section id="level-10" class="level locked" data-level="10">
+  <div class="level-header">
+    <div class="level-badge">关卡 10</div>
+    <h2 class="level-title">万能公式</h2>
+    <div class="level-meta">
+      <span class="level-time">约 5 分钟</span>
+      <span class="level-xp">+60 XP</span>
+    </div>
+    <div class="phase-tag">第四阶段：底层角块</div>
+  </div>
+
+  <div class="content-card">
+    <h3>目标：把 4 个白色角块都放好</h3>
+    <div class="goal-visual">
+      <div class="cube-face-display">
+        <span class="face-title">底面全白</span>
+        <div class="grid3 face-large">
+          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+        </div>
+      </div>
+      <div class="plus-sign">+</div>
+      <div class="cube-face-display">
+        <span class="face-title">侧面底部一行也对齐</span>
+        <div class="grid3 face-large">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s r"></span><span class="s x"></span>
+          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h3>公式就是你已经会的：R U R' U'</h3>
+    <div class="formula-box">
+      <div class="formula-name">底层角块万能公式</div>
       <div class="formula-display">
         <span class="formula-move">R</span>
         <span class="formula-move">U</span>
         <span class="formula-move reverse">R'</span>
         <span class="formula-move reverse">U'</span>
       </div>
-      <p class="formula-reading">读作：<strong>右 → 上 → 右撇 → 上撇</strong></p>
-      <p>意思是：右面顺时针 → 上面顺时针 → 右面逆时针 → 上面逆时针</p>
-      <div class="tip-box">💡 这四步叫做"基本手法"，后面会经常用到，先记住它！</div>
+      <div class="memory-trick">
+        <span class="memory-label">口诀</span>
+        <span class="memory-text">「推上去，拨过去，拉回来，推回来」—— 和关卡 4 学的一模一样！</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">原理</span>
+        <span class="memory-text">每做一次 R U R' U'，角块会原地转 120 度。角块有 3 个面，所以最多做 3 次（有时是 1 次、3 次或 5 次），白色就会朝下。</span>
+      </div>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>挑战3：做一个面（不是还原！）</h3>
-      <p>拿起你的乱魔方，试试能不能<strong>只拼出一个面的颜色一样</strong>（比如全白色面）。</p>
-      <p>注意：<strong>只要颜色一样就行</strong>，侧面对不对不管。</p>
-      <div class="challenge-box">
-        <div class="challenge-goal">
-          <span class="challenge-label">目标</span>
-          <div class="grid3 face-large">
-            <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-            <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-            <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-          </div>
-          <p>一个面全白就算赢</p>
+  <div class="content-card">
+    <h3>跟着做（5 步走）</h3>
+    <div class="walkthrough">
+      <div class="walk-step">
+        <div class="walk-header">
+          <span class="walk-num">第 1 步</span>
+          <strong>找到一个带白色的角块</strong>
+        </div>
+        <div class="walk-body">
+          <p>在顶层 4 个角里找一个有白色的角块。</p>
         </div>
       </div>
-      <div class="tip-box">💡 这个比正式还原简单很多——不需要公式，随便转就能做到。大多数人2-5分钟就能搞定。做到了就说明你已经有手感了！</div>
-    </div>
-
-    <div class="content-card">
-      <h3>挑战4：验证魔方的"魔法"</h3>
-      <p>拿一个<strong>任意状态</strong>的魔方（乱的也行），做这个实验：</p>
-      <div class="challenge-box">
-        <div class="challenge-experiment">
-          <p><strong>实验：</strong>做 6 遍 R U R' U'</p>
-          <div class="formula-display">
-            <span class="formula-move">R</span>
-            <span class="formula-move">U</span>
-            <span class="formula-move reverse">R'</span>
-            <span class="formula-move reverse">U'</span>
-            <span class="formula-move" style="background:#64748B;">×6</span>
-          </div>
-          <p><strong>结果：</strong>魔方回到你开始之前的状态！</p>
+      <div class="walk-step">
+        <div class="walk-header">
+          <span class="walk-num">第 2 步</span>
+          <strong>看 3 种颜色，知道它要去哪</strong>
+        </div>
+        <div class="walk-body">
+          <p>参考关卡 9 学的方法，找到它的"家"。</p>
         </div>
       </div>
-      <p>这不是巧合——这是数学。任何公式重复足够多次，都会回到原点。魔方的"公式"就是利用了这个规律。</p>
-      <div class="tip-box">💡 做3遍的时候停下来看看——你会发现只有角块的位置变了，其他地方都没动。这就是R U R' U' 的"精准打击"——它只影响特定的几个块。</div>
-    </div>
-
-    <div class="content-card milestone">
-      <h3>热身完成！你现在掌握了——</h3>
-      <div class="achievement-list">
-        <p>✅ 知道6个面怎么转（R/L/U/D/F/B）</p>
-        <p>✅ 知道撇号是反方向</p>
-        <p>✅ 能做出一个面的颜色统一</p>
-        <p>✅ 亲手验证了R U R' U' ×6 = 回到原点</p>
-      </div>
-      <p>你已经准备好了。接下来是真正的还原——从白色十字开始！</p>
-    </div>
-
-    <div class="next-step">
-      <a href="#step1" class="next-button">开始还原！第一步：白色十字 →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 第1步：白色十字 ==================== -->
-  <section id="step1" class="step-section">
-    <div class="section-header" style="--accent: #FFFFFF; --accent-text: #333;">
-      <span class="step-badge">第 1 步</span>
-      <h2>拼出白色十字</h2>
-      <p class="step-desc">在底面拼出一个白色十字，这是一切的起点</p>
-    </div>
-
-    <div class="content-card">
-      <h3>目标：底面出现白色十字</h3>
-      <div class="goal-visual">
-        <div class="cube-face-display">
-          <span class="face-title">底面（白色面）</span>
-          <div class="grid3 face-large">
-            <span class="s x"></span><span class="s w"></span><span class="s x"></span>
-            <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-            <span class="s x"></span><span class="s w"></span><span class="s x"></span>
-          </div>
-          <p class="face-note">灰色 = 暂时不管</p>
+      <div class="walk-step">
+        <div class="walk-header">
+          <span class="walk-num">第 3 步</span>
+          <strong>用 U 转到"家"的正上方</strong>
+        </div>
+        <div class="walk-body">
+          <p>只转顶层，把角块移到家的正上方。</p>
         </div>
       </div>
-
-      <div class="important-box">
-        ⚠️ 注意！不只是底面有十字，还要求每个棱块的<strong>侧面颜色</strong>也要跟对应的中心块颜色一致！
+      <div class="walk-step">
+        <div class="walk-header">
+          <span class="walk-num">第 4 步</span>
+          <strong>整体转魔方，让角块在右前方</strong>
+        </div>
+        <div class="walk-body">
+          <p>整个魔方一起转（不是转某一面），让这个角块到你的右手前方。</p>
+        </div>
       </div>
-
-      <div class="side-check">
-        <div class="side-check-item">
-          <div class="grid3 small-face">
-            <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s r"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s r"></span><span class="s x"></span>
-          </div>
-          <span>前面的棱块<br>也是红色 ✓</span>
+      <div class="walk-step">
+        <div class="walk-header">
+          <span class="walk-num">第 5 步</span>
+          <strong>做 R U R' U'，没好就再来</strong>
         </div>
-        <div class="side-check-item">
-          <div class="grid3 small-face">
-            <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s b"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s b"></span><span class="s x"></span>
-          </div>
-          <span>右面的棱块<br>也是蓝色 ✓</span>
-        </div>
-        <div class="side-check-item">
-          <div class="grid3 small-face">
-            <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s o"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s o"></span><span class="s x"></span>
-          </div>
-          <span>后面的棱块<br>也是橙色 ✓</span>
-        </div>
-        <div class="side-check-item">
-          <div class="grid3 small-face">
-            <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s g"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s g"></span><span class="s x"></span>
-          </div>
-          <span>左面的棱块<br>也是绿色 ✓</span>
+        <div class="walk-body">
+          <p>做完 4 步后看底面：白色朝下了吗？</p>
+          <p>朝下了 → 搞定！找下一个角块。</p>
+          <p>没朝下 → 别动别的面，原地再做一遍 R U R' U'。最多 5 遍一定到位。</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>核心思路：先到顶层 → 对颜色 → 转下去</h3>
-      <p>不管白色棱块现在在哪，都是三步走：</p>
-      <div class="logic-explain">
-        <div class="logic-step">
-          <span class="logic-num">一</span>
-          <div>
-            <strong>把它弄到顶层</strong>
-            <p>不管在哪，先想办法把白色棱块移到顶层（黄色面那一层）。</p>
-          </div>
+  <div class="content-card">
+    <h3>特殊情况：角块卡在底层</h3>
+    <p>如果白色角块已经在底层但位置或方向不对：</p>
+    <div class="scenario-steps">
+      <p>1. 整体转魔方，让那个角块在你的<strong>右前方</strong></p>
+      <p>2. 做一遍 <code>R U R' U'</code> → 角块弹到顶层了</p>
+      <p>3. 接着按上面 5 步走就行了</p>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h3>练一练</h3>
+    <div class="practice-counter">
+      <button class="practice-btn counter-btn" id="practiceBtn10" data-target="4" data-counter-id="practice-10">我放好了一个角块！</button>
+      <span class="counter-text">已完成 <strong class="practice-count" id="practiceCount10">0</strong> / 4 个角块</span>
+    </div>
+  </div>
+
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>如果做了 5 遍还是不对，可能是角块没有放在"家"的正上方。重新看看它的 3 种颜色，确认位置再试。</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-10" data-requires-practice disabled>完成本关</button>
+</section>
+
+<!-- ============================================================ -->
+<!-- 第五阶段：中间层 (关卡 11-12)                                   -->
+<!-- ============================================================ -->
+
+<!-- ==================== 关卡 11：左右滑梯 ==================== -->
+<section id="level-11" class="level locked" data-level="11">
+  <div class="level-header">
+    <div class="level-badge">关卡 11</div>
+    <h2 class="level-title">左右滑梯</h2>
+    <div class="level-meta">
+      <span class="level-time">约 5 分钟</span>
+      <span class="level-xp">+60 XP</span>
+    </div>
+    <div class="phase-tag">第五阶段：中间层</div>
+  </div>
+
+  <div class="content-card">
+    <h3>目标：完成中间那一层</h3>
+    <div class="goal-visual">
+      <div class="cube-face-display">
+        <span class="face-title">侧面看起来这样</span>
+        <div class="grid3 face-large">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
+          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
         </div>
-        <div class="logic-step">
-          <span class="logic-num">二</span>
-          <div>
-            <strong>转动顶层，让侧面颜色对准</strong>
-            <p>棱块有两种颜色，一面是白色，另一面是别的颜色（比如红色）。转动顶层 U，让那个<strong>非白色</strong>的面对准同颜色的中心块。</p>
-          </div>
+        <p class="face-note">顶层暂时不管</p>
+      </div>
+    </div>
+    <p>底层已经搞定了。现在要把中间层的 4 个棱块也放好。</p>
+  </div>
+
+  <div class="content-card">
+    <h3>先找棱块</h3>
+    <p>在顶层找一个<strong>没有黄色</strong>的棱块。有黄色的棱块是属于顶层的，不是中间层的，先不管它。</p>
+    <p>找到之后，转动顶层 U，让棱块的<strong>正面颜色</strong>跟对应的<strong>中心块颜色</strong>一致。</p>
+    <p>然后看棱块<strong>朝上的颜色</strong>：那个颜色的中心块在左边还是右边？</p>
+    <div class="tip-box">在右边 → 用"右滑梯"公式。在左边 → 用"左滑梯"公式。</div>
+  </div>
+
+  <div class="content-card">
+    <h3>右滑梯（棱块要去右边）</h3>
+    <div class="formula-box">
+      <div class="formula-name">右插公式</div>
+      <div class="formula-display">
+        <span class="formula-move">U</span>
+        <span class="formula-move">R</span>
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move reverse">R'</span>
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move reverse">F'</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move">F</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">口诀</span>
+        <span class="memory-text">分两半记！前 4 步：「上·右·回·回」（把顶层让开）。后 4 步：「回·回·上·前」（把棱块塞进去）。</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">原理</span>
+        <span class="memory-text">前半段像"打开抽屉"——U 把棱块移到右面上方，R 打开右面，U' R' 关上。后半段像"推进抽屉"——U' F' 打开前面，U F 把棱块推进空位。</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h3>左滑梯（棱块要去左边）</h3>
+    <div class="formula-box">
+      <div class="formula-name">左插公式</div>
+      <div class="formula-display">
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move reverse">L'</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move">L</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move">F</span>
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move reverse">F'</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">口诀</span>
+        <span class="memory-text">和右插完全"镜像"！右插用 R 和 F，左插用 L 和 F，所有方向反过来。</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">原理</span>
+        <span class="memory-text">原理跟右插一模一样，只是方向反了。如果你记住了右插，左插就是"用左手做一遍"。</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="important-box">
+      如果棱块已经在中间层但方向反了？随便用一次右插或左插，把一个顶层棱块塞进去，错误的棱块会被顶到顶层。然后重新处理它就行了。
+    </div>
+  </div>
+
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>判断左右的方法：先对齐正面颜色和中心块，然后看棱块顶面的颜色。那个颜色的中心块在你的右手边就用右插，在左手边就用左插。</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-11">完成本关</button>
+</section>
+
+<!-- ==================== 关卡 12：两层封顶 ==================== -->
+<section id="level-12" class="level locked" data-level="12">
+  <div class="level-header">
+    <div class="level-badge">关卡 12</div>
+    <h2 class="level-title">两层封顶</h2>
+    <div class="level-meta">
+      <span class="level-time">约 5 分钟</span>
+      <span class="level-xp">+50 XP</span>
+    </div>
+    <div class="phase-tag">第五阶段：中间层</div>
+  </div>
+
+  <div class="content-card">
+    <h3>挑战：完成前两层！</h3>
+    <p>用关卡 11 学的左右滑梯公式，把中间层的 4 个棱块全部放好。</p>
+    <p>做完之后，你的魔方从底面往上看，前两层应该全部对齐了。只剩顶层还是乱的。</p>
+    <div class="goal-visual">
+      <div class="cube-face-display">
+        <div class="grid3 face-large">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
+          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
         </div>
-        <div class="logic-step">
-          <span class="logic-num">三</span>
-          <div>
-            <strong>转 180 度送到底面</strong>
-            <p>对准之后，把那个面转 180 度（比如 F2），棱块就到底面了，而且侧面颜色自动对齐。</p>
-          </div>
+        <p class="face-note">前面</p>
+      </div>
+      <div class="cube-face-display">
+        <div class="grid3 face-large">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s b"></span><span class="s b"></span><span class="s b"></span>
+          <span class="s b"></span><span class="s b"></span><span class="s b"></span>
+        </div>
+        <p class="face-note">右面</p>
+      </div>
+      <div class="cube-face-display">
+        <div class="grid3 face-large">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s o"></span><span class="s o"></span><span class="s o"></span>
+          <span class="s o"></span><span class="s o"></span><span class="s o"></span>
+        </div>
+        <p class="face-note">后面</p>
+      </div>
+      <div class="cube-face-display">
+        <div class="grid3 face-large">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s g"></span><span class="s g"></span><span class="s g"></span>
+          <span class="s g"></span><span class="s g"></span><span class="s g"></span>
+        </div>
+        <p class="face-note">左面</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card" style="text-align:center;">
+    <p>前两层都对齐了吗？</p>
+    <button class="counter-btn" id="didItBtn12" onclick="document.getElementById('complete-12').disabled=false;" style="margin-top:12px;font-size:18px;padding:16px 40px;">我做到了！</button>
+    <div class="tip-box">做到这里真的很厉害了！你已经完成了三分之二的魔方！</div>
+  </div>
+
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>如果顶层找不到不带黄色的棱块了，说明有棱块卡在中间层但方向不对。用一次左插或右插把它弹出来，再重新处理。</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-12" disabled>完成本关</button>
+</section>
+
+<!-- ============================================================ -->
+<!-- 第六阶段：顶层 (关卡 13-18)                                     -->
+<!-- ============================================================ -->
+
+<!-- ==================== 关卡 13：黄色十字 ==================== -->
+<section id="level-13" class="level locked" data-level="13">
+  <div class="level-header">
+    <div class="level-badge">关卡 13</div>
+    <h2 class="level-title">黄色十字</h2>
+    <div class="level-meta">
+      <span class="level-time">约 3 分钟</span>
+      <span class="level-xp">+50 XP</span>
+    </div>
+    <div class="phase-tag">第六阶段：顶层</div>
+  </div>
+
+  <div class="content-card">
+    <h3>目标：顶面出现黄色十字</h3>
+    <div class="goal-visual">
+      <div class="cube-face-display">
+        <span class="face-title">顶面</span>
+        <div class="grid3 face-large">
+          <span class="s x"></span><span class="s y"></span><span class="s x"></span>
+          <span class="s y"></span><span class="s y"></span><span class="s y"></span>
+          <span class="s x"></span><span class="s y"></span><span class="s x"></span>
+        </div>
+        <p class="face-note">角先不管，只要十字</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h3>公式</h3>
+    <div class="formula-box">
+      <div class="formula-name">黄色十字公式</div>
+      <div class="formula-display">
+        <span class="formula-move">F</span>
+        <span class="formula-move">R</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move reverse">R'</span>
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move reverse">F'</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">口诀</span>
+        <span class="memory-text">「前开门 → 右上右上 → 前关门」—— F 开头 F' 结尾，中间是你最熟悉的 R U R' U'！</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">原理</span>
+        <span class="memory-text">F 把顶层棱块拉到前面（开门），R U R' U' 翻转棱块的方向（黄色从侧面翻到顶面），F' 把棱块送回顶层（关门）。</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h3>三种起始情况</h3>
+    <p>看你的顶面黄色棱块，会出现下面三种形状之一：</p>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="grid3 case-face">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s y"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+        </div>
+        <h4>一个点</h4>
+        <p>只有中心是黄色<br>做 <strong>3 次</strong>公式<br>（随便放就行）</p>
+      </div>
+      <div class="case-card">
+        <div class="grid3 case-face">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s y"></span><span class="s y"></span><span class="s x"></span>
+          <span class="s x"></span><span class="s y"></span><span class="s x"></span>
+        </div>
+        <h4>L 形（拐角）</h4>
+        <p>两个黄色棱块成 L<br>把 L 放在<strong>左下角</strong><br>做 <strong>2 次</strong>公式</p>
+      </div>
+      <div class="case-card">
+        <div class="grid3 case-face">
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+          <span class="s y"></span><span class="s y"></span><span class="s y"></span>
+          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
+        </div>
+        <h4>一字（横线）</h4>
+        <p>两个黄色棱块成一条线<br><strong>横放</strong>（不要竖放）<br>做 <strong>1 次</strong>公式</p>
+      </div>
+    </div>
+    <div class="important-box">
+      L 形要放在左下角（9 点钟和 6 点钟方向）再做公式！一字要横放！方向放错了会多做好几次。
+    </div>
+  </div>
+
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>如果分不清是 L 形还是一字：转转顶层 U 试试不同方向，一定能找到 L 形或一字。如果只有一个点，那就随便放直接做公式就行。</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-13">完成本关</button>
+</section>
+
+<!-- ==================== 关卡 14：顶面全黄 ==================== -->
+<section id="level-14" class="level locked" data-level="14">
+  <div class="level-header">
+    <div class="level-badge">关卡 14</div>
+    <h2 class="level-title">顶面全黄</h2>
+    <div class="level-meta">
+      <span class="level-time">约 3 分钟</span>
+      <span class="level-xp">+50 XP</span>
+    </div>
+    <div class="phase-tag">第六阶段：顶层</div>
+  </div>
+
+  <div class="content-card">
+    <h3>目标：顶面 9 格全部变黄</h3>
+    <div class="goal-visual">
+      <div class="cube-face-display">
+        <span class="face-title">顶面</span>
+        <div class="grid3 face-large">
+          <span class="s y"></span><span class="s y"></span><span class="s y"></span>
+          <span class="s y"></span><span class="s y"></span><span class="s y"></span>
+          <span class="s y"></span><span class="s y"></span><span class="s y"></span>
         </div>
       </div>
     </div>
+    <p>十字已经有了，现在要让 4 个角块的黄色也朝上。</p>
+  </div>
 
-    <div class="content-card">
-      <h3>四种情况，逐个击破</h3>
-      <p>白色棱块可能出现在 4 种位置。找到你的情况，照着做就行：</p>
+  <div class="content-card">
+    <h3>小鱼公式</h3>
+    <div class="formula-box">
+      <div class="formula-name">小鱼公式</div>
+      <div class="formula-display">
+        <span class="formula-move">R</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move reverse">R'</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move">R</span>
+        <span class="formula-move">U2</span>
+        <span class="formula-move reverse">R'</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">口诀</span>
+        <span class="memory-text">只用 R 和 U！前面是老朋友「右·上·回」，后面是「上·右·上上·回」。节奏：「右上回 · 上右上上回」。</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">原理</span>
+        <span class="memory-text">这个公式让顶层的角块"原地翻转"。做一次可以让 1-2 个角块的黄色翻到顶面。U2 表示上面转 2 次（180 度）。</span>
+      </div>
+    </div>
+  </div>
 
-      <div class="scenario-list">
-        <div class="scenario">
-          <div class="scenario-header">
-            <span class="scenario-badge">情况 A</span>
-            <strong>白色棱块在顶层，白色朝上</strong>
-          </div>
-          <div class="scenario-body">
-            <p>这是最简单的情况。白色朝上，你能看到它。</p>
-            <div class="scenario-steps">
-              <p>1. 看棱块<strong>侧面</strong>是什么颜色（比如红色）</p>
-              <p>2. 转动顶层 U，把这个侧面<strong>对准红色中心块</strong></p>
-              <p>3. 对准后，做 <code>F2</code>（前面转 180 度），白色棱块掉到底面</p>
-            </div>
-            <div class="tip-box">💡 如果棱块在右边就做 R2，在后面就做 B2，在左边就做 L2。哪个面的上面就转哪个面两下。</div>
-          </div>
+  <div class="content-card">
+    <h3>怎么摆放？</h3>
+    <div class="tips-list">
+      <div class="tip-item">
+        <span class="tip-num">1</span>
+        <div>
+          <strong>转动顶层，让左上角的角块黄色不在顶面</strong>
+          <p>黄色朝向你或朝左都可以，只要不朝上。</p>
         </div>
-
-        <div class="scenario">
-          <div class="scenario-header">
-            <span class="scenario-badge">情况 B</span>
-            <strong>白色棱块在顶层，白色朝侧面</strong>
-          </div>
-          <div class="scenario-body">
-            <p>白色不朝上，而是朝向你（或朝左/朝右）。需要多一步"翻转"。</p>
-            <div class="scenario-steps">
-              <p>1. 把白色棱块转到<strong>你正前方</strong>（转 U）</p>
-              <p>2. 做 <code>F U' R U</code> —— 前面转一下，把棱块翻过来送到右边的正确位置</p>
-            </div>
-            <div class="memory-trick">
-              <span class="memory-label">逻辑</span>
-              <span class="memory-text">F 把棱块从顶层拉到前面，U' 让右面腾出位置，R 把棱块推上去（这时白色朝下了），U 把顶层转回来</span>
-            </div>
-          </div>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">2</span>
+        <div>
+          <strong>做一次小鱼公式</strong>
+          <p>做完后重新观察顶面。</p>
         </div>
-
-        <div class="scenario">
-          <div class="scenario-header">
-            <span class="scenario-badge">情况 C</span>
-            <strong>白色棱块在中层（卡在中间那一层）</strong>
-          </div>
-          <div class="scenario-body">
-            <p>棱块夹在两个面的中间，需要先"弹"到顶层。</p>
-            <div class="scenario-steps">
-              <p>1. 把这个棱块转到<strong>你正前方的右边位置</strong></p>
-              <p>2. 做 <code>R U R'</code> —— 右面一转，棱块弹到顶层去了</p>
-              <p>3. 现在变成情况 A 或 B，按上面的方法处理</p>
-            </div>
-            <div class="memory-trick">
-              <span class="memory-label">逻辑</span>
-              <span class="memory-text">R 把棱块带到顶层，U 移走它不让它掉回来，R' 把右面恢复原状</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="scenario">
-          <div class="scenario-header">
-            <span class="scenario-badge">情况 D</span>
-            <strong>白色棱块在底层，但侧面颜色不对</strong>
-          </div>
-          <div class="scenario-body">
-            <p>棱块已经在底面了，白色也朝下，但旁边的颜色对不上中心块。</p>
-            <div class="scenario-steps">
-              <p>1. 把这个错位的棱块转到<strong>你正前方</strong></p>
-              <p>2. 做 <code>F2</code> 把它弹到顶层</p>
-              <p>3. 现在变成情况 A，重新对准颜色再 F2 送回去</p>
-            </div>
-            <div class="memory-trick">
-              <span class="memory-label">逻辑</span>
-              <span class="memory-text">F2 就是"取出来 → 放回去"的万能操作，转两下等于把底面和顶面的棱块互换</span>
-            </div>
-          </div>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">3</span>
+        <div>
+          <strong>重复直到全黄</strong>
+          <p>调整方向后再做。最多 3 次就能全黄。</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>操作顺序建议</h3>
-      <div class="tips-list">
-        <div class="tip-item">
-          <span class="tip-num">1</span>
-          <div>
-            <strong>一次只找一个白色棱块</strong>
-            <p>别贪心，一个一个来。全魔方有 4 个白色棱块，一个搞定再搞下一个。</p>
-          </div>
-        </div>
-        <div class="tip-item">
-          <span class="tip-num">2</span>
-          <div>
-            <strong>先做简单的（情况 A），再做难的</strong>
-            <p>先找那些已经在顶层、白色朝上的，直接 F2 搞定。</p>
-          </div>
-        </div>
-        <div class="tip-item">
-          <span class="tip-num">3</span>
-          <div>
-            <strong>弄乱了已经就位的怎么办？</strong>
-            <p>做 F2 的时候可能把已经归位的棱块顶走了。别慌——先用 U 把顶层那个碍事的移走，做完 F2 后再 U 回来，最后把顶走的那个重新 F2 送回去。</p>
-          </div>
-        </div>
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>关键是每次做之前要调整好方向：确保左上角的角块黄色不在顶面。如果全部角块的黄色都在顶面了，那就不用做了。</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-14">完成本关</button>
+</section>
+
+<!-- ==================== 关卡 15：角块归位 ==================== -->
+<section id="level-15" class="level locked" data-level="15">
+  <div class="level-header">
+    <div class="level-badge">关卡 15</div>
+    <h2 class="level-title">角块归位</h2>
+    <div class="level-meta">
+      <span class="level-time">约 3 分钟</span>
+      <span class="level-xp">+50 XP</span>
+    </div>
+    <div class="phase-tag">第六阶段：顶层</div>
+  </div>
+
+  <div class="content-card">
+    <h3>目标：角块都到正确的位置</h3>
+    <p>现在顶面全黄了，但角块的<strong>位置</strong>可能还不对。</p>
+    <p>检查方法：看每个角块侧面的 2 种颜色，是不是跟相邻的两个面的中心块颜色一致。</p>
+  </div>
+
+  <div class="content-card">
+    <h3>公式</h3>
+    <div class="formula-box">
+      <div class="formula-name">角块归位公式</div>
+      <div class="formula-display">
+        <span class="formula-move">U</span>
+        <span class="formula-move">R</span>
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move reverse">L'</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move reverse">R'</span>
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move">L</span>
       </div>
-      <div class="tip-box">💡 白色十字是最需要动脑子的一步，也是最有成就感的一步。一旦你搞定了，后面都是"背公式 + 练手速"。</div>
-    </div>
-
-    <div class="next-step">
-      <a href="#step2" class="next-button">第二步：底层角块 →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 第2步：底层角块 ==================== -->
-  <section id="step2" class="step-section">
-    <div class="section-header" style="--accent: #FAFAFA; --accent-text: #333;">
-      <span class="step-badge">第 2 步</span>
-      <h2>底层角块归位</h2>
-      <p class="step-desc">把 4 个白色角块放到正确的位置，完成整个底层</p>
-    </div>
-
-    <div class="content-card">
-      <h3>目标：底层全部完成</h3>
-      <div class="goal-visual">
-        <div class="cube-face-display">
-          <span class="face-title">底面（全白）</span>
-          <div class="grid3 face-large">
-            <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-            <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-            <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-          </div>
-        </div>
-        <div class="plus-sign">+</div>
-        <div class="cube-face-display">
-          <span class="face-title">四个侧面底部一行也对齐</span>
-          <div class="grid3 face-large">
-            <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s r"></span><span class="s x"></span>
-            <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-          </div>
-        </div>
+      <div class="memory-trick">
+        <span class="memory-label">口诀</span>
+        <span class="memory-text">两组四步，节奏一样！第一组：「上·右·回·左撇」。第二组：「上·右撇·回·左」。就像左右手交替出拳。</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">原理</span>
+        <span class="memory-text">这个公式让 3 个角块按顺时针方向轮换位置，同时保持第 4 个角块不动。所以你要把不用换的那个放在右前方。</span>
       </div>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>前提：白色十字已经做好，白色面朝下</h3>
-      <div class="important-box">
-        ⚠️ 做角块之前，确保白色十字已经完成（底面十字 + 侧面颜色对齐中心块）。白色面朝下拿着。如果十字还没做好，先回上一步。
+  <div class="content-card">
+    <h3>操作方法</h3>
+    <div class="tips-list">
+      <div class="tip-item">
+        <span class="tip-num">1</span>
+        <div>
+          <strong>找到一个正确的角块</strong>
+          <p>转动顶层，找一个侧面颜色跟两个相邻面的中心块都匹配的角块。</p>
+        </div>
       </div>
-    </div>
-
-    <div class="content-card">
-      <h3>手把手操作：跟着做</h3>
-      <div class="walkthrough">
-        <div class="walk-step">
-          <div class="walk-header">
-            <span class="walk-num">第一步</span>
-            <strong>找到一个带白色的角块</strong>
-          </div>
-          <div class="walk-body">
-            <p>眼睛看顶层（黄色面那一层）的4个角。找到一个<strong>带白色</strong>的角块。</p>
-            <p>白色可能朝上、朝前、或朝侧面——没关系，只要看到白色就行。</p>
-            <div class="tip-box">💡 如果顶层4个角都没有白色——说明白色角块都卡在底层了。别慌，等下会教你怎么弄出来。</div>
-          </div>
+      <div class="tip-item">
+        <span class="tip-num">2</span>
+        <div>
+          <strong>让正确的角块在右前方</strong>
+          <p>整体转魔方（不是转顶层），让那个对的角块在你的右前方。</p>
         </div>
-
-        <div class="walk-step">
-          <div class="walk-header">
-            <span class="walk-num">第二步</span>
-            <strong>看这个角块的3种颜色，它应该去哪？</strong>
-          </div>
-          <div class="walk-body">
-            <p>角块有3种颜色。一种是白色，另外两种告诉你它的"家"在哪。</p>
-            <p><strong>举例：</strong>你找到一个角块，3种颜色是 白色、红色、蓝色。</p>
-            <p>红色中心块在哪个面？蓝色中心块在哪个面？这两个面的<strong>交界处的底角</strong>就是它的家。</p>
-            <p>红色面在前、蓝色面在右 → 它的家就是<strong>底层右前角</strong>。</p>
-          </div>
-        </div>
-
-        <div class="walk-step">
-          <div class="walk-header">
-            <span class="walk-num">第三步</span>
-            <strong>转动顶层，让角块到"家"的正上方</strong>
-          </div>
-          <div class="walk-body">
-            <p>只转顶层（U或U'），把这个白色角块移到它的家的<strong>正上方</strong>。</p>
-            <p>接着上面的例子：它的家在底层右前角 → 把它转到<strong>顶层右前角</strong>。</p>
-            <div class="important-box">⚠️ 这一步只转顶层！不要转其他面，不然十字会乱。</div>
-          </div>
-        </div>
-
-        <div class="walk-step">
-          <div class="walk-header">
-            <span class="walk-num">第四步</span>
-            <strong>整体转动魔方，让角块在你的右前方</strong>
-          </div>
-          <div class="walk-body">
-            <p>整体旋转魔方（不是转某一面，是整个魔方一起转），让这个角块在你的<strong>右手前方</strong>的位置。</p>
-            <p>这样 R U R' U' 才能操作到这个角块。</p>
-          </div>
-        </div>
-
-        <div class="walk-step">
-          <div class="walk-header">
-            <span class="walk-num">第五步</span>
-            <strong>做 R U R' U'，做完看一眼，没好就再做</strong>
-          </div>
-          <div class="walk-body">
-            <div class="formula-display">
-              <span class="formula-move">R</span>
-              <span class="formula-move">U</span>
-              <span class="formula-move reverse">R'</span>
-              <span class="formula-move reverse">U'</span>
-            </div>
-            <p>做完<strong>完整4步</strong>后看一下底面：白色角块到底层了吗？白色朝下了吗？</p>
-            <ul>
-              <li>✅ 白色朝下，侧面颜色也对 → 这个角块搞定了！回第一步找下一个。</li>
-              <li>❌ 还没到位 → <strong>不要动其他面</strong>，原地再做一遍 R U R' U'。</li>
-              <li>最多做 <strong>5 遍</strong>一定会到位。</li>
-            </ul>
-            <div class="important-box">⚠️ 做的过程中看到十字"乱了"是正常的！做完4步十字会恢复。中间不要停下来。</div>
-          </div>
-        </div>
-
-        <div class="walk-step">
-          <div class="walk-header">
-            <span class="walk-num">特殊情况</span>
-            <strong>白色角块卡在底层怎么办？</strong>
-          </div>
-          <div class="walk-body">
-            <p>如果一个白色角块已经在底层，但颜色不对（白色没有朝下，或者侧面颜色对不上中心块）：</p>
-            <div class="scenario-steps">
-              <p>1. 整体转动魔方，让这个角块在你的<strong>右前方</strong></p>
-              <p>2. 做一遍 <code>R U R' U'</code> → 它会被弹到顶层</p>
-              <p>3. 现在就变成了正常情况，按第二步~第五步处理</p>
-            </div>
-          </div>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">3</span>
+        <div>
+          <strong>做公式 1-2 次</strong>
+          <p>做完检查。没全对就再做一次。</p>
         </div>
       </div>
     </div>
+    <div class="tip-box">
+      如果 4 个角块都不对怎么办？随便选一个面朝向你，直接做一次公式。做完就会出现一个正确的角块。
+    </div>
+  </div>
 
-    <div class="content-card">
-      <h3>核心公式：R U R' U'</h3>
-      <div class="formula-box">
-        <div class="formula-name">基本公式（右上右上）</div>
-        <div class="formula-display">
-          <span class="formula-move">R</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move reverse">R'</span>
-          <span class="formula-move reverse">U'</span>
-        </div>
-        <p class="formula-desc">右面转 → 上面转 → 右面回 → 上面回</p>
-        <div class="memory-trick">
-          <span class="memory-label">记忆口诀</span>
-          <span class="memory-text">「上去 回来 上去 回来」—— 右手推上去，食指拨过去，右手拉回来，大拇指推回来</span>
-        </div>
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>判断角块是否正确：看角块侧面两种颜色，是不是分别跟左边的中心块和右边的中心块一样。比如红-蓝-黄角块应该在红色面和蓝色面的交界处。</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-15">完成本关</button>
+</section>
+
+<!-- ==================== 关卡 16：最终还原 ==================== -->
+<section id="level-16" class="level locked" data-level="16">
+  <div class="level-header">
+    <div class="level-badge">关卡 16</div>
+    <h2 class="level-title">最终还原</h2>
+    <div class="level-meta">
+      <span class="level-time">约 3 分钟</span>
+      <span class="level-xp">+60 XP</span>
+    </div>
+    <div class="phase-tag">第六阶段：顶层</div>
+  </div>
+
+  <div class="content-card">
+    <h3>最后一步！棱块归位！</h3>
+    <p>角块都到位了，现在只剩顶层的 4 个棱块需要调整位置。这是还原的最后一步！</p>
+  </div>
+
+  <div class="content-card">
+    <h3>顺时针三棱换</h3>
+    <div class="formula-box">
+      <div class="formula-name">顺时针换（前→右→后）</div>
+      <div class="formula-display">
+        <span class="formula-move">R</span>
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move">R</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move">R</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move">R</span>
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move reverse">R'</span>
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move">R2</span>
       </div>
-
-      <div class="content-card logic-card">
-        <h3>为什么 R U R' U' 能把角块放好？</h3>
-        <p>这个公式的本质是<strong>「搅动」</strong>——每做一次，角块就换一个方向。</p>
-        <div class="logic-explain">
-          <div class="logic-step">
-            <span class="logic-num">R</span>
-            <div><p>右面向上转，把角块从顶层<strong>带到右面上方</strong></p></div>
-          </div>
-          <div class="logic-step">
-            <span class="logic-num">U</span>
-            <div><p>顶层转一下，把角块<strong>移到别的位置</strong>，腾出右上角</p></div>
-          </div>
-          <div class="logic-step">
-            <span class="logic-num">R'</span>
-            <div><p>右面转回来，<strong>恢复右面</strong>（但角块已经不在那了）</p></div>
-          </div>
-          <div class="logic-step">
-            <span class="logic-num">U'</span>
-            <div><p>顶层转回来，把角块<strong>送回右上角</strong>，但它的朝向变了120度</p></div>
-          </div>
-        </div>
-        <div class="tip-box">💡 关键概念：每做一次 R U R' U'，角块原地转120度。白色角块有3个面，所以最多做3次就一定能让白色朝下！（有时候要做1次、3次或5次）</div>
+      <div class="memory-trick">
+        <span class="memory-label">口诀</span>
+        <span class="memory-text">全程只用 R 和 U！像打鼓一样记节奏：「右·回 / 右·上 / 右·上 / 右·回 / 回·回 / 右右」。</span>
       </div>
-
-      <div class="tip-box">💡 如果角块在底层但方向不对：对准它，做一次 R U R' U' 把它弹到顶层，再按上面的方法重新插入。</div>
-    </div>
-
-    <div class="content-card video-placeholder">
-      <h3>📺 参考视频</h3>
-      <div class="video-slot">
-        <p>（稍后添加底层角块的教学视频）</p>
-      </div>
-    </div>
-
-    <div class="next-step">
-      <a href="#step3" class="next-button">第三步：中层棱块 →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 第3步：中层棱块 ==================== -->
-  <section id="step3" class="step-section">
-    <div class="section-header" style="--accent: #FF5800;">
-      <span class="step-badge">第 3 步</span>
-      <h2>中层棱块归位</h2>
-      <p class="step-desc">完成中间那一层，魔方就搞定三分之二了！</p>
-    </div>
-
-    <div class="content-card">
-      <h3>目标：前两层全部完成</h3>
-      <div class="goal-visual">
-        <div class="cube-face-display">
-          <span class="face-title">侧面看起来这样</span>
-          <div class="grid3 face-large">
-            <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-            <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-            <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-          </div>
-          <p class="face-note">顶层暂时不管</p>
-        </div>
+      <div class="memory-trick">
+        <span class="memory-label">原理</span>
+        <span class="memory-text">这个公式让前、右、后三个面的顶层棱块按顺时针方向轮换。左面的棱块不动。</span>
       </div>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>两个公式：往左插 & 往右插</h3>
-      <p>在顶层找到一个不带黄色的棱块，它只能往左边走或者往右边走。</p>
+  <div class="content-card">
+    <h3>逆时针三棱换</h3>
+    <div class="formula-box">
+      <div class="formula-name">逆时针换（前→左→后）</div>
+      <div class="formula-display">
+        <span class="formula-move">R2</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move">R</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move reverse">R'</span>
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move reverse">R'</span>
+        <span class="formula-move reverse">U'</span>
+        <span class="formula-move reverse">R'</span>
+        <span class="formula-move">U</span>
+        <span class="formula-move reverse">R'</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">口诀</span>
+        <span class="memory-text">顺时针的"倒带"！顺的从 R 开头 R2 结尾，逆的从 R2 开头 R' 结尾。</span>
+      </div>
+      <div class="memory-trick">
+        <span class="memory-label">原理</span>
+        <span class="memory-text">和顺时针方向相反，让三个棱块按逆时针轮换。</span>
+      </div>
+    </div>
+  </div>
 
-      <div class="formula-box">
-        <div class="formula-name">往右插（棱块要去右边）</div>
-        <div class="formula-display">
-          <span class="formula-move">U</span>
-          <span class="formula-move">R</span>
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move reverse">R'</span>
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move reverse">F'</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move">F</span>
-        </div>
-        <p class="formula-desc">上 → 右 → 上撇 → 右撇 → 上撇 → 前撇 → 上 → 前</p>
-        <div class="memory-trick">
-          <span class="memory-label">记忆口诀</span>
-          <span class="memory-text">分两半记：前4步「上 右 回 回」= 把顶层让开；后4步「回 回 上 前」= 把棱块塞进去</span>
+  <div class="content-card">
+    <h3>怎么做？</h3>
+    <div class="tips-list">
+      <div class="tip-item">
+        <span class="tip-num">1</span>
+        <div>
+          <strong>找一个已经对好的面</strong>
+          <p>转动顶层，看有没有一个面的顶层棱块颜色跟中心块一致。</p>
         </div>
       </div>
-
-      <div class="formula-box">
-        <div class="formula-name">往左插（棱块要去左边）</div>
-        <div class="formula-display">
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move reverse">L'</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move">L</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move">F</span>
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move reverse">F'</span>
+      <div class="tip-item">
+        <span class="tip-num">2</span>
+        <div>
+          <strong>把对好的面放在后面</strong>
+          <p>整体转魔方，让对好的面背对你。</p>
         </div>
-        <p class="formula-desc">上撇 → 左撇 → 上 → 左 → 上 → 前 → 上撇 → 前撇</p>
-        <div class="memory-trick">
-          <span class="memory-label">记忆口诀</span>
-          <span class="memory-text">和右插是"镜像"！右插用 R 和 F，左插用 L 和 F，方向全部反过来</span>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">3</span>
+        <div>
+          <strong>看其他三个面的棱块需要怎么换</strong>
+          <p>顺时针轮换 → 用顺时针公式。逆时针轮换 → 用逆时针公式。</p>
         </div>
       </div>
     </div>
-
-    <div class="content-card">
-      <h3>怎么判断往左还是往右？</h3>
-      <div class="tips-list">
-        <div class="tip-item">
-          <span class="tip-num">1</span>
-          <div>
-            <strong>先对齐</strong>
-            <p>转动顶层，让棱块的<strong>正面颜色</strong>和对应的<strong>中心块颜色</strong>一致。</p>
-          </div>
-        </div>
-        <div class="tip-item">
-          <span class="tip-num">2</span>
-          <div>
-            <strong>看顶面颜色</strong>
-            <p>棱块朝上的那个颜色属于哪一面？如果那个面在<strong>右边</strong>，就用"往右插"公式；在<strong>左边</strong>，就用"往左插"公式。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="tip-box">💡 如果中层有一个棱块在正确位置但方向反了：随便用一次公式把它弄出来，再重新插入。</div>
+    <div class="tip-box">
+      如果 4 个棱块都不对：随便选一个面放在后面，先做一次顺时针公式，做完就会出现一个对好的面。
     </div>
+  </div>
 
-    <div class="content-card logic-card">
-      <h3>为什么中层公式这么长？它在干什么？</h3>
-      <p>8 步公式看起来长，其实分成两半就好理解了：</p>
-      <div class="logic-explain">
-        <div class="logic-step">
-          <span class="logic-num">前4</span>
-          <div>
-            <strong>U R U' R'（把上层让开）</strong>
-            <p>把目标棱块<strong>从顶层移走</strong>，同时用右面把底下的<strong>空位打开</strong>。就像开抽屉——把东西拿出来，把抽屉拉开。</p>
-          </div>
-        </div>
-        <div class="logic-step">
-          <span class="logic-num">后4</span>
-          <div>
-            <strong>U' F' U F（把棱块塞进去）</strong>
-            <p>用前面把棱块<strong>推进空位</strong>，然后把顶层和前面<strong>恢复原状</strong>。就像把东西塞进抽屉，再把抽屉推回去。</p>
-          </div>
+  <div class="level-hint">
+    <button class="hint-toggle">需要提示吗？点这里</button>
+    <div class="hint-content">
+      <p>判断顺逆时针：对好的面在后面，看前面棱块的颜色应该去右面还是左面。去右面就是顺时针，去左面就是逆时针。</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" id="complete-16">完成本关</button>
+</section>
+
+<!-- ==================== 关卡 17：大功告成 ==================== -->
+<section id="level-17" class="level locked" data-level="17">
+  <div class="level-header">
+    <div class="level-badge">关卡 17</div>
+    <h2 class="level-title">大功告成</h2>
+    <div class="level-meta">
+      <span class="level-time">约 1 分钟</span>
+      <span class="level-xp">+100 XP</span>
+    </div>
+    <div class="phase-tag">第六阶段：顶层</div>
+  </div>
+
+  <div class="content-card milestone celebration">
+    <div class="confetti">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+    <h3>恭喜你！魔方还原了！</h3>
+    <p>你完成了一件很多人一辈子都没做到的事——<strong>还原了一个三阶魔方！</strong></p>
+    <div class="goal-visual final-goal">
+      <div class="cube-face-display">
+        <div class="grid3 face-large">
+          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
+          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
+          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
         </div>
       </div>
-      <div class="tip-box">💡 所有魔方公式都是这个套路——「打开 → 塞进去 → 关上」。理解了这个，后面的公式都不用死记硬背。</div>
-    </div>
-
-    <div class="content-card milestone">
-      <h3>🎉 恭喜！完成前两层了！</h3>
-      <p>把魔方翻过来，底面朝上看看——两层都对齐了！接下来搞定顶层就行了。</p>
-    </div>
-
-    <div class="next-step">
-      <a href="#step4" class="next-button">第四步：黄色十字 →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 第4步：黄色十字 ==================== -->
-  <section id="step4" class="step-section">
-    <div class="section-header" style="--accent: #FFD500; --accent-text: #333;">
-      <span class="step-badge">第 4 步</span>
-      <h2>顶面黄色十字</h2>
-      <p class="step-desc">在顶面拼出一个黄色十字</p>
-    </div>
-
-    <div class="content-card">
-      <h3>目标：顶面出现黄色十字</h3>
-      <div class="goal-visual">
-        <div class="cube-face-display">
-          <span class="face-title">顶面（黄色面）</span>
-          <div class="grid3 face-large">
-            <span class="s x"></span><span class="s y"></span><span class="s x"></span>
-            <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-            <span class="s x"></span><span class="s y"></span><span class="s x"></span>
-          </div>
-          <p class="face-note">只要十字，角先不管</p>
+      <div class="cube-face-display">
+        <div class="grid3 face-large">
+          <span class="s b"></span><span class="s b"></span><span class="s b"></span>
+          <span class="s b"></span><span class="s b"></span><span class="s b"></span>
+          <span class="s b"></span><span class="s b"></span><span class="s b"></span>
+        </div>
+      </div>
+      <div class="cube-face-display">
+        <div class="grid3 face-large">
+          <span class="s o"></span><span class="s o"></span><span class="s o"></span>
+          <span class="s o"></span><span class="s o"></span><span class="s o"></span>
+          <span class="s o"></span><span class="s o"></span><span class="s o"></span>
+        </div>
+      </div>
+      <div class="cube-face-display">
+        <div class="grid3 face-large">
+          <span class="s g"></span><span class="s g"></span><span class="s g"></span>
+          <span class="s g"></span><span class="s g"></span><span class="s g"></span>
+          <span class="s g"></span><span class="s g"></span><span class="s g"></span>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="content-card">
-      <h3>核心公式</h3>
-      <div class="formula-box">
-        <div class="formula-name">黄色十字公式</div>
-        <div class="formula-display">
-          <span class="formula-move">F</span>
-          <span class="formula-move">R</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move reverse">R'</span>
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move reverse">F'</span>
+  <div class="content-card">
+    <h3>你的成就</h3>
+    <div class="achievement-list">
+      <p>&#10003; 认识了魔方的结构（中心块、棱块、角块）</p>
+      <p>&#10003; 学会了 6 个方向的转动记号</p>
+      <p>&#10003; 掌握了 R U R' U' 基本手法</p>
+      <p>&#10003; 完成了白色十字</p>
+      <p>&#10003; 完成了底层角块</p>
+      <p>&#10003; 完成了中间层</p>
+      <p>&#10003; 完成了黄色十字和顶面全黄</p>
+      <p>&#10003; 完成了角块和棱块的最终归位</p>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h3>下一步目标</h3>
+    <div class="tips-list">
+      <div class="tip-item">
+        <span class="tip-num">1</span>
+        <div>
+          <strong>再做 3 遍</strong>
+          <p>第 1 遍对着教程做，第 2 遍偶尔看一下，第 3 遍手指就记住了。</p>
         </div>
-        <p class="formula-desc">前 → 右 → 上 → 右撇 → 上撇 → 前撇</p>
-        <div class="memory-trick">
-          <span class="memory-label">记忆口诀</span>
-          <span class="memory-text">「前开门 → 右上右上 → 前关门」—— F 开头 F' 结尾，中间就是你最熟的 R U R' U'</span>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">2</span>
+        <div>
+          <strong>挑战速度</strong>
+          <p>第一次还原可能要 30 分钟。目标：5 分钟 → 3 分钟 → 1 分钟！</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">3</span>
+        <div>
+          <strong>教给朋友</strong>
+          <p>教别人是最好的学习方式。把你学到的教给同学或家人吧！</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="content-card logic-card">
-      <h3>这个公式在干什么？</h3>
-      <p>F R U R' U' F' 的本质是<strong>「翻转棱块的朝向」</strong>：</p>
-      <div class="logic-explain">
-        <div class="logic-step">
-          <span class="logic-num">F</span>
-          <div><p>前面一转，把<strong>顶层的棱块拉到前面</strong>，像打开一扇门</p></div>
-        </div>
-        <div class="logic-step">
-          <span class="logic-num">中间</span>
-          <div><p>R U R' U' 你已经会了——把棱块<strong>翻转方向</strong>（黄色从侧面翻到顶面）</p></div>
-        </div>
-        <div class="logic-step">
-          <span class="logic-num">F'</span>
-          <div><p>前面转回来，<strong>关上门</strong>，棱块回到顶层但朝向变了</p></div>
-        </div>
-      </div>
-      <div class="tip-box">💡 所以这个公式 = 开门 + 翻转 + 关门。你已经会的 R U R' U' 在这里变成了"翻转工具"！</div>
+  <button class="complete-btn" id="complete-17">完成本关</button>
+</section>
+
+<!-- ==================== 关卡 18：公式速查 ==================== -->
+<section id="level-18" class="level locked" data-level="18">
+  <div class="level-header">
+    <div class="level-badge">关卡 18</div>
+    <h2 class="level-title">公式速查</h2>
+    <div class="level-meta">
+      <span class="level-time">随时查看</span>
+      <span class="level-xp">+30 XP</span>
     </div>
+    <div class="phase-tag">第六阶段：顶层</div>
+  </div>
 
-    <div class="content-card">
-      <p>看你的顶面黄色棱块是什么形状，决定要做几次公式：</p>
+  <div class="content-card">
+    <h3>把这个表收藏起来！</h3>
+    <p>打印出来贴在桌上，练习时随时看。</p>
+  </div>
 
-      <div class="cases-grid">
-        <div class="case-card">
-          <div class="grid3 case-face">
-            <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s y"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          </div>
-          <h4>一个点</h4>
-          <p>只有中心是黄色<br>→ 做 <strong>3 次</strong>公式</p>
-        </div>
-        <div class="case-card">
-          <div class="grid3 case-face">
-            <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-            <span class="s y"></span><span class="s y"></span><span class="s x"></span>
-            <span class="s x"></span><span class="s y"></span><span class="s x"></span>
-          </div>
-          <h4>L 形（拐角）</h4>
-          <p>两个棱块呈 L 形<br>→ 把 L 放在<strong>左下角</strong>，做 <strong>2 次</strong>公式</p>
-        </div>
-        <div class="case-card">
-          <div class="grid3 case-face">
-            <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-            <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-            <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          </div>
-          <h4>一字（横线）</h4>
-          <p>两个棱块成一条线<br>→ <strong>横放</strong>，做 <strong>1 次</strong>公式</p>
-        </div>
-      </div>
+  <div class="content-card cheatsheet-card">
+    <table class="cheatsheet-table">
+      <thead>
+        <tr>
+          <th>步骤</th>
+          <th>公式</th>
+          <th>记忆口诀</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>白色十字</td>
+          <td>无固定公式（靠观察）</td>
+          <td>先到顶层→对颜色→F2送下去</td>
+        </tr>
+        <tr>
+          <td>底层角块</td>
+          <td><code>R U R' U'</code>（重复 1-5 次）</td>
+          <td>推上去 拨过去 拉回来 推回来</td>
+        </tr>
+        <tr>
+          <td>中层右插</td>
+          <td><code>U R U' R' U' F' U F</code></td>
+          <td>上右回回 + 回回上前</td>
+        </tr>
+        <tr>
+          <td>中层左插</td>
+          <td><code>U' L' U L U F U' F'</code></td>
+          <td>右插的镜像版</td>
+        </tr>
+        <tr>
+          <td>黄色十字</td>
+          <td><code>F R U R' U' F'</code></td>
+          <td>前开门 + 右上右上 + 前关门</td>
+        </tr>
+        <tr>
+          <td>顶面全黄</td>
+          <td><code>R U R' U R U2 R'</code></td>
+          <td>小鱼公式：右上回·上右上上回</td>
+        </tr>
+        <tr>
+          <td>角块归位</td>
+          <td><code>U R U' L' U R' U' L</code></td>
+          <td>上右回左 + 上右撇回左</td>
+        </tr>
+        <tr>
+          <td>棱块归位（顺）</td>
+          <td><code>R U' R U R U R U' R' U' R2</code></td>
+          <td>只用R和U打鼓节奏</td>
+        </tr>
+        <tr>
+          <td>棱块归位（逆）</td>
+          <td><code>R2 U R U R' U' R' U' R' U R'</code></td>
+          <td>顺时针的倒带</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-      <div class="tip-box">💡 L形要放在左下角（9点钟和6点钟方向）再做公式！一字要横放！方向很重要！</div>
+  <div class="content-card">
+    <div class="tip-box">
+      小窍门：所有公式的核心都是 R U R' U'。黄色十字只是外面包了 F 和 F'，小鱼只是多转一次 U，中层公式只是分成前后两半。把 R U R' U' 练到闭着眼睛都能做，其他公式就都不难了。
     </div>
+  </div>
 
-    <div class="next-step">
-      <a href="#step5" class="next-button">第五步：顶面全黄 →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 第5步：顶面全黄 ==================== -->
-  <section id="step5" class="step-section">
-    <div class="section-header" style="--accent: #FFD500; --accent-text: #333;">
-      <span class="step-badge">第 5 步</span>
-      <h2>顶面全部变黄</h2>
-      <p class="step-desc">把顶面的角块也翻成黄色，整个顶面变成纯黄</p>
-    </div>
-
-    <div class="content-card">
-      <h3>目标：顶面 9 格全黄</h3>
-      <div class="goal-visual">
-        <div class="cube-face-display">
-          <span class="face-title">顶面</span>
-          <div class="grid3 face-large">
-            <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-            <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-            <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="content-card">
-      <h3>核心公式：小鱼公式</h3>
-      <div class="formula-box">
-        <div class="formula-name">小鱼公式</div>
-        <div class="formula-display">
-          <span class="formula-move">R</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move reverse">R'</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move">R</span>
-          <span class="formula-move">U2</span>
-          <span class="formula-move reverse">R'</span>
-        </div>
-        <p class="formula-desc">右 → 上 → 右撇 → 上 → 右 → 上×2 → 右撇</p>
-        <div class="memory-trick">
-          <span class="memory-label">记忆口诀</span>
-          <span class="memory-text">只用 R 和 U 两个动作！节奏是「右上回 · 上右上上回」—— 前半段是老朋友 R U R'，后半段多转一次上面</span>
-        </div>
-      </div>
-
-      <div class="tip-box">💡 U2 = 上面转两次（180度）。</div>
-    </div>
-
-    <div class="content-card">
-      <h3>怎么做？</h3>
-      <div class="tips-list">
-        <div class="tip-item">
-          <span class="tip-num">1</span>
-          <div>
-            <strong>数黄色角块</strong>
-            <p>看顶面 4 个角的位置，有几个角块的黄色面朝上？</p>
-          </div>
-        </div>
-        <div class="tip-item">
-          <span class="tip-num">2</span>
-          <div>
-            <strong>找到正确的摆放方向</strong>
-            <p>转动顶层，让<strong>左上角</strong>的角块黄色<strong>不在顶面</strong>（朝向你或朝左），然后做一次小鱼公式。</p>
-          </div>
-        </div>
-        <div class="tip-item">
-          <span class="tip-num">3</span>
-          <div>
-            <strong>重复直到全黄</strong>
-            <p>做完一次后重新观察，调整方向，再做。最多做 3 次就能全黄。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="next-step">
-      <a href="#step6" class="next-button">第六步：角块归位 →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 第6步：顶层角块归位 ==================== -->
-  <section id="step6" class="step-section">
-    <div class="section-header" style="--accent: #009E60;">
-      <span class="step-badge">第 6 步</span>
-      <h2>顶层角块归位</h2>
-      <p class="step-desc">角块的颜色已经对了（黄色朝上），现在把它们移到正确的位置</p>
-    </div>
-
-    <div class="content-card">
-      <h3>目标：每个角块在正确的位置</h3>
-      <p>检查方法：看每个角块的 3 种颜色，是不是和相邻的两个面的中心块颜色匹配。</p>
-      <div class="tip-box">💡 比如红-蓝-黄角块，应该在红色面和蓝色面的交界处。</div>
-    </div>
-
-    <div class="content-card">
-      <h3>核心公式</h3>
-      <div class="formula-box">
-        <div class="formula-name">角块归位公式</div>
-        <div class="formula-display">
-          <span class="formula-move">U</span>
-          <span class="formula-move">R</span>
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move reverse">L'</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move reverse">R'</span>
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move">L</span>
-        </div>
-        <p class="formula-desc">上 → 右 → 上撇 → 左撇 → 上 → 右撇 → 上撇 → 左</p>
-        <div class="memory-trick">
-          <span class="memory-label">记忆口诀</span>
-          <span class="memory-text">「上右回左 · 上右回左」—— 两组完全一样的节奏！第一组是正方向（U R U' L'），第二组是反方向（U R' U' L）</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content-card">
-      <h3>怎么做？</h3>
-      <div class="tips-list">
-        <div class="tip-item">
-          <span class="tip-num">1</span>
-          <div>
-            <strong>先找一个正确的角块</strong>
-            <p>转动顶层，找到一个已经在正确位置的角块（颜色和两个相邻面匹配的）。</p>
-          </div>
-        </div>
-        <div class="tip-item">
-          <span class="tip-num">2</span>
-          <div>
-            <strong>把正确的角块放在右前方</strong>
-            <p>整体转动魔方（不是只转顶层），让正确的角块在你的<strong>右前方</strong>。</p>
-          </div>
-        </div>
-        <div class="tip-item">
-          <span class="tip-num">3</span>
-          <div>
-            <strong>做公式</strong>
-            <p>做一次公式后检查，如果还没全对就再做一次。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="tip-box">💡 如果四个角块都不对：随便选一个面朝向你，直接做一次公式，做完就会出现一个正确的角块。</div>
-    </div>
-
-    <div class="next-step">
-      <a href="#step7" class="next-button">最后一步！棱块归位 →</a>
-    </div>
-  </section>
-
-  <!-- ==================== 第7步：顶层棱块归位 ==================== -->
-  <section id="step7" class="step-section">
-    <div class="section-header" style="--accent: #C41E3A;">
-      <span class="step-badge">第 7 步</span>
-      <h2>顶层棱块归位</h2>
-      <p class="step-desc">最后一步！把顶层的棱块移到正确位置，魔方就还原了！</p>
-    </div>
-
-    <div class="content-card">
-      <h3>目标：六面全部还原！</h3>
-      <div class="goal-visual final-goal">
-        <div class="cube-face-display">
-          <div class="grid3 face-large">
-            <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-            <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-            <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-          </div>
-        </div>
-        <div class="cube-face-display">
-          <div class="grid3 face-large">
-            <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-            <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-            <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-          </div>
-        </div>
-        <div class="cube-face-display">
-          <div class="grid3 face-large">
-            <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-            <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-            <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-          </div>
-        </div>
-        <div class="cube-face-display">
-          <div class="grid3 face-large">
-            <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-            <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-            <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="content-card">
-      <h3>核心公式：三棱换</h3>
-      <div class="formula-box">
-        <div class="formula-name">顺时针三棱换（前→右→后）</div>
-        <div class="formula-display">
-          <span class="formula-move">R</span>
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move">R</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move">R</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move">R</span>
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move reverse">R'</span>
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move">R2</span>
-        </div>
-        <p class="formula-desc">右 → 上撇 → 右 → 上 → 右 → 上 → 右 → 上撇 → 右撇 → 上撇 → 右2</p>
-        <div class="memory-trick">
-          <span class="memory-label">记忆口诀</span>
-          <span class="memory-text">全程只用 R 和 U！节奏：「右·回 / 右·上 / 右·上 / 右·回 / 回·回 / 右右」—— 像打鼓一样记节奏</span>
-        </div>
-      </div>
-
-      <div class="formula-box">
-        <div class="formula-name">逆时针三棱换（前→左→后）</div>
-        <div class="formula-display">
-          <span class="formula-move">R2</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move">R</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move reverse">R'</span>
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move reverse">R'</span>
-          <span class="formula-move reverse">U'</span>
-          <span class="formula-move reverse">R'</span>
-          <span class="formula-move">U</span>
-          <span class="formula-move reverse">R'</span>
-        </div>
-        <p class="formula-desc">右2 → 上 → 右 → 上 → 右撇 → 上撇 → 右撇 → 上撇 → 右撇 → 上 → 右撇</p>
-        <div class="memory-trick">
-          <span class="memory-label">记忆口诀</span>
-          <span class="memory-text">顺时针公式的"倒带"！顺的从 R 开头 R2 结尾，逆的从 R2 开头 R' 结尾，方向全反</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content-card">
-      <h3>怎么做？</h3>
-      <div class="tips-list">
-        <div class="tip-item">
-          <span class="tip-num">1</span>
-          <div>
-            <strong>先找一个已经对好的面</strong>
-            <p>转动顶层，看有没有一个面的棱块颜色已经和中心块一致了。</p>
-          </div>
-        </div>
-        <div class="tip-item">
-          <span class="tip-num">2</span>
-          <div>
-            <strong>把对好的面放在后面</strong>
-            <p>让已经对好的面朝后（背对你），然后看其他三个棱块需要顺时针换还是逆时针换。</p>
-          </div>
-        </div>
-        <div class="tip-item">
-          <span class="tip-num">3</span>
-          <div>
-            <strong>选择公式</strong>
-            <p>三个棱块需要顺时针轮换 → 用第一个公式。<br>三个棱块需要逆时针轮换 → 用第二个公式。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="tip-box">💡 如果四个棱块都不对：随便选一个面朝后，先做一次顺时针公式，做完就会出现一个对好的面。</div>
-    </div>
-
-    <div class="content-card milestone celebration">
-      <div class="confetti">🎉🎊🎉🎊🎉</div>
-      <h3>恭喜你！魔方还原了！</h3>
-      <p>你已经学会了层先法还原三阶魔方！</p>
-      <div class="achievement-list">
-        <p>✅ 白色十字</p>
-        <p>✅ 底层角块</p>
-        <p>✅ 中层棱块</p>
-        <p>✅ 黄色十字</p>
-        <p>✅ 顶面全黄</p>
-        <p>✅ 角块归位</p>
-        <p>✅ 棱块归位</p>
-      </div>
-      <p class="final-tip">多练几次，你会越来越快的！目标：5分钟内还原 → 3分钟 → 1分钟！</p>
-    </div>
-  </section>
-
-  <!-- ==================== 公式速查表 ==================== -->
-  <section id="cheatsheet" class="step-section">
-    <div class="section-header" style="--accent: #4A90D9;">
-      <span class="step-badge">速查</span>
-      <h2>公式速查表</h2>
-      <p class="step-desc">打印出来放在手边，练习时随时查看</p>
-    </div>
-
-    <div class="content-card cheatsheet-card">
-      <table class="cheatsheet-table">
-        <thead>
-          <tr>
-            <th>步骤</th>
-            <th>公式</th>
-            <th>口诀</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>① 白色十字</td>
-            <td>无固定公式</td>
-            <td>靠自己观察</td>
-          </tr>
-          <tr>
-            <td>② 底层角块</td>
-            <td><code>R U R' U'</code></td>
-            <td>右上右上（重复）</td>
-          </tr>
-          <tr>
-            <td>③ 中层右插</td>
-            <td><code>U R U' R' U' F' U F</code></td>
-            <td>上右上撇右撇 上撇前撇上前</td>
-          </tr>
-          <tr>
-            <td>③ 中层左插</td>
-            <td><code>U' L' U L U F U' F'</code></td>
-            <td>上撇左撇上左 上前上撇前撇</td>
-          </tr>
-          <tr>
-            <td>④ 黄色十字</td>
-            <td><code>F R U R' U' F'</code></td>
-            <td>前右上 右撇上撇前撇</td>
-          </tr>
-          <tr>
-            <td>⑤ 顶面全黄</td>
-            <td><code>R U R' U R U2 R'</code></td>
-            <td>小鱼公式</td>
-          </tr>
-          <tr>
-            <td>⑥ 角块归位</td>
-            <td><code>U R U' L' U R' U' L</code></td>
-            <td>上右上撇左撇 上右撇上撇左</td>
-          </tr>
-          <tr>
-            <td>⑦ 棱块归位（顺）</td>
-            <td><code>R U' R U R U R U' R' U' R2</code></td>
-            <td>三棱顺换</td>
-          </tr>
-          <tr>
-            <td>⑦ 棱块归位（逆）</td>
-            <td><code>R2 U R U R' U' R' U' R' U R'</code></td>
-            <td>三棱逆换</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>用 ❤️ 制作 · 布斯 & 布小斯 · 2026</p>
-    <p class="footer-sub">爸爸和女儿一起学魔方、一起做网站</p>
-  </footer>
+  <button class="complete-btn" id="complete-18">通关！</button>
+</section>
 
 </main>
+
+<!-- Footer -->
+<footer>
+  <p>布斯 & 布小斯 · 2026 · 爸爸和女儿一起学魔方</p>
+</footer>
 
 <script src="script.js"></script>
 </body>
