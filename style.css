@@ -1135,6 +1135,108 @@ footer {
   color: var(--text-light);
 }
 
+/* ---------- Logic Explanation ---------- */
+.logic-card {
+  border-left: 4px solid #8B5CF6;
+}
+
+.logic-explain {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.logic-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: #F5F3FF;
+  border-radius: 10px;
+}
+
+.logic-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  background: #8B5CF6;
+  color: white;
+  font-weight: 700;
+  border-radius: 8px;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-family: "SF Mono", "Fira Code", monospace;
+  padding: 0 6px;
+}
+
+.logic-step p {
+  margin: 0;
+  font-size: 15px;
+  color: #4C1D95;
+}
+
+/* ---------- Scenario List ---------- */
+.scenario-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 16px 0;
+}
+
+.scenario {
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.scenario-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.scenario-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #3B82F6;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.scenario-body {
+  padding: 20px;
+}
+
+.scenario-steps {
+  background: #F0F9FF;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.scenario-steps p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+.scenario-steps code {
+  background: #1E293B;
+  color: #E2E8F0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: "SF Mono", "Fira Code", monospace;
+}
+
 /* ---------- Memory Trick ---------- */
 .memory-trick {
   display: flex;

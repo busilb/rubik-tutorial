@@ -530,41 +530,138 @@
     </div>
 
     <div class="content-card">
-      <h3>怎么做？——靠自己慢慢试！</h3>
-      <p>白色十字没有固定公式，需要你自己观察和尝试。这是最好玩的一步！</p>
+      <h3>核心思路：先到顶层 → 对颜色 → 转下去</h3>
+      <p>不管白色棱块现在在哪，都是三步走：</p>
+      <div class="logic-explain">
+        <div class="logic-step">
+          <span class="logic-num">一</span>
+          <div>
+            <strong>把它弄到顶层</strong>
+            <p>不管在哪，先想办法把白色棱块移到顶层（黄色面那一层）。</p>
+          </div>
+        </div>
+        <div class="logic-step">
+          <span class="logic-num">二</span>
+          <div>
+            <strong>转动顶层，让侧面颜色对准</strong>
+            <p>棱块有两种颜色，一面是白色，另一面是别的颜色（比如红色）。转动顶层 U，让那个<strong>非白色</strong>的面对准同颜色的中心块。</p>
+          </div>
+        </div>
+        <div class="logic-step">
+          <span class="logic-num">三</span>
+          <div>
+            <strong>转 180 度送到底面</strong>
+            <p>对准之后，把那个面转 180 度（比如 F2），棱块就到底面了，而且侧面颜色自动对齐。</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="content-card">
+      <h3>四种情况，逐个击破</h3>
+      <p>白色棱块可能出现在 4 种位置。找到你的情况，照着做就行：</p>
+
+      <div class="scenario-list">
+        <div class="scenario">
+          <div class="scenario-header">
+            <span class="scenario-badge">情况 A</span>
+            <strong>白色棱块在顶层，白色朝上</strong>
+          </div>
+          <div class="scenario-body">
+            <p>这是最简单的情况。白色朝上，你能看到它。</p>
+            <div class="scenario-steps">
+              <p>1. 看棱块<strong>侧面</strong>是什么颜色（比如红色）</p>
+              <p>2. 转动顶层 U，把这个侧面<strong>对准红色中心块</strong></p>
+              <p>3. 对准后，做 <code>F2</code>（前面转 180 度），白色棱块掉到底面</p>
+            </div>
+            <div class="tip-box">💡 如果棱块在右边就做 R2，在后面就做 B2，在左边就做 L2。哪个面的上面就转哪个面两下。</div>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-header">
+            <span class="scenario-badge">情况 B</span>
+            <strong>白色棱块在顶层，白色朝侧面</strong>
+          </div>
+          <div class="scenario-body">
+            <p>白色不朝上，而是朝向你（或朝左/朝右）。需要多一步"翻转"。</p>
+            <div class="scenario-steps">
+              <p>1. 把白色棱块转到<strong>你正前方</strong>（转 U）</p>
+              <p>2. 做 <code>F U' R U</code> —— 前面转一下，把棱块翻过来送到右边的正确位置</p>
+            </div>
+            <div class="memory-trick">
+              <span class="memory-label">逻辑</span>
+              <span class="memory-text">F 把棱块从顶层拉到前面，U' 让右面腾出位置，R 把棱块推上去（这时白色朝下了），U 把顶层转回来</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-header">
+            <span class="scenario-badge">情况 C</span>
+            <strong>白色棱块在中层（卡在中间那一层）</strong>
+          </div>
+          <div class="scenario-body">
+            <p>棱块夹在两个面的中间，需要先"弹"到顶层。</p>
+            <div class="scenario-steps">
+              <p>1. 把这个棱块转到<strong>你正前方的右边位置</strong></p>
+              <p>2. 做 <code>R U R'</code> —— 右面一转，棱块弹到顶层去了</p>
+              <p>3. 现在变成情况 A 或 B，按上面的方法处理</p>
+            </div>
+            <div class="memory-trick">
+              <span class="memory-label">逻辑</span>
+              <span class="memory-text">R 把棱块带到顶层，U 移走它不让它掉回来，R' 把右面恢复原状</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-header">
+            <span class="scenario-badge">情况 D</span>
+            <strong>白色棱块在底层，但侧面颜色不对</strong>
+          </div>
+          <div class="scenario-body">
+            <p>棱块已经在底面了，白色也朝下，但旁边的颜色对不上中心块。</p>
+            <div class="scenario-steps">
+              <p>1. 把这个错位的棱块转到<strong>你正前方</strong></p>
+              <p>2. 做 <code>F2</code> 把它弹到顶层</p>
+              <p>3. 现在变成情况 A，重新对准颜色再 F2 送回去</p>
+            </div>
+            <div class="memory-trick">
+              <span class="memory-label">逻辑</span>
+              <span class="memory-text">F2 就是"取出来 → 放回去"的万能操作，转两下等于把底面和顶面的棱块互换</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>操作顺序建议</h3>
       <div class="tips-list">
         <div class="tip-item">
           <span class="tip-num">1</span>
           <div>
-            <strong>找到白色棱块</strong>
-            <p>魔方上有 4 个带白色的棱块，把它们一个一个移到底面。</p>
+            <strong>一次只找一个白色棱块</strong>
+            <p>别贪心，一个一个来。全魔方有 4 个白色棱块，一个搞定再搞下一个。</p>
           </div>
         </div>
         <div class="tip-item">
           <span class="tip-num">2</span>
           <div>
-            <strong>先对颜色再插入</strong>
-            <p>把白色棱块移到顶层，转动顶层让它的侧面颜色对准对应的中心块，然后转 180 度插到底面。</p>
+            <strong>先做简单的（情况 A），再做难的</strong>
+            <p>先找那些已经在顶层、白色朝上的，直接 F2 搞定。</p>
           </div>
         </div>
         <div class="tip-item">
           <span class="tip-num">3</span>
           <div>
-            <strong>已经归位的不要弄乱</strong>
-            <p>已经就位的棱块尽量不动，实在避不开就先移走、等会儿再移回来。</p>
+            <strong>弄乱了已经就位的怎么办？</strong>
+            <p>做 F2 的时候可能把已经归位的棱块顶走了。别慌——先用 U 把顶层那个碍事的移走，做完 F2 后再 U 回来，最后把顶走的那个重新 F2 送回去。</p>
           </div>
         </div>
       </div>
-
-      <div class="tip-box">💡 这一步大多数人需要 5-10 分钟，多试几次就能找到感觉。不要着急！</div>
-    </div>
-
-    <div class="content-card video-placeholder">
-      <h3>📺 参考视频</h3>
-      <div class="video-slot">
-        <p>（稍后添加白色十字的教学视频）</p>
-      </div>
+      <div class="tip-box">💡 白色十字是最需要动脑子的一步，也是最有成就感的一步。一旦你搞定了，后面都是"背公式 + 练手速"。</div>
     </div>
 
     <div class="next-step">
@@ -618,6 +715,30 @@
           <span class="memory-label">记忆口诀</span>
           <span class="memory-text">「上去 回来 上去 回来」—— 右手推上去，食指拨过去，右手拉回来，大拇指推回来</span>
         </div>
+      </div>
+
+      <div class="content-card logic-card">
+        <h3>为什么 R U R' U' 能把角块放好？</h3>
+        <p>这个公式的本质是<strong>「搅动」</strong>——每做一次，角块就换一个方向。</p>
+        <div class="logic-explain">
+          <div class="logic-step">
+            <span class="logic-num">R</span>
+            <div><p>右面向上转，把角块从顶层<strong>带到右面上方</strong></p></div>
+          </div>
+          <div class="logic-step">
+            <span class="logic-num">U</span>
+            <div><p>顶层转一下，把角块<strong>移到别的位置</strong>，腾出右上角</p></div>
+          </div>
+          <div class="logic-step">
+            <span class="logic-num">R'</span>
+            <div><p>右面转回来，<strong>恢复右面</strong>（但角块已经不在那了）</p></div>
+          </div>
+          <div class="logic-step">
+            <span class="logic-num">U'</span>
+            <div><p>顶层转回来，把角块<strong>送回右上角</strong>，但它的朝向变了120度</p></div>
+          </div>
+        </div>
+        <div class="tip-box">💡 关键概念：每做一次 R U R' U'，角块原地转120度。白色角块有3个面，所以最多做3次就一定能让白色朝下！（有时候要做1次、3次或5次）</div>
       </div>
 
       <div class="tips-list">
@@ -748,6 +869,28 @@
       <div class="tip-box">💡 如果中层有一个棱块在正确位置但方向反了：随便用一次公式把它弄出来，再重新插入。</div>
     </div>
 
+    <div class="content-card logic-card">
+      <h3>为什么中层公式这么长？它在干什么？</h3>
+      <p>8 步公式看起来长，其实分成两半就好理解了：</p>
+      <div class="logic-explain">
+        <div class="logic-step">
+          <span class="logic-num">前4</span>
+          <div>
+            <strong>U R U' R'（把上层让开）</strong>
+            <p>把目标棱块<strong>从顶层移走</strong>，同时用右面把底下的<strong>空位打开</strong>。就像开抽屉——把东西拿出来，把抽屉拉开。</p>
+          </div>
+        </div>
+        <div class="logic-step">
+          <span class="logic-num">后4</span>
+          <div>
+            <strong>U' F' U F（把棱块塞进去）</strong>
+            <p>用前面把棱块<strong>推进空位</strong>，然后把顶层和前面<strong>恢复原状</strong>。就像把东西塞进抽屉，再把抽屉推回去。</p>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box">💡 所有魔方公式都是这个套路——「打开 → 塞进去 → 关上」。理解了这个，后面的公式都不用死记硬背。</div>
+    </div>
+
     <div class="content-card milestone">
       <h3>🎉 恭喜！完成前两层了！</h3>
       <p>把魔方翻过来，底面朝上看看——两层都对齐了！接下来搞定顶层就行了。</p>
@@ -801,8 +944,27 @@
       </div>
     </div>
 
+    <div class="content-card logic-card">
+      <h3>这个公式在干什么？</h3>
+      <p>F R U R' U' F' 的本质是<strong>「翻转棱块的朝向」</strong>：</p>
+      <div class="logic-explain">
+        <div class="logic-step">
+          <span class="logic-num">F</span>
+          <div><p>前面一转，把<strong>顶层的棱块拉到前面</strong>，像打开一扇门</p></div>
+        </div>
+        <div class="logic-step">
+          <span class="logic-num">中间</span>
+          <div><p>R U R' U' 你已经会了——把棱块<strong>翻转方向</strong>（黄色从侧面翻到顶面）</p></div>
+        </div>
+        <div class="logic-step">
+          <span class="logic-num">F'</span>
+          <div><p>前面转回来，<strong>关上门</strong>，棱块回到顶层但朝向变了</p></div>
+        </div>
+      </div>
+      <div class="tip-box">💡 所以这个公式 = 开门 + 翻转 + 关门。你已经会的 R U R' U' 在这里变成了"翻转工具"！</div>
+    </div>
+
     <div class="content-card">
-      <h3>三种情况</h3>
       <p>看你的顶面黄色棱块是什么形状，决定要做几次公式：</p>
 
       <div class="cases-grid">
