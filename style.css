@@ -1400,6 +1400,169 @@ footer {
 }
 
 /* ---------- Scenario List ---------- */
+
+/* ---------- Facts List ---------- */
+.facts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.fact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #F0FDF4;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.fact-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: #10B981;
+  color: white;
+  font-weight: 700;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+/* Share Explain */
+.share-explain {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.share-card {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: #F8FAFC;
+  border-radius: 12px;
+  align-items: center;
+}
+
+.share-visual {
+  flex-shrink: 0;
+}
+
+.share-cube {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  border: 2px solid #E2E8F0;
+  min-width: 80px;
+}
+
+.share-face {
+  display: block;
+  padding: 2px 8px;
+  font-size: 11px;
+  color: var(--text-light);
+  background: #EFF6FF;
+  border-radius: 4px;
+}
+
+.share-block {
+  display: block;
+  padding: 4px 10px;
+  background: #3B82F6;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.share-text h4 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.share-text p {
+  font-size: 14px;
+  color: var(--text-light);
+  margin: 4px 0;
+}
+
+.share-math {
+  font-size: 15px !important;
+  color: var(--text) !important;
+  background: #DBEAFE;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 6px !important;
+  font-family: "SF Mono", "Fira Code", monospace;
+}
+
+/* Summary Count */
+.summary-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.count-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 20px;
+  background: #F8FAFC;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 80px;
+}
+
+.count-item.count-total {
+  background: #DBEAFE;
+  border: 2px solid #3B82F6;
+}
+
+.count-num {
+  font-size: 32px;
+  font-weight: 800;
+  color: #3B82F6;
+  line-height: 1;
+}
+
+.count-total .count-num {
+  color: #1D4ED8;
+}
+
+.count-label {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.count-label small {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.count-plus {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+/* ---------- Scenario List ---------- */
 .scenario-list {
   display: flex;
   flex-direction: column;

@@ -259,6 +259,33 @@
     </div>
 
     <div class="content-card">
+      <h3>先确认几个事实</h3>
+      <div class="facts-list">
+        <div class="fact-item">
+          <span class="fact-check">✓</span>
+          <span>魔方是一个<strong>正方体</strong></span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-check">✓</span>
+          <span>正方体有 <strong>6 个面</strong></span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-check">✓</span>
+          <span>正方体有 <strong>12 条棱</strong>（边）</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-check">✓</span>
+          <span>正方体有 <strong>8 个角</strong>（顶点）</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-check">✓</span>
+          <span>每个面正中间有 <strong>1 个中心块</strong>，共 6 个</span>
+        </div>
+      </div>
+      <div class="tip-box">💡 这些数字是正方体的几何性质，不用记——拿起魔方数一数就知道了。</div>
+    </div>
+
+    <div class="content-card">
       <h3>魔方有 6 个面，6 种颜色</h3>
       <div class="color-grid">
         <div class="color-item"><div class="color-swatch white-swatch"></div><span>白色（底面）</span></div>
@@ -268,42 +295,93 @@
         <div class="color-item"><div class="color-swatch blue-swatch"></div><span>蓝色（右面）</span></div>
         <div class="color-item"><div class="color-swatch green-swatch"></div><span>绿色（左面）</span></div>
       </div>
+      <p>对面的颜色是固定搭配的：白↔黄、红↔橙、蓝↔绿。</p>
     </div>
 
     <div class="content-card">
-      <h3>魔方有 3 种"零件"</h3>
-      <div class="pieces-grid">
-        <div class="piece-card">
-          <div class="piece-visual">
-            <div class="piece-demo center-piece">
-              <span class="s r"></span>
+      <h3>关键概念：「共享」</h3>
+      <p>这是理解魔方结构最重要的一个概念——</p>
+      <p>每个面确实有 4 个角、4 条棱。但是<strong>角块和棱块是被多个面共享的</strong>：</p>
+
+      <div class="share-explain">
+        <div class="share-card">
+          <div class="share-visual">
+            <div class="share-cube">
+              <span class="share-face face-a">面A</span>
+              <span class="share-face face-b">面B</span>
+              <span class="share-face face-c">面C</span>
+              <span class="share-block">角块</span>
             </div>
           </div>
-          <h4>中心块 × 6</h4>
-          <p>每个面正中间的那一块。<strong>中心块不会动</strong>，它决定了这个面的颜色。</p>
-          <div class="tip-box">💡 记住：中心块是"锚点"，白色中心永远在白色面。</div>
+          <div class="share-text">
+            <h4>角块 = 3个面的交汇点</h4>
+            <p>一个角块同时属于<strong>3个面</strong>，所以它有3种颜色。</p>
+            <p>每面有4个角，但每个角被3个面共享：</p>
+            <p class="share-math"><strong>6面 × 4角 ÷ 3共享 = 8个角块</strong></p>
+          </div>
         </div>
-        <div class="piece-card">
-          <div class="piece-visual">
-            <div class="piece-demo edge-piece">
-              <span class="s r"></span><span class="s b"></span>
+
+        <div class="share-card">
+          <div class="share-visual">
+            <div class="share-cube">
+              <span class="share-face face-a">面A</span>
+              <span class="share-face face-b">面B</span>
+              <span class="share-block">棱块</span>
             </div>
           </div>
-          <h4>棱块 × 12</h4>
-          <p>两个面交界处的块，有 <strong>2 种颜色</strong>。</p>
-          <div class="tip-box">💡 红蓝棱块 = 一面红色 + 一面蓝色，只有一个！</div>
+          <div class="share-text">
+            <h4>棱块 = 2个面的交界线</h4>
+            <p>一个棱块同时属于<strong>2个面</strong>，所以它有2种颜色。</p>
+            <p>每面有4条棱，但每条棱被2个面共享：</p>
+            <p class="share-math"><strong>6面 × 4棱 ÷ 2共享 = 12个棱块</strong></p>
+          </div>
         </div>
-        <div class="piece-card">
-          <div class="piece-visual">
-            <div class="piece-demo corner-piece">
-              <span class="s r"></span><span class="s b"></span><span class="s y"></span>
+
+        <div class="share-card">
+          <div class="share-visual">
+            <div class="share-cube">
+              <span class="share-face face-a">面A</span>
+              <span class="share-block">中心</span>
             </div>
           </div>
-          <h4>角块 × 8</h4>
-          <p>三个面交汇的块，有 <strong>3 种颜色</strong>。</p>
-          <div class="tip-box">💡 角块在魔方的8个角上，是最难搞定的家伙。</div>
+          <div class="share-text">
+            <h4>中心块 = 只属于1个面</h4>
+            <p>中心块<strong>不跟任何面共享</strong>，只有1种颜色，而且<strong>永远不动</strong>。</p>
+            <p class="share-math"><strong>6面 × 1中心 = 6个中心块</strong></p>
+          </div>
         </div>
       </div>
+    </div>
+
+    <div class="content-card">
+      <h3>合计：6 + 12 + 8 = 26 个小块</h3>
+      <div class="summary-count">
+        <div class="count-item">
+          <span class="count-num">6</span>
+          <span class="count-label">中心块<br><small>1色 · 不动</small></span>
+        </div>
+        <span class="count-plus">+</span>
+        <div class="count-item">
+          <span class="count-num">12</span>
+          <span class="count-label">棱块<br><small>2色 · 会动</small></span>
+        </div>
+        <span class="count-plus">+</span>
+        <div class="count-item">
+          <span class="count-num">8</span>
+          <span class="count-label">角块<br><small>3色 · 会动</small></span>
+        </div>
+        <span class="count-plus">=</span>
+        <div class="count-item count-total">
+          <span class="count-num">26</span>
+          <span class="count-label">小块<br><small>（中间的轴不算）</small></span>
+        </div>
+      </div>
+
+      <div class="important-box">
+        ⚠️ 还原魔方 = 把 20 个会动的块（12棱 + 8角）放回正确的位置和朝向。中心块不用管——它们就是坐标。
+      </div>
+
+      <div class="tip-box">💡 <strong>动手验证：</strong>拿起魔方，数一数8个角（正方体的8个顶点），再数12条棱（正方体的12条边）。你会发现，数学和实物完全吻合。这不是需要"记"的知识，是你亲手能验证的事实。</div>
     </div>
 
     <div class="next-step">
