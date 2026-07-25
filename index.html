@@ -21,17 +21,19 @@
   </div>
   <ul>
     <li><a href="#hero" class="nav-link active" data-step="0">🏠 首页</a></li>
-    <li><a href="#story" class="nav-link" data-step="1">📖 全局地图</a></li>
-    <li><a href="#basics" class="nav-link" data-step="2">🧱 认识魔方</a></li>
-    <li><a href="#holding" class="nav-link" data-step="2">🤲 怎么拿</a></li>
-    <li><a href="#notation" class="nav-link" data-step="3">🔤 转动符号</a></li>
-    <li><a href="#step1" class="nav-link" data-step="4">① 白色十字</a></li>
-    <li><a href="#step2" class="nav-link" data-step="4">② 底层角块</a></li>
-    <li><a href="#step3" class="nav-link" data-step="5">③ 中层棱块</a></li>
-    <li><a href="#step4" class="nav-link" data-step="6">④ 黄色十字</a></li>
-    <li><a href="#step5" class="nav-link" data-step="7">⑤ 顶面全黄</a></li>
-    <li><a href="#step6" class="nav-link" data-step="8">⑥ 角块归位</a></li>
-    <li><a href="#step7" class="nav-link" data-step="9">⑦ 大功告成</a></li>
+    <li><a href="#quiz" class="nav-link" data-step="1">🎮 趣味闯关</a></li>
+    <li><a href="#why" class="nav-link" data-step="2">💡 为什么学</a></li>
+    <li><a href="#story" class="nav-link" data-step="3">🗺️ 全局地图</a></li>
+    <li><a href="#basics" class="nav-link" data-step="4">🧱 认识结构</a></li>
+    <li><a href="#holding" class="nav-link" data-step="5">🤲 怎么拿</a></li>
+    <li><a href="#warmup" class="nav-link" data-step="6">🏋️ 手感训练</a></li>
+    <li><a href="#step1" class="nav-link" data-step="7">① 白色十字</a></li>
+    <li><a href="#step2" class="nav-link" data-step="8">② 底层角块</a></li>
+    <li><a href="#step3" class="nav-link" data-step="9">③ 中层棱块</a></li>
+    <li><a href="#step4" class="nav-link" data-step="10">④ 黄色十字</a></li>
+    <li><a href="#step5" class="nav-link" data-step="11">⑤ 顶面全黄</a></li>
+    <li><a href="#step6" class="nav-link" data-step="12">⑥ 角块归位</a></li>
+    <li><a href="#step7" class="nav-link" data-step="13">⑦ 大功告成</a></li>
   </ul>
   <div class="progress-bar">
     <div class="progress-fill" id="progressFill"></div>
@@ -80,6 +82,130 @@
       <h1>30分钟学会<br><span class="highlight">三阶魔方</span></h1>
       <p class="subtitle">零基础也能学会 · 一步一步跟着做 · 你一定可以！</p>
       <a href="#basics" class="cta-button">开始学习 →</a>
+    </div>
+  </section>
+
+  <!-- ==================== 趣味闯关 ==================== -->
+  <section id="quiz" class="step-section">
+    <div class="section-header" style="--accent: #F59E0B; --accent-text: #333;">
+      <span class="step-badge">热身</span>
+      <h2>先来几道趣味题</h2>
+      <p class="step-desc">不用拿魔方，先用脑子"玩"一下</p>
+    </div>
+
+    <div class="content-card quiz-card" id="quizCard1">
+      <h3>第 1 题：魔方有几种颜色？</h3>
+      <div class="quiz-options" data-correct="2">
+        <button class="quiz-btn" data-idx="1">4 种</button>
+        <button class="quiz-btn" data-idx="2">6 种</button>
+        <button class="quiz-btn" data-idx="3">8 种</button>
+        <button class="quiz-btn" data-idx="4">9 种</button>
+      </div>
+      <div class="quiz-feedback" id="feedback1"></div>
+    </div>
+
+    <div class="content-card quiz-card" id="quizCard2">
+      <h3>第 2 题：魔方一共有多少个可以动的小块？</h3>
+      <div class="quiz-options" data-correct="3">
+        <button class="quiz-btn" data-idx="1">27 个（3×3×3）</button>
+        <button class="quiz-btn" data-idx="2">26 个</button>
+        <button class="quiz-btn" data-idx="3">20 个</button>
+        <button class="quiz-btn" data-idx="4">54 个</button>
+      </div>
+      <div class="quiz-feedback" id="feedback2"></div>
+    </div>
+
+    <div class="content-card quiz-card" id="quizCard3">
+      <h3>第 3 题：魔方的中心块有什么特点？</h3>
+      <div class="quiz-options" data-correct="2">
+        <button class="quiz-btn" data-idx="1">会跟着转动换位置</button>
+        <button class="quiz-btn" data-idx="2">永远不会换位置</button>
+        <button class="quiz-btn" data-idx="3">是魔方里最难搞的块</button>
+        <button class="quiz-btn" data-idx="4">有两种颜色</button>
+      </div>
+      <div class="quiz-feedback" id="feedback3"></div>
+    </div>
+
+    <div class="content-card quiz-card" id="quizCard4">
+      <h3>第 4 题：一个角块有几种颜色？</h3>
+      <div class="quiz-options" data-correct="3">
+        <button class="quiz-btn" data-idx="1">1 种</button>
+        <button class="quiz-btn" data-idx="2">2 种</button>
+        <button class="quiz-btn" data-idx="3">3 种</button>
+        <button class="quiz-btn" data-idx="4">6 种</button>
+      </div>
+      <div class="quiz-feedback" id="feedback4"></div>
+    </div>
+
+    <div class="content-card quiz-card" id="quizCard5">
+      <h3>第 5 题：还原魔方的世界纪录大约是多少？</h3>
+      <div class="quiz-options" data-correct="2">
+        <button class="quiz-btn" data-idx="1">5 秒</button>
+        <button class="quiz-btn" data-idx="2">3 秒多</button>
+        <button class="quiz-btn" data-idx="3">10 秒</button>
+        <button class="quiz-btn" data-idx="4">30 秒</button>
+      </div>
+      <div class="quiz-feedback" id="feedback5"></div>
+    </div>
+
+    <div class="content-card" id="quizResult" style="display:none;">
+      <div class="quiz-score">
+        <h3>闯关完成！</h3>
+        <p>答对 <strong id="scoreNum">0</strong> / 5 题</p>
+        <p class="quiz-comment" id="quizComment"></p>
+      </div>
+    </div>
+
+    <div class="next-step">
+      <a href="#why" class="next-button">看看学魔方有什么好处 →</a>
+    </div>
+  </section>
+
+  <!-- ==================== 为什么学 ==================== -->
+  <section id="why" class="step-section">
+    <div class="section-header" style="--accent: #EC4899;">
+      <span class="step-badge">动力</span>
+      <h2>学会魔方，你会收获什么？</h2>
+      <p class="step-desc">不只是一个技能，更是一种思维方式</p>
+    </div>
+
+    <div class="content-card">
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">🧠</div>
+          <h4>空间想象力</h4>
+          <p>在脑子里"看到"一个立体的东西怎么变化——这个能力学数学、搞设计、做编程都用得上。</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🎯</div>
+          <h4>拆解复杂问题</h4>
+          <p>魔方看起来超复杂，但拆成7步，每步只做一件事——这就是解决任何难题的思路。</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">💪</div>
+          <h4>耐心和专注</h4>
+          <p>第一次还原可能要1小时。但做出来那一刻，你会知道"坚持"是什么感觉。</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🌟</div>
+          <h4>社交超能力</h4>
+          <p>在同学面前30秒还原一个魔方？那就是你最酷的时刻。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>一个有趣的比喻</h3>
+      <p>还原魔方就像<strong>整理一个乱七八糟的房间</strong>：</p>
+      <div class="analogy-box">
+        <p>你不会一次性把所有东西都放好——你会<strong>先整理地板</strong>（底层），<strong>再收拾桌面</strong>（中层），<strong>最后摆好书架</strong>（顶层）。</p>
+        <p>每收拾好一个区域，你都能看到进展。这就是魔方的还原过程。</p>
+        <p>而且——<strong>你用的整理方法永远是同一套</strong>：「把东西拿出来 → 腾出位置 → 放进去 → 恢复原样」。</p>
+      </div>
+    </div>
+
+    <div class="next-step">
+      <a href="#story" class="next-button">看看还原的全局地图 →</a>
     </div>
   </section>
 
@@ -615,20 +741,20 @@
     </div>
 
     <div class="next-step">
-      <a href="#notation" class="next-button">下一步：学习转动符号 →</a>
+      <a href="#warmup" class="next-button">下一步：练练手感 →</a>
     </div>
   </section>
 
-  <!-- ==================== 转动符号 ==================== -->
-  <section id="notation" class="step-section">
-    <div class="section-header" style="--accent: #7B68EE;">
-      <span class="step-badge">基础</span>
-      <h2>转动符号</h2>
-      <p class="step-desc">学会这6个字母，你就能"读懂"所有魔方公式</p>
+  <!-- ==================== 手感训练 ==================== -->
+  <section id="warmup" class="step-section">
+    <div class="section-header" style="--accent: #F97316;">
+      <span class="step-badge">热身</span>
+      <h2>手感训练</h2>
+      <p class="step-desc">先别急着还原——练5分钟手感，后面会快10倍</p>
     </div>
 
     <div class="content-card">
-      <h3>6 个基本转动</h3>
+      <h3>挑战1：认识6个方向</h3>
       <p>每个字母代表转动一个面，<strong>顺时针转90度</strong>（想象你正面对着那个面）。</p>
       <div class="notation-grid">
         <div class="notation-card">
@@ -696,7 +822,7 @@
     </div>
 
     <div class="content-card">
-      <h3>来试试读一个公式！</h3>
+      <h3>挑战2：读懂一个公式</h3>
       <div class="formula-display">
         <span class="formula-move">R</span>
         <span class="formula-move">U</span>
@@ -706,6 +832,55 @@
       <p class="formula-reading">读作：<strong>右 → 上 → 右撇 → 上撇</strong></p>
       <p>意思是：右面顺时针 → 上面顺时针 → 右面逆时针 → 上面逆时针</p>
       <div class="tip-box">💡 这四步叫做"基本手法"，后面会经常用到，先记住它！</div>
+    </div>
+
+    <div class="content-card">
+      <h3>挑战3：做一个面（不是还原！）</h3>
+      <p>拿起你的乱魔方，试试能不能<strong>只拼出一个面的颜色一样</strong>（比如全白色面）。</p>
+      <p>注意：<strong>只要颜色一样就行</strong>，侧面对不对不管。</p>
+      <div class="challenge-box">
+        <div class="challenge-goal">
+          <span class="challenge-label">目标</span>
+          <div class="grid3 face-large">
+            <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+            <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+            <span class="s w"></span><span class="s w"></span><span class="s w"></span>
+          </div>
+          <p>一个面全白就算赢</p>
+        </div>
+      </div>
+      <div class="tip-box">💡 这个比正式还原简单很多——不需要公式，随便转就能做到。大多数人2-5分钟就能搞定。做到了就说明你已经有手感了！</div>
+    </div>
+
+    <div class="content-card">
+      <h3>挑战4：验证魔方的"魔法"</h3>
+      <p>拿一个<strong>任意状态</strong>的魔方（乱的也行），做这个实验：</p>
+      <div class="challenge-box">
+        <div class="challenge-experiment">
+          <p><strong>实验：</strong>做 6 遍 R U R' U'</p>
+          <div class="formula-display">
+            <span class="formula-move">R</span>
+            <span class="formula-move">U</span>
+            <span class="formula-move reverse">R'</span>
+            <span class="formula-move reverse">U'</span>
+            <span class="formula-move" style="background:#64748B;">×6</span>
+          </div>
+          <p><strong>结果：</strong>魔方回到你开始之前的状态！</p>
+        </div>
+      </div>
+      <p>这不是巧合——这是数学。任何公式重复足够多次，都会回到原点。魔方的"公式"就是利用了这个规律。</p>
+      <div class="tip-box">💡 做3遍的时候停下来看看——你会发现只有角块的位置变了，其他地方都没动。这就是R U R' U' 的"精准打击"——它只影响特定的几个块。</div>
+    </div>
+
+    <div class="content-card milestone">
+      <h3>热身完成！你现在掌握了——</h3>
+      <div class="achievement-list">
+        <p>✅ 知道6个面怎么转（R/L/U/D/F/B）</p>
+        <p>✅ 知道撇号是反方向</p>
+        <p>✅ 能做出一个面的颜色统一</p>
+        <p>✅ 亲手验证了R U R' U' ×6 = 回到原点</p>
+      </div>
+      <p>你已经准备好了。接下来是真正的还原——从白色十字开始！</p>
     </div>
 
     <div class="next-step">

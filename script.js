@@ -90,6 +90,58 @@ document.addEventListener('DOMContentLoaded', function () {
     observer.observe(card);
   });
 
+  // --- Quiz logic ---
+  var quizAnswers = {
+    1: { correct: 2, explain: '对！6个面，6种颜色：白、黄、红、橙、蓝、绿。' },
+    2: { correct: 3, explain: '对！总共26个小块，但中心块不动（6个），所以可以动的是 12棱块 + 8角块 = 20个。' },
+    3: { correct: 2, explain: '对！中心块永远不会换位置——它决定了每个面的颜色，是你的"坐标系"。' },
+    4: { correct: 3, explain: '对！角块在3个面的交汇处，所以有3种颜色。棱块在2个面的交界处，有2种颜色。' },
+    5: { correct: 2, explain: '对！目前世界纪录是3.13秒（2024年）。不过你的第一次还原，30分钟就很厉害了！' }
+  };
+
+  var quizScore = 0;
+  var quizDone = 0;
+
+  document.querySelectorAll('.quiz-options').forEach(function (optGroup) {
+    var cardId = optGroup.closest('.quiz-card').id;
+    var qNum = parseInt(cardId.replace('quizCard', ''));
+
+    optGroup.querySelectorAll('.quiz-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (optGroup.classList.contains('answered')) return;
+        optGroup.classList.add('answered');
+
+        var idx = parseInt(this.getAttribute('data-idx'));
+        var answer = quizAnswers[qNum];
+        var feedback = document.getElementById('feedback' + qNum);
+
+        if (idx === answer.correct) {
+          this.classList.add('correct');
+          feedback.innerHTML = '✅ ' + answer.explain;
+          feedback.className = 'quiz-feedback show correct-fb';
+          quizScore++;
+        } else {
+          this.classList.add('wrong');
+          optGroup.querySelector('[data-idx="' + answer.correct + '"]').classList.add('correct');
+          feedback.innerHTML = '❌ 不对哦！' + answer.explain;
+          feedback.className = 'quiz-feedback show wrong-fb';
+        }
+
+        quizDone++;
+        if (quizDone >= 5) {
+          var result = document.getElementById('quizResult');
+          var scoreNum = document.getElementById('scoreNum');
+          var comment = document.getElementById('quizComment');
+          result.style.display = 'block';
+          scoreNum.textContent = quizScore;
+          if (quizScore === 5) comment.textContent = '满分！你已经是魔方理论大师了！';
+          else if (quizScore >= 3) comment.textContent = '不错！对魔方已经有基本了解了。';
+          else comment.textContent = '没关系！看完教程就全懂了。';
+        }
+      });
+    });
+  });
+
   // --- Formula click to highlight ---
   var formulaMoves = document.querySelectorAll('.formula-move');
   formulaMoves.forEach(function (move) {
@@ -125,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // --- Keyboard navigation ---
   var stepSections = [
-    'hero', 'story', 'basics', 'holding', 'notation',
+    'hero', 'quiz', 'why', 'story', 'basics', 'holding', 'warmup',
     'step1', 'step2', 'step3', 'step4',
     'step5', 'step6', 'step7'
   ];
