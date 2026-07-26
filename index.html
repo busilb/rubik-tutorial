@@ -1,1709 +1,893 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>魔方闯关大冒险 - 18关学会三阶魔方</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>魔方闯关大冒险</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans SC',sans-serif;
+  background:#0d0d1a;
+  color:#e0e0e0;
+  min-height:100vh;
+  padding-bottom:80px;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ===== Top Bar ===== */
+#topbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(13,13,26,.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(0,255,170,.15);
+  padding:8px 16px;display:flex;align-items:center;gap:10px;
+}
+.topbar-title{font-size:14px;font-weight:700;color:#00ffaa;white-space:nowrap}
+.topbar-progress{flex:1;height:8px;background:#1a1a2e;border-radius:4px;overflow:hidden}
+.topbar-fill{height:100%;background:linear-gradient(90deg,#00ffaa,#00ccff);border-radius:4px;transition:width .6s ease}
+.topbar-xp{font-size:12px;color:#ffd700;font-weight:700;white-space:nowrap}
+.topbar-badge{
+  font-size:11px;color:#0d0d1a;background:#ffd700;padding:2px 8px;border-radius:10px;
+  font-weight:700;white-space:nowrap;
+}
+
+/* ===== Main ===== */
+main{max-width:600px;margin:0 auto;padding:72px 16px 24px}
+
+/* ===== Level Cards ===== */
+.level-card{
+  background:#1a1a2e;border-radius:16px;margin-bottom:20px;overflow:hidden;
+  border:1px solid rgba(0,255,170,.1);transition:all .4s ease;
+}
+.level-card.locked{opacity:.5;pointer-events:none;filter:grayscale(.6)}
+.level-card.locked .card-body{display:none}
+.level-card.completed{border-color:rgba(0,255,170,.4)}
+.level-card.completed .card-header{background:linear-gradient(135deg,rgba(0,255,170,.15),rgba(0,204,255,.1))}
+
+.card-header{
+  padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,rgba(30,30,60,.8),rgba(20,20,40,.9));
+  position:relative;
+}
+.card-header:active{background:rgba(0,255,170,.08)}
+.level-num{
+  width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:18px;color:#0d0d1a;background:linear-gradient(135deg,#00ffaa,#00ccff);
+  flex-shrink:0;
+}
+.level-card.locked .level-num{background:#333;color:#666}
+.level-card.completed .level-num{background:linear-gradient(135deg,#ffd700,#ffaa00)}
+.level-card.completed .level-num::after{content:'\\2713';position:absolute}
+.header-info{flex:1;min-width:0}
+.header-info h2{font-size:17px;font-weight:700;color:#fff;margin-bottom:2px}
+.header-info .subtitle{font-size:12px;color:#888}
+.header-xp{font-size:13px;color:#ffd700;font-weight:700;white-space:nowrap}
+.lock-icon{font-size:20px;color:#555}
+
+.card-body{padding:0 20px 20px;display:none}
+.level-card.active .card-body{display:block;animation:fadeSlide .4s ease}
+
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== Story Box ===== */
+.story-box{
+  background:linear-gradient(135deg,#1e1e3a,#2a1a3e);
+  border-left:3px solid #aa66ff;border-radius:8px;padding:16px;margin:16px 0;
+}
+.story-box .story-label{font-size:11px;color:#aa66ff;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.story-box p{font-size:15px;line-height:1.7;color:#d0c0e0}
+
+/* ===== Knowledge Box ===== */
+.know-box{
+  background:linear-gradient(135deg,#1a2e1a,#1a3020);
+  border-left:3px solid #00ffaa;border-radius:8px;padding:16px;margin:16px 0;
+}
+.know-box .know-label{font-size:11px;color:#00ffaa;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.know-box p,.know-box li{font-size:14px;line-height:1.8;color:#c0e0d0}
+.know-box ul{padding-left:20px;margin-top:6px}
+
+/* ===== Fun Fact (collapsible) ===== */
+.funfact{
+  background:linear-gradient(135deg,#2e2a1a,#3e3020);
+  border:1px solid rgba(255,215,0,.2);border-radius:10px;margin:16px 0;overflow:hidden;
+}
+.funfact summary{
+  padding:12px 16px;cursor:pointer;font-size:14px;font-weight:700;color:#ffd700;
+  list-style:none;display:flex;align-items:center;gap:8px;
+}
+.funfact summary::-webkit-details-marker{display:none}
+.funfact summary::before{content:'?';display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#ffd700;color:#0d0d1a;font-weight:900;font-size:14px;flex-shrink:0}
+.funfact[open] summary::before{content:'!'}
+.funfact .funfact-body{padding:0 16px 14px;font-size:14px;line-height:1.7;color:#e0d8c0}
+
+/* ===== Challenge Area ===== */
+.challenge-area{
+  background:linear-gradient(135deg,#1a1a3e,#2a1a40);
+  border:1px solid rgba(100,100,255,.2);border-radius:10px;padding:16px;margin:16px 0;
+}
+.challenge-area .ch-label{font-size:11px;color:#6688ff;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+
+/* Quiz */
+.quiz-q{font-size:15px;font-weight:700;color:#fff;margin-bottom:12px}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-btn{
+  background:#252545;border:2px solid #3a3a6a;border-radius:10px;padding:12px 16px;
+  font-size:15px;color:#ddd;text-align:left;cursor:pointer;transition:all .2s;
+  font-family:inherit;
+}
+.quiz-btn:active{transform:scale(.97)}
+.quiz-btn.correct{background:#1a3a1a;border-color:#00ffaa;color:#00ffaa}
+.quiz-btn.wrong{background:#3a1a1a;border-color:#ff4466;color:#ff4466}
+.quiz-btn:disabled{cursor:default;opacity:.7}
+.quiz-result{margin-top:10px;font-size:14px;font-weight:700;min-height:20px}
+
+/* Counter */
+.counter-area{text-align:center;padding:12px 0}
+.counter-btn{
+  background:linear-gradient(135deg,#00ccff,#00ffaa);color:#0d0d1a;
+  border:none;border-radius:12px;padding:14px 28px;font-size:16px;font-weight:700;
+  cursor:pointer;transition:all .2s;font-family:inherit;
+}
+.counter-btn:active{transform:scale(.95)}
+.counter-text{display:block;margin-top:10px;font-size:18px;font-weight:700;color:#00ffaa}
+.counter-sub{font-size:13px;color:#888;margin-top:4px}
+
+/* Confirm Button */
+.confirm-btn{
+  display:block;width:100%;padding:14px;margin-top:16px;
+  background:linear-gradient(135deg,#00ccff,#00ffaa);color:#0d0d1a;
+  border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;
+  transition:all .2s;font-family:inherit;
+}
+.confirm-btn:active{transform:scale(.97)}
+.confirm-btn:disabled{background:#333;color:#666;cursor:default}
+
+/* Complete Button */
+.complete-btn{
+  display:block;width:100%;padding:16px;margin-top:20px;
+  background:linear-gradient(135deg,#ffd700,#ffaa00);color:#0d0d1a;
+  border:none;border-radius:14px;font-size:17px;font-weight:900;cursor:pointer;
+  transition:all .2s;font-family:inherit;letter-spacing:1px;
+}
+.complete-btn:active{transform:scale(.96)}
+.complete-btn:disabled{background:#333;color:#666;cursor:default}
+
+/* ===== Formula Display ===== */
+.formula-display{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
+.f-move{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:42px;height:42px;border-radius:8px;font-size:16px;font-weight:900;
+  background:#252550;color:#00ccff;border:1px solid rgba(0,204,255,.3);
+}
+.f-move.rev{color:#ff88aa;border-color:rgba(255,136,170,.3)}
+
+/* ===== Reward Popup ===== */
+#reward-overlay{
+  display:none;position:fixed;inset:0;z-index:2000;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;
+}
+#reward-overlay.show{display:flex}
+.reward-card{
+  background:#1a1a2e;border:2px solid #ffd700;border-radius:20px;padding:32px 28px;
+  text-align:center;max-width:340px;width:90%;animation:popIn .4s ease;
+}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.reward-card .rw-stars{font-size:28px;margin-bottom:8px;color:#ffd700}
+.reward-card h3{font-size:20px;color:#ffd700;margin-bottom:12px}
+.reward-card .rw-xp{font-size:28px;font-weight:900;color:#00ffaa;margin:8px 0}
+.reward-card .rw-title{font-size:15px;color:#aa66ff;margin:8px 0 16px;font-weight:700}
+.reward-card .rw-close{
+  background:#ffd700;color:#0d0d1a;border:none;border-radius:10px;padding:12px 32px;
+  font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;
+}
+
+/* ===== Celebration Particles ===== */
+.particle{
+  position:fixed;pointer-events:none;z-index:2001;font-size:20px;
+  animation:particleFall 1.5s ease-out forwards;
+}
+@keyframes particleFall{
+  0%{opacity:1;transform:translateY(0) rotate(0deg) scale(1)}
+  100%{opacity:0;transform:translateY(100vh) rotate(720deg) scale(0)}
+}
+
+/* ===== Footer ===== */
+footer{text-align:center;padding:40px 16px 20px;color:#555;font-size:13px}
+footer span{color:#ffd700}
+
+/* ===== Responsive ===== */
+@media(min-width:640px){
+  .quiz-opts{flex-direction:row;flex-wrap:wrap}
+  .quiz-btn{flex:1;min-width:45%}
+}
+</style>
 </head>
 <body>
 
-<!-- ===== 顶部固定进度条 ===== -->
+<!-- Top Bar -->
 <div id="topbar">
-  <span class="topbar-logo">魔方闯关大冒险</span>
-  <div class="topbar-progress">
-    <div class="topbar-progress-fill" id="progress-fill"></div>
-  </div>
-  <div class="topbar-level">
-    <div class="topbar-level-icon" id="level-counter-icon">1</div>
-    <span id="level-counter">关卡 0/18</span>
-  </div>
+  <span class="topbar-title">魔方闯关</span>
+  <div class="topbar-progress"><div class="topbar-fill" id="progressFill" style="width:0%"></div></div>
+  <span class="topbar-xp" id="xpDisplay">0 XP</span>
+  <span class="topbar-badge" id="badgeDisplay">学徒</span>
 </div>
 
-<!-- ===== 成就弹窗（脚本会自动创建，这里也放一个备用） ===== -->
-<div id="achievement-popup" class="achievement-popup"></div>
+<!-- Reward Overlay -->
+<div id="reward-overlay">
+  <div class="reward-card">
+    <div class="rw-stars" id="rwStars"></div>
+    <h3 id="rwTitle">闯关成功!</h3>
+    <div class="rw-xp" id="rwXp">+0 XP</div>
+    <div class="rw-title" id="rwBadge"></div>
+    <button class="rw-close" onclick="closeReward()">继续冒险</button>
+  </div>
+</div>
 
 <main>
 
-<div class="content-card" style="background:linear-gradient(135deg,#e3f2fd,#e8f5e9);border-radius:16px;padding:20px;margin-bottom:20px;border:2px solid #90caf9;">
-  <h2 style="text-align:center;margin-bottom:12px;">🏠 魔方还原 = 盖一栋三层小楼</h2>
-  <p style="text-align:center;color:#555;font-size:15px;line-height:1.8;">
-    把魔方想象成一栋三层楼房。我们要从一楼开始，一层一层往上盖。<br>
-    <strong>一楼</strong>（底层）：先铺好白色地板 → 关卡 5-10<br>
-    <strong>二楼</strong>（中间层）：装好中间的墙壁 → 关卡 11-12<br>
-    <strong>三楼</strong>（顶层）：盖好黄色屋顶 → 关卡 13-18<br><br>
-    🔑 全程只需要记住几个口诀：<br>
-    <span style="background:#fff9c4;padding:2px 8px;border-radius:8px;font-weight:700;">上去下回</span>
-    <span style="background:#c8e6c9;padding:2px 8px;border-radius:8px;font-weight:700;">开门-上去-关门</span>
-    <span style="background:#bbdefb;padding:2px 8px;border-radius:8px;font-weight:700;">找家长</span>
-    <span style="background:#f8bbd0;padding:2px 8px;border-radius:8px;font-weight:700;">眼镜公式</span><br>
-    记住这几个词，就能还原整个魔方！
-  </p>
+<!-- ======== Level 1 ======== -->
+<div class="level-card active" id="lv1" data-level="1">
+  <div class="card-header" onclick="toggleCard(1)">
+    <div class="level-num">1</div>
+    <div class="header-info">
+      <h2>魔方世界的入口</h2>
+      <span class="subtitle">认识你的魔方</span>
+    </div>
+    <span class="header-xp">+30 XP</span>
+  </div>
+  <div class="card-body">
+    <div class="story-box">
+      <div class="story-label">剧情</div>
+      <p>欢迎来到魔方世界! 你是一名刚刚踏入这个奇妙世界的魔方学徒。在这里，每一次转动都是一次探索，每一个颜色都有它的位置。让我们从最基本的认识开始，揭开魔方的神秘面纱。</p>
+    </div>
+
+    <div class="know-box">
+      <div class="know-label">知识点</div>
+      <p>一个标准三阶魔方的基本结构：</p>
+      <ul>
+        <li><strong>6个面</strong> -- 白、黄、红、橙、蓝、绿</li>
+        <li><strong>中心块</strong>(6个) -- 每面正中间那个，它<strong>永远不会动</strong>!</li>
+        <li><strong>棱块</strong>(12个) -- 在两个面的交界处，有2种颜色</li>
+        <li><strong>角块</strong>(8个) -- 在三个面的交汇处，有3种颜色</li>
+      </ul>
+      <p style="margin-top:8px">总共 6 + 12 + 8 = <strong>26个小方块</strong>组成了魔方。</p>
+    </div>
+
+    <details class="funfact">
+      <summary>你知道吗？</summary>
+      <div class="funfact-body">
+        魔方的世界纪录是惊人的 <strong>3.13秒</strong>! 但别紧张，我们不追求速度。能把魔方还原出来，你就已经超越了全世界93%的人。慢慢来，享受过程。
+      </div>
+    </details>
+
+    <div class="challenge-area">
+      <div class="ch-label">闯关挑战</div>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">回答下面3个问题，全部答对即可过关!</p>
+
+      <div class="quiz-q">Q1: 魔方一共有几个面？</div>
+      <div class="quiz-opts" id="q1-1">
+        <button class="quiz-btn" onclick="checkQuiz(this,1,1,false)">4个</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,1,true)">6个</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,1,false)">8个</button>
+      </div>
+      <div class="quiz-result" id="qr1-1"></div>
+
+      <div class="quiz-q" style="margin-top:16px">Q2: 魔方有几个角块？</div>
+      <div class="quiz-opts" id="q1-2">
+        <button class="quiz-btn" onclick="checkQuiz(this,1,2,false)">6个</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,2,true)">8个</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,2,false)">12个</button>
+      </div>
+      <div class="quiz-result" id="qr1-2"></div>
+
+      <div class="quiz-q" style="margin-top:16px">Q3: 中心块会动吗？</div>
+      <div class="quiz-opts" id="q1-3">
+        <button class="quiz-btn" onclick="checkQuiz(this,1,3,false)">会动</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,3,true)">不会动</button>
+      </div>
+      <div class="quiz-result" id="qr1-3"></div>
+    </div>
+
+    <button class="complete-btn" id="comp1" disabled onclick="completeLevel(1,30,'魔方新手')">闯关完成! 领取奖励</button>
+  </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- 第一阶段：认识魔方 (关卡 1-3)                                   -->
-<!-- ============================================================ -->
-
-<!-- ==================== 关卡 1：小探险家 ==================== -->
-<section id="level-1" class="level" data-level="1">
-  <div class="level-header">
-    <div class="level-badge">关卡 1</div>
-    <h2 class="level-title">小探险家</h2>
-    <div class="level-meta">
-      <span class="level-time">约 2 分钟</span>
-      <span class="level-xp">+30 XP</span>
+<!-- ======== Level 2 ======== -->
+<div class="level-card locked" id="lv2" data-level="2">
+  <div class="card-header" onclick="toggleCard(2)">
+    <div class="level-num">2</div>
+    <div class="header-info">
+      <h2>认识你的武器</h2>
+      <span class="subtitle">学会"上去下回"</span>
     </div>
-    <div class="phase-tag">第一阶段：认识魔方</div>
+    <span class="header-xp">+50 XP</span>
   </div>
-
-  <div class="content-card">
-    <h3>欢迎来到魔方世界！</h3>
-    <p>在开始学习之前，先来回答三个小问题吧！</p>
-    <p>别怕答错，答错了也没关系——这只是帮你热热脑子。</p>
-  </div>
-
-  <div class="content-card quiz-card">
-    <h3>问题 1：魔方有几个面？</h3>
-    <div class="quiz-options" data-correct="2" data-qid="1-1">
-      <button class="quiz-btn" data-idx="1">4 个</button>
-      <button class="quiz-btn" data-idx="2">6 个</button>
-      <button class="quiz-btn" data-idx="3">8 个</button>
-      <button class="quiz-btn" data-idx="4">12 个</button>
+  <div class="card-body">
+    <div class="story-box">
+      <div class="story-label">剧情</div>
+      <p>每个魔方高手都有自己的"武功秘籍"。而我们的秘籍，核心其实只有4个动作。掌握了这4招，你就掌握了还原魔方的根基。准备好了吗？让我们开始修炼!</p>
     </div>
-    <div class="quiz-feedback"></div>
-  </div>
 
-  <div class="content-card quiz-card">
-    <h3>问题 2：每个面有几个小贴纸？</h3>
-    <div class="quiz-options" data-correct="3" data-qid="1-2">
-      <button class="quiz-btn" data-idx="1">4 个（2x2）</button>
-      <button class="quiz-btn" data-idx="2">6 个（2x3）</button>
-      <button class="quiz-btn" data-idx="3">9 个（3x3）</button>
-      <button class="quiz-btn" data-idx="4">16 个（4x4）</button>
-    </div>
-    <div class="quiz-feedback"></div>
-  </div>
-
-  <div class="content-card quiz-card">
-    <h3>问题 3：魔方一共有多少个小贴纸？</h3>
-    <p>提示：每个面有 9 个贴纸，一共有 6 个面……</p>
-    <div class="quiz-options" data-correct="2" data-qid="1-3">
-      <button class="quiz-btn" data-idx="1">48 个</button>
-      <button class="quiz-btn" data-idx="2">54 个</button>
-      <button class="quiz-btn" data-idx="3">60 个</button>
-      <button class="quiz-btn" data-idx="4">36 个</button>
-    </div>
-    <div class="quiz-feedback"></div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>魔方是一个正方体。正方体有 6 个面，每个面是 3x3 的方格，所以有 9 个贴纸。总共就是 6 x 9 = 54 个贴纸。</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-1" data-requires-quiz disabled>完成本关</button>
-</section>
-
-<!-- ==================== 关卡 2：积木大师 ==================== -->
-<section id="level-2" class="level locked" data-level="2">
-  <div class="level-header">
-    <div class="level-badge">关卡 2</div>
-    <h2 class="level-title">积木大师</h2>
-    <div class="level-meta">
-      <span class="level-time">约 3 分钟</span>
-      <span class="level-xp">+40 XP</span>
-    </div>
-    <div class="phase-tag">第一阶段：认识魔方</div>
-  </div>
-
-  <div class="content-card">
-    <h3>魔方里有三种"积木"</h3>
-    <p>虽然魔方看起来有 54 个贴纸，但其实它是由<strong>小方块</strong>组成的。每个小方块可能有 1 个、2 个、或 3 个颜色。我们来认识一下这三种方块：</p>
-  </div>
-
-  <div class="content-card">
-    <h3>第一种：中心块（6 个）</h3>
-    <div class="block-info">
-      <div class="block-demo">
-        <div class="piece-demo center-piece"><span class="s r" style="width:48px;height:48px;border-radius:6px;"></span></div>
+    <div class="know-box">
+      <div class="know-label">核心招式：上去下回</div>
+      <p><strong>R U R' U'</strong> -- 魔方界最经典的4步组合</p>
+      <div class="formula-display" style="margin:16px 0">
+        <span class="f-move">R</span>
+        <span class="f-move">U</span>
+        <span class="f-move rev">R'</span>
+        <span class="f-move rev">U'</span>
       </div>
-      <div class="block-desc">
-        <p><strong>只有 1 个颜色</strong>。每个面的正中间那个就是中心块。</p>
-        <p>中心块有个超厉害的特点：<strong>它永远不会动！</strong>不管你怎么转，它一直在原地。</p>
-        <p>一共有 <strong>6 个</strong>中心块（每面 1 个）。</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>第二种：棱块（12 个）</h3>
-    <div class="block-info">
-      <div class="block-demo">
-        <div class="piece-demo"><span class="s r" style="width:48px;height:48px;border-radius:6px 0 0 6px;"></span><span class="s b" style="width:48px;height:48px;border-radius:0 6px 6px 0;"></span></div>
-      </div>
-      <div class="block-desc">
-        <p><strong>有 2 个颜色</strong>。它在两个面的<strong>交界处</strong>（边上）。</p>
-        <p>为什么是 12 个呢？每个面有 4 条边，但每条边被 2 个面<strong>共享</strong>。</p>
-        <p class="share-math">6 面 x 4 边 / 2 共享 = <strong>12 个</strong>棱块</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>第三种：角块（8 个）</h3>
-    <div class="block-info">
-      <div class="block-demo">
-        <div class="piece-demo"><span class="s r" style="width:32px;height:48px;border-radius:6px 0 0 6px;"></span><span class="s b" style="width:32px;height:48px;border-radius:0;"></span><span class="s y" style="width:32px;height:48px;border-radius:0 6px 6px 0;"></span></div>
-      </div>
-      <div class="block-desc">
-        <p><strong>有 3 个颜色</strong>。它在三个面的<strong>交汇处</strong>（角上）。</p>
-        <p>每个面有 4 个角，每个角被 3 个面<strong>共享</strong>。</p>
-        <p class="share-math">6 面 x 4 角 / 3 共享 = <strong>8 个</strong>角块</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>加在一起看看</h3>
-    <div class="summary-count">
-      <div class="count-item">
-        <span class="count-num">6</span>
-        <span class="count-label">中心块<br><small>1色 · 不动</small></span>
-      </div>
-      <span class="count-plus">+</span>
-      <div class="count-item">
-        <span class="count-num">12</span>
-        <span class="count-label">棱块<br><small>2色 · 会动</small></span>
-      </div>
-      <span class="count-plus">+</span>
-      <div class="count-item">
-        <span class="count-num">8</span>
-        <span class="count-label">角块<br><small>3色 · 会动</small></span>
-      </div>
-      <span class="count-plus">=</span>
-      <div class="count-item count-total">
-        <span class="count-num">26</span>
-        <span class="count-label">小方块<br><small>（中间的轴不算）</small></span>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card quiz-card">
-    <h3>闯关测验：一共有多少个<strong>会动的</strong>方块？</h3>
-    <p>提示：中心块不会动哦！只有棱块和角块会动。</p>
-    <div class="quiz-options" data-correct="3" data-qid="2-1">
-      <button class="quiz-btn" data-idx="1">26 个</button>
-      <button class="quiz-btn" data-idx="2">24 个</button>
-      <button class="quiz-btn" data-idx="3">20 个</button>
-      <button class="quiz-btn" data-idx="4">18 个</button>
-    </div>
-    <div class="quiz-feedback"></div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>会动的方块 = 棱块（12 个） + 角块（8 个） = 20 个。中心块虽然也是方块，但它们永远不动，所以不算。</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-2" data-requires-quiz disabled>完成本关</button>
-</section>
-
-<!-- ==================== 关卡 3：方向感 ==================== -->
-<section id="level-3" class="level locked" data-level="3">
-  <div class="level-header">
-    <div class="level-badge">关卡 3</div>
-    <h2 class="level-title">方向感</h2>
-    <div class="level-meta">
-      <span class="level-time">约 3 分钟</span>
-      <span class="level-xp">+40 XP</span>
-    </div>
-    <div class="phase-tag">第一阶段：认识魔方</div>
-  </div>
-
-  <div class="content-card">
-    <h3>魔方的 6 个方向</h3>
-    <p>我们用英文字母来代表 6 个面的转动。每个字母 = 那个面<strong>顺时针转 90 度</strong>。</p>
-    <p>带撇号（'）= 那个面<strong>逆时针转 90 度</strong>。</p>
-  </div>
-
-  <div class="content-card">
-    <div class="notation-card">
-      <div class="notation-letter">R</div>
-      <div class="notation-name">Right · 右面</div>
-      <div class="notation-desc">右手中指和无名指<strong>向上推</strong>右面。就像翻书页一样往上翻。</div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <div class="notation-card">
-      <div class="notation-letter">L</div>
-      <div class="notation-name">Left · 左面</div>
-      <div class="notation-desc">左手中指和无名指<strong>向下拉</strong>左面。注意：左面的"顺时针"看起来是向下的（想象你站在左边看）。</div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <div class="notation-card">
-      <div class="notation-letter">U</div>
-      <div class="notation-name">Up · 上面</div>
-      <div class="notation-desc">右手食指<strong>向左拨</strong>顶面。就像拨一个转盘。</div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <div class="notation-card">
-      <div class="notation-letter">D</div>
-      <div class="notation-name">Down · 下面</div>
-      <div class="notation-desc">右手<strong>向右推</strong>底面。平时用得不多，知道就行。</div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <div class="notation-card">
-      <div class="notation-letter">F</div>
-      <div class="notation-name">Front · 前面</div>
-      <div class="notation-desc">右手大拇指<strong>顺时针拨</strong>前面。前面就是正对着你的那个面。</div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <div class="notation-card">
-      <div class="notation-letter">B</div>
-      <div class="notation-name">Back · 后面</div>
-      <div class="notation-desc">后面比较少用到。转的时候要想象你绕到后面去看——<strong>顺时针</strong>其实是从前面看的<strong>逆时针</strong>方向。</div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <div class="important-box">
-      记住：字母后面加 ' （撇号）就是<strong>反方向</strong>转。比如 R 是右面向上推，R' 就是右面向下拉。
-    </div>
-    <div class="tip-box">
-      最常用的就 4 个动作：R、R'、U、U'。先把这 4 个练熟，后面就轻松了！
-    </div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>拿起你的魔方，把白色面朝下，红色面朝你。试着做 R（右面向上推）和 U（顶面向左拨）。多做几次感受一下！</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-3">完成本关</button>
-</section>
-
-<!-- ============================================================ -->
-<!-- 第二阶段：热身训练 (关卡 4-5)                                   -->
-<!-- ============================================================ -->
-
-<!-- ==================== 关卡 4：手感训练 ==================== -->
-<section id="level-4" class="level locked" data-level="4">
-  <div class="level-header">
-    <div class="level-badge">关卡 4</div>
-    <h2 class="level-title">手感训练</h2>
-    <div class="level-meta">
-      <span class="level-time">约 5 分钟</span>
-      <span class="level-xp">+50 XP</span>
-    </div>
-    <div class="phase-tag">第二阶段：热身训练</div>
-  </div>
-
-  <div class="content-card">
-    <h3>练习：上去下回</h3>
-    <p>这四步是魔方里<strong>最最最重要</strong>的基本手法。后面几乎每一步都会用到它。</p>
-    <p>现在不用管魔方变成什么样，只要练手感就好！</p>
-  </div>
-
-  <div class="content-card">
-    <div class="formula-display">
-      <span class="formula-move">R</span>
-      <span class="formula-move">U</span>
-      <span class="formula-move reverse">R'</span>
-      <span class="formula-move reverse">U'</span>
-    </div>
-    <div class="practice-steps">
-      <div class="practice-step">
-        <span class="practice-num">1</span>
-        <div class="practice-detail">
-          <div class="formula-move">R</div>
-          <span>右手推上去</span>
-        </div>
-      </div>
-      <div class="practice-step">
-        <span class="practice-num">2</span>
-        <div class="practice-detail">
-          <div class="formula-move">U</div>
-          <span>顶上拨过去</span>
-        </div>
-      </div>
-      <div class="practice-step">
-        <span class="practice-num">3</span>
-        <div class="practice-detail">
-          <div class="formula-move reverse">R'</div>
-          <span>右手拉回来</span>
-        </div>
-      </div>
-      <div class="practice-step">
-        <span class="practice-num">4</span>
-        <div class="practice-detail">
-          <div class="formula-move reverse">U'</div>
-          <span>顶上推回来</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>目标：做 10 遍 R U R' U'</h3>
-    <p>每做完 4 步算 1 遍。点下面的按钮记录你做了几遍。</p>
-    <div class="practice-counter">
-      <button class="practice-btn counter-btn" id="practiceBtn4" data-target="10" data-counter-id="practice-4">我做完一遍了！</button>
-      <span class="counter-text">已完成 <strong class="practice-count" id="practiceCount4">0</strong> / 10 遍</span>
-    </div>
-    <div class="tip-box">
-      有趣的事实：做 <strong>6 遍</strong> R U R' U'，魔方会变回原来的样子！不信你试试。这就是数学的魔法！
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>记忆口诀</h3>
-    <div class="memory-trick">
-      <span class="memory-label">口诀</span>
-      <span class="memory-text">「推上去，拨过去，拉回来，推回来」</span>
-    </div>
-    <div class="memory-trick">
-      <span class="memory-label">比喻</span>
-      <span class="memory-text">就像开门进屋——推开右边的门(R)，把顶上的东西挪一下(U)，关上门(R')，把东西放回去(U')。做完之后底下两层完全不变，只有顶层动了。</span>
-    </div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>不要看魔方变乱了就慌！只要完整做完 4 步就行。中途停下来看到"乱了"是正常的——你只做了一半呢！</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-4" data-requires-practice disabled>完成本关</button>
-</section>
-
-<!-- ==================== 关卡 5：一面大师 ==================== -->
-
-<!-- 布斯实战笔记：底层全白总览 -->
-<section id="boss-note-1" class="level locked" data-level="5" style="border-left:4px solid #ed7b2f;">
-  <div class="content-card" style="background:linear-gradient(135deg,#fff8f0,#fff3e0);border-radius:12px;">
-    <h3>📝 布斯实战笔记：底层全白的三步法</h3>
-    <p style="color:#666;font-size:14px;">学完关卡 5-10 后回来看这个总览，会更清晰</p>
-
-    <div style="margin:16px 0;padding:16px;background:#fff;border-radius:8px;border:1px solid #ffe0b2;">
-      <p style="font-weight:700;font-size:16px;margin-bottom:12px;">拼全白底 = 三个步骤：</p>
-      <div style="margin-bottom:10px;">
-        <span style="background:#ffd54f;padding:3px 10px;border-radius:12px;font-weight:700;font-size:13px;">Step 1</span>
-        <strong> 拼小黄花 🌼</strong>
-        <p style="margin:4px 0 0 36px;color:#555;font-size:14px;">让 4 个白色棱块到顶面。方法：顶部不动，转右边列3次，看有没有白色上来。没有就转下面两层再来。</p>
-      </div>
-      <div style="margin-bottom:10px;">
-        <span style="background:#fff176;padding:3px 10px;border-radius:12px;font-weight:700;font-size:13px;">Step 2</span>
-        <strong> 拼白十字 ✝️</strong>
-        <p style="margin:4px 0 0 36px;color:#555;font-size:14px;">找棱块侧面颜色的"家长"（同色中心块），对齐后向下转两圈（180度）。4个棱块依次操作。</p>
-      </div>
-      <div style="margin-bottom:10px;">
-        <span style="background:#fff9c4;padding:3px 10px;border-radius:12px;font-weight:700;font-size:13px;">Step 3</span>
-        <strong> 拼全白底 ⬜</strong>
-        <p style="margin:4px 0 0 36px;color:#555;font-size:14px;">解决4个角块。核心手法：<strong>上去下回（R U R' U'）</strong></p>
-        <div style="margin:8px 0 0 36px;font-size:13px;color:#555;">
-          <p>• 角块在三楼侧面 → 找家长 → 上去下回 ×1</p>
-          <p>• 角块白色朝上 → 交叉找中心 → 上去下回 ×3</p>
-          <p>• 角块在底部位置不对 → 先上去下回变成三楼 → 再处理</p>
-        </div>
-      </div>
+      <ul>
+        <li><strong>R</strong> 推上去 -- 右手把右面向上推</li>
+        <li><strong>U</strong> 拨过去 -- 顶面向左拨</li>
+        <li><strong>R'</strong> 拉回来 -- 右面拉回来(向下)</li>
+        <li><strong>U'</strong> 推回来 -- 顶面推回来(向右)</li>
+      </ul>
+      <p style="margin-top:10px;padding:10px;background:rgba(0,255,170,.08);border-radius:8px">
+        <strong>比喻：</strong>像开门进屋 -- 推开门(R)，挪东西(U)，关门(R')，放回去(U')。
+      </p>
     </div>
 
-    <div style="padding:12px 16px;background:#fff3e0;border-radius:8px;border-left:3px solid #ed7b2f;margin-top:12px;">
-      <p style="margin:0;font-size:14px;color:#e65100;font-weight:600;">💡 布斯感悟：仅拼一个底面就有3个步骤，每步都有细节动作。但本质跟学AI一样——大问题拆成小步骤，一步步来就能完成。先跑通一个方法，再优化找更好的办法。</p>
-    </div>
-  </div>
-</section>
-
-<section id="level-5" class="level locked" data-level="5">
-  <div class="level-header">
-    <div class="level-badge">关卡 5</div>
-    <h2 class="level-title">一面大师</h2>
-    <div class="level-meta">
-      <span class="level-time">约 5 分钟</span>
-      <span class="level-xp">+50 XP</span>
-    </div>
-    <div class="phase-tag">第二阶段：热身训练</div>
-  </div>
-
-  <div class="content-card">
-    <h3>挑战：拼出一个全白色的面</h3>
-    <p>把魔方打乱，然后试试能不能让一个面<strong>全部变成白色</strong>。</p>
-    <p>这一关<strong>不需要公式</strong>！凭感觉转就行。只要白色面的 9 个格子都是白色就算成功。</p>
-    <p>侧面颜色对不对不用管，那是后面的事。</p>
-    <div class="goal-visual">
-      <div class="cube-face-display">
-        <span class="face-title">目标：让一个面全白</span>
-        <div class="grid3 face-large">
-          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <div class="tip-box">大多数人 2-5 分钟就能做到。做到了就说明你已经有手感了！</div>
-    <div class="tip-box">如果太难了，先试试只拼出白色的"十字"（中间一横一竖），那就更简单。</div>
-  </div>
-
-  <div class="content-card" style="text-align:center;">
-    <p>做到了吗？</p>
-    <button class="counter-btn" id="didItBtn5" onclick="document.getElementById('complete-5').disabled=false;" style="margin-top:12px;font-size:18px;padding:16px 40px;">我做到了！</button>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>小技巧：先找到白色中心块，把它朝上。然后一个一个把白色棱块和角块转到顶面。不要着急，慢慢来！</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-5" disabled>完成本关</button>
-</section>
-
-<!-- ============================================================ -->
-<!-- 第三阶段：白色十字 (关卡 6-8)                                   -->
-<!-- ============================================================ -->
-
-<!-- ==================== 关卡 6：白色十字 ==================== -->
-<section id="level-6" class="level locked" data-level="6">
-  <div class="level-header">
-    <div class="level-badge">关卡 6</div>
-    <h2 class="level-title">白色十字</h2>
-    <div class="level-meta">
-      <span class="level-time">约 5 分钟</span>
-      <span class="level-xp">+60 XP</span>
-    </div>
-    <div class="phase-tag">第三阶段：白色十字</div>
-  </div>
-
-  <div class="content-card">
-    <h3>目标：在底面拼出白色十字</h3>
-    <p>把白色面朝下。我们要在底面拼出一个<strong>白色十字</strong>——就是中间的十字形状全是白色。</p>
-    <div class="goal-visual">
-      <div class="cube-face-display">
-        <span class="face-title">底面（白色面朝下看）</span>
-        <div class="grid3 face-large">
-          <span class="s x"></span><span class="s w"></span><span class="s x"></span>
-          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-          <span class="s x"></span><span class="s w"></span><span class="s x"></span>
-        </div>
-        <p class="face-note">灰色 = 暂时不管</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>白色棱块可能在 4 种地方</h3>
-    <p>不管它在哪里，思路都一样：<strong>先弄到顶层 → 对准颜色 → 转到底面</strong>。</p>
-  </div>
-
-  <div class="content-card">
-    <details class="scenario-collapse">
-      <summary class="scenario-summary"><span class="scenario-badge">情况 A</span> 白色棱块在顶层，白色朝上——最简单！</summary>
-      <div class="scenario-body">
-        <p>你能在顶面看到一个白色贴纸。</p>
-        <div class="scenario-steps">
-          <p>1. 看这个棱块<strong>侧面</strong>的颜色（比如红色）</p>
-          <p>2. 转动顶层 U，让侧面颜色<strong>对准同颜色的中心块</strong></p>
-          <p>3. 对准后，把那一面向下转两下（180度），白色就掉到底面了</p>
-        </div>
+    <details class="funfact">
+      <summary>你知道吗？</summary>
+      <div class="funfact-body">
+        做<strong>6遍</strong>"上去下回"(R U R' U')，魔方会完美地变回原样! 不信你试试。这就是群论(一种数学)的魔法 -- 6次循环回到起点。
       </div>
     </details>
-  </div>
 
-  <div class="content-card">
-    <details class="scenario-collapse">
-      <summary class="scenario-summary"><span class="scenario-badge">情况 B</span> 白色棱块在顶层，白色朝侧面——需要翻转</summary>
-      <div class="scenario-body">
-        <p>白色不是朝上的，而是朝着你或者朝侧面。需要多一步来翻转它。</p>
-        <div class="scenario-steps">
-          <p>1. 把白色棱块转到你的正前方（转 U）</p>
-          <p>2. 做「前翻→顶转→右推→顶回」——把棱块翻个身送到正确位置</p>
-        </div>
-        <div class="memory-trick">
-          <span class="memory-label">原理</span>
-          <span class="memory-text">F 把棱块从顶层拉下来，U' 让右面腾出位置，R 把棱块推上去（白色现在朝下了），U 恢复顶层。</span>
-        </div>
+    <div class="challenge-area">
+      <div class="ch-label">闯关挑战</div>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">拿起魔方，练习10遍"上去下回"。每完成一遍点一次按钮。</p>
+      <div class="counter-area">
+        <button class="counter-btn" id="cnt2btn" onclick="incrementCounter(2)">我做完一遍了!</button>
+        <div class="counter-text"><span id="cnt2">0</span> / 10</div>
+        <div class="counter-sub">不用管魔方变成什么样，只管练手感</div>
+      </div>
+    </div>
+
+    <button class="complete-btn" id="comp2" disabled onclick="completeLevel(2,50,'上去下回学徒')">闯关完成! 领取奖励</button>
+  </div>
+</div>
+
+<!-- ======== Level 3 ======== -->
+<div class="level-card locked" id="lv3" data-level="3">
+  <div class="card-header" onclick="toggleCard(3)">
+    <div class="level-num">3</div>
+    <div class="header-info">
+      <h2>小黄花盛开</h2>
+      <span class="subtitle">白色棱块上顶面</span>
+    </div>
+    <span class="header-xp">+60 XP</span>
+  </div>
+  <div class="card-body">
+    <div class="story-box">
+      <div class="story-label">剧情</div>
+      <p>想象魔方是一栋三层楼的房子。一楼地板要铺白色瓷砖，但我们不能直接铺 -- 要先在屋顶(顶面)种一朵"小黄花"。所谓小黄花，就是让4个白色棱块都到顶面，形成十字形。这是铺地板的第一步!</p>
+    </div>
+
+    <div class="know-box">
+      <div class="know-label">怎么做</div>
+      <p>把白色面朝下(黄色朝上)，开始找白色棱块：</p>
+      <ul>
+        <li>顶部不动，转右边那列(R) 3次，看看有没有白色棱块被带上来</li>
+        <li>没有的话，转底下两层换个方向再来</li>
+        <li>每找到一个白色棱块到顶面，就处理下一个</li>
+      </ul>
+      <p style="margin-top:10px;padding:10px;background:rgba(0,255,170,.08);border-radius:8px">
+        <strong>"找家长"法则：</strong>每个白色棱块都要找到同色中心块这个"家长"。棱块的另一面颜色是什么，就要对准那个颜色的中心块。
+      </p>
+    </div>
+
+    <details class="funfact">
+      <summary>你知道吗？</summary>
+      <div class="funfact-body">
+        魔方的发明者鲁比克教授，在1974年发明魔方之后，自己花了<strong>整整一个月</strong>才第一次还原成功! 所以不用急，慢慢来。
       </div>
     </details>
-  </div>
 
-  <div class="content-card">
-    <details class="scenario-collapse">
-      <summary class="scenario-summary"><span class="scenario-badge">情况 C</span> 白色棱块在中间层——先弹出来</summary>
-      <div class="scenario-body">
-        <p>棱块卡在中间那一层了，需要先把它弹到顶层。</p>
-        <div class="scenario-steps">
-          <p>1. 让这个棱块在你的右前方位置</p>
-          <p>2. 做「开门→上去→关门」——棱块就被弹到顶层了</p>
-          <p>3. 变成了情况 A 或 B，按上面的方法处理</p>
-        </div>
-        <div class="memory-trick">
-          <span class="memory-label">原理</span>
-          <span class="memory-text">R 打开右面把棱块带上去，U 移走它不让它掉回来，R' 关上右面恢复原状。</span>
-        </div>
+    <div class="challenge-area">
+      <div class="ch-label">实操挑战</div>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">在你的真实魔方上，拼出顶面的"小黄花"(4个白色棱块到顶面)。做到了就点下面的按钮!</p>
+      <div class="counter-area">
+        <button class="confirm-btn" id="cfm3" onclick="confirmDone(3)">我做到了!</button>
+      </div>
+    </div>
+
+    <button class="complete-btn" id="comp3" disabled onclick="completeLevel(3,60,'花匠')">闯关完成! 领取奖励</button>
+  </div>
+</div>
+
+<!-- ======== Level 4 ======== -->
+<div class="level-card locked" id="lv4" data-level="4">
+  <div class="card-header" onclick="toggleCard(4)">
+    <div class="level-num">4</div>
+    <div class="header-info">
+      <h2>白色十字降临</h2>
+      <span class="subtitle">棱块翻到底面</span>
+    </div>
+    <span class="header-xp">+70 XP</span>
+  </div>
+  <div class="card-body">
+    <div class="story-box">
+      <div class="story-label">剧情</div>
+      <p>小黄花在屋顶盛开了! 现在要把花瓣翻到一楼，让底面形成完美的白色十字。这一步的关键是"找家长" -- 每个棱块都要找到自己的家。</p>
+    </div>
+
+    <div class="know-box">
+      <div class="know-label">操作方法</div>
+      <p>找棱块<strong>侧面颜色</strong>的"家长"(同色中心块)，对齐后向下转两下(180度)。</p>
+      <p style="margin-top:8px;font-weight:700">4种情况：</p>
+      <ul>
+        <li><strong>白色在顶面朝上</strong> -- 最简单! 对齐侧面颜色，转两下送下去</li>
+        <li><strong>白色朝侧面</strong> -- 需要多一步翻转：F U' R U</li>
+        <li><strong>在中间层</strong> -- 先弹出来(R U R')，变成上面的情况再处理</li>
+        <li><strong>在底面但方向反了</strong> -- 先F2弹到顶层，重新对齐再放回去</li>
+      </ul>
+    </div>
+
+    <details class="funfact">
+      <summary>你知道吗？</summary>
+      <div class="funfact-body">
+        全世界每<strong>7个人</strong>中就有1个人玩过魔方。魔方是人类历史上销量最大的玩具之一，累计销量超过<strong>5亿</strong>个!
       </div>
     </details>
-  </div>
 
-  <div class="content-card">
-    <details class="scenario-collapse">
-      <summary class="scenario-summary"><span class="scenario-badge">情况 D</span> 白色棱块在底层但颜色不对——取出来重放</summary>
-      <div class="scenario-body">
-        <p>棱块已经在底面了，白色也朝下，但侧面颜色跟中心块对不上。</p>
-        <div class="scenario-steps">
-          <p>1. 让这个棱块在你的正前方</p>
-          <p>2. 前面转两下，把它弹到顶层</p>
-          <p>3. 变成了情况 A，重新对准颜色再转两下送回去</p>
-        </div>
-        <div class="memory-trick">
-          <span class="memory-label">原理</span>
-          <span class="memory-text">前面转两下把底面和顶面的棱块互换。取出来重新对颜色，再放回去就好了。</span>
-        </div>
+    <div class="challenge-area">
+      <div class="ch-label">实操挑战</div>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">在真实魔方上拼出白色十字 -- 底面十字全白，且每个棱块的侧面颜色和中心块一致。</p>
+      <div class="counter-area">
+        <button class="confirm-btn" id="cfm4" onclick="confirmDone(4)">我做到了!</button>
+      </div>
+    </div>
+
+    <button class="complete-btn" id="comp4" disabled onclick="completeLevel(4,70,'十字骑士')">闯关完成! 领取奖励</button>
+  </div>
+</div>
+
+<!-- ======== Level 5 ======== -->
+<div class="level-card locked" id="lv5" data-level="5">
+  <div class="card-header" onclick="toggleCard(5)">
+    <div class="level-num">5</div>
+    <div class="header-info">
+      <h2>一楼装修完成</h2>
+      <span class="subtitle">底面全白 + 角块归位</span>
+    </div>
+    <span class="header-xp">+80 XP</span>
+  </div>
+  <div class="card-body">
+    <div class="story-box">
+      <div class="story-label">剧情</div>
+      <p>白色十字地板铺好了! 现在要把四个角落也铺上白色，让整个一楼底面变成纯白色。好消息是 -- 你需要的公式就是你已经学会的"上去下回"!</p>
+    </div>
+
+    <div class="know-box">
+      <div class="know-label">角块3种情况</div>
+      <p>把白色角块放到它"家"的正上方(看角块的3种颜色决定位置)，然后：</p>
+      <ul>
+        <li><strong>角块在三楼侧面</strong> -- 白色朝向你 -> 做1次"上去下回"(R U R' U')</li>
+        <li><strong>角块白色在顶部朝上</strong> -- 做3次"上去下回"</li>
+        <li><strong>角块在底部位置不对</strong> -- 先做一次"上去下回"弹出来，再处理</li>
+      </ul>
+      <div class="formula-display" style="margin:12px 0">
+        <span class="f-move">R</span>
+        <span class="f-move">U</span>
+        <span class="f-move rev">R'</span>
+        <span class="f-move rev">U'</span>
+      </div>
+      <p style="text-align:center;color:#888;font-size:13px">最多做5次，白色一定会朝下</p>
+    </div>
+
+    <details class="funfact">
+      <summary>你知道吗？</summary>
+      <div class="funfact-body">
+        一个被打乱的魔方，最多只需要<strong>20步</strong>就能还原! 这个数字被称为<strong>"上帝之数"</strong>。2010年由Google的超级计算机证明。当然，找到这20步本身就是天大的难题。
       </div>
     </details>
-  </div>
 
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>一次只找一个白色棱块！先找最简单的情况 A 做掉，再处理其他的。全部做完大概需要处理 4 个棱块。</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-6">完成本关</button>
-</section>
-
-<!-- ==================== 关卡 7：十字检查 ==================== -->
-<section id="level-7" class="level locked" data-level="7">
-  <div class="level-header">
-    <div class="level-badge">关卡 7</div>
-    <h2 class="level-title">十字检查</h2>
-    <div class="level-meta">
-      <span class="level-time">约 2 分钟</span>
-      <span class="level-xp">+30 XP</span>
-    </div>
-    <div class="phase-tag">第三阶段：白色十字</div>
-  </div>
-
-  <div class="content-card">
-    <h3>检查你的白色十字</h3>
-    <p>做完十字之后，要确认 5 件事情都对了才算真正完成。用下面的清单一项一项检查：</p>
-  </div>
-
-  <div class="content-card">
-    <div class="checklist" id="checklist7">
-      <label class="checklist-item">
-        <input type="checkbox" class="checklist-check" data-list="7">
-        <span class="checkmark"></span>
-        <span>白色面朝下，底面中间形成了十字形（4 个棱块 + 中心块是白色）</span>
-      </label>
-      <label class="checklist-item">
-        <input type="checkbox" class="checklist-check" data-list="7">
-        <span class="checkmark"></span>
-        <span>前面那个白色棱块的侧面颜色跟前面中心块一样（比如都是红色）</span>
-      </label>
-      <label class="checklist-item">
-        <input type="checkbox" class="checklist-check" data-list="7">
-        <span class="checkmark"></span>
-        <span>右面那个白色棱块的侧面颜色跟右面中心块一样（比如都是蓝色）</span>
-      </label>
-      <label class="checklist-item">
-        <input type="checkbox" class="checklist-check" data-list="7">
-        <span class="checkmark"></span>
-        <span>后面那个白色棱块的侧面颜色跟后面中心块一样（比如都是橙色）</span>
-      </label>
-      <label class="checklist-item">
-        <input type="checkbox" class="checklist-check" data-list="7">
-        <span class="checkmark"></span>
-        <span>左面那个白色棱块的侧面颜色跟左面中心块一样（比如都是绿色）</span>
-      </label>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <div class="side-check">
-      <div class="side-check-item">
-        <div class="grid3 small-face">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s r"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s r"></span><span class="s x"></span>
-        </div>
-        <span>前面 ✓</span>
-      </div>
-      <div class="side-check-item">
-        <div class="grid3 small-face">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s b"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s b"></span><span class="s x"></span>
-        </div>
-        <span>右面 ✓</span>
-      </div>
-      <div class="side-check-item">
-        <div class="grid3 small-face">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s o"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s o"></span><span class="s x"></span>
-        </div>
-        <span>后面 ✓</span>
-      </div>
-      <div class="side-check-item">
-        <div class="grid3 small-face">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s g"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s g"></span><span class="s x"></span>
-        </div>
-        <span>左面 ✓</span>
+    <div class="challenge-area">
+      <div class="ch-label">实操挑战</div>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">完成全白底面! 底面9格全白，且每个角块的侧面颜色也要和中心块对齐。</p>
+      <div class="counter-area">
+        <button class="confirm-btn" id="cfm5" onclick="confirmDone(5)">全白底面完成!</button>
       </div>
     </div>
-  </div>
 
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>如果底面十字有了但侧面颜色不对，说明棱块放错了位置。把它前面转两下弹出来，对准正确的中心块再转两下放回去。</p>
+    <button class="complete-btn" id="comp5" disabled onclick="completeLevel(5,80,'一楼包工头')">闯关完成! 领取奖励</button>
+  </div>
+</div>
+
+<!-- ======== Level 6 ======== -->
+<div class="level-card locked" id="lv6" data-level="6">
+  <div class="card-header" onclick="toggleCard(6)">
+    <div class="level-num">6</div>
+    <div class="header-info">
+      <h2>二楼装墙板</h2>
+      <span class="subtitle">中间层棱块归位</span>
     </div>
+    <span class="header-xp">+90 XP</span>
   </div>
-
-  <button class="complete-btn" id="complete-7" data-requires-checklist disabled>完成本关</button>
-</section>
-
-<!-- ==================== 关卡 8：十字急救 ==================== -->
-<section id="level-8" class="level locked" data-level="8">
-  <div class="level-header">
-    <div class="level-badge">关卡 8</div>
-    <h2 class="level-title">十字急救</h2>
-    <div class="level-meta">
-      <span class="level-time">约 3 分钟</span>
-      <span class="level-xp">+40 XP</span>
+  <div class="card-body">
+    <div class="story-box">
+      <div class="story-label">剧情</div>
+      <p>一楼装修完工! 现在上二楼，把中间层的4个棱块全部归位。这一步用到的新招式叫"开门-上去-关门"，其实本质还是我们的老朋友"上去下回"的变体。</p>
     </div>
-    <div class="phase-tag">第三阶段：白色十字</div>
-  </div>
 
-  <div class="content-card">
-    <h3>遇到棱块"卡住"了怎么办？</h3>
-    <p>有时候白色棱块会卡在奇怪的地方，或者放了一个棱块之后另一个被顶走了。别慌！这里教你怎么急救。</p>
-  </div>
-
-  <div class="content-card">
-    <h3>情况 1：棱块卡在中间层</h3>
-    <p>白色棱块夹在中间那一层的两个面之间。</p>
-    <div class="scenario-steps">
-      <p>1. 整体转动魔方，让这个棱块在你的<strong>右前方</strong></p>
-      <p>2. 做「开门→上去→关门」——棱块被弹到顶层了</p>
-      <p>3. 现在回到关卡 6 的方法，从顶层把它送到正确位置</p>
+    <div class="know-box">
+      <div class="know-label">方法(占位 -- 后续详细填)</div>
+      <p>在顶层找一个<strong>没有黄色</strong>的棱块，对齐正面颜色和中心块，然后看顶面颜色决定往左还是往右插入：</p>
+      <ul>
+        <li><strong>右插公式：</strong>U R U' R' U' F' U F</li>
+        <li><strong>左插公式：</strong>U' L' U L U F U' F'</li>
+      </ul>
+      <p style="margin-top:8px;color:#888">口诀："分两半记"。前4步打开抽屉，后4步推进棱块。</p>
+      <p style="margin-top:8px;color:#888">如果棱块已在中间层但方向反了，随便用一次左插或右插把它弹出来，再重新处理。</p>
     </div>
-  </div>
 
-  <div class="content-card">
-    <h3>情况 2：棱块在底面但方向反了</h3>
-    <p>白色在侧面而不是在底面。</p>
-    <div class="scenario-steps">
-      <p>1. 让这个棱块在你的正前方</p>
-      <p>2. 前面转两下，把它弹到顶层</p>
-      <p>3. 转一下顶层，移走它（给别的棱块让路）</p>
-      <p>4. 前面转两下，把原来的空位补回来</p>
-      <p>5. 再回到关卡 6 的方法处理刚才弹出来的棱块</p>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>情况 3：放了一个棱块，另一个被顶走了</h3>
-    <p>这是最常见的问题！解决方法：</p>
-    <div class="scenario-steps">
-      <p>1. 前面转两下送棱块到底面之前，先转一下顶层把碍事棱块<strong>移走</strong></p>
-      <p>2. 前面转两下放好之后，再转一下顶层把之前移走的棱块<strong>转回来</strong></p>
-      <p>3. 最后处理那个被转回来的棱块</p>
-    </div>
-    <div class="tip-box">
-      核心原则：<strong>一次只管一个！</strong>放好一个再放下一个。要有耐心。
-    </div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>白色十字是最需要动脑子的一步，没有固定公式，靠的是观察和灵活应变。多练几次就会越来越快！</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-8">完成本关</button>
-</section>
-
-<!-- ============================================================ -->
-<!-- 第四阶段：底层角块 (关卡 9-10)                                  -->
-<!-- ============================================================ -->
-
-<!-- ==================== 关卡 9：找到角块的家 ==================== -->
-<section id="level-9" class="level locked" data-level="9">
-  <div class="level-header">
-    <div class="level-badge">关卡 9</div>
-    <h2 class="level-title">找到角块的家</h2>
-    <div class="level-meta">
-      <span class="level-time">约 3 分钟</span>
-      <span class="level-xp">+40 XP</span>
-    </div>
-    <div class="phase-tag">第四阶段：底层角块</div>
-  </div>
-
-  <div class="content-card">
-    <h3>角块怎么找"家"？</h3>
-    <p>每个白色角块有 3 种颜色。其中一种是白色，另外两种颜色告诉你它应该去哪里。</p>
-    <p>比如一个角块有<strong>白色、红色、蓝色</strong>：</p>
-    <div class="scenario-steps">
-      <p>红色中心块在前面，蓝色中心块在右面</p>
-      <p>所以这个角块的"家"在 → <strong>底层的右前角</strong>（前面和右面的交界处）</p>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>操作方法</h3>
-    <div class="tips-list">
-      <div class="tip-item">
-        <span class="tip-num">1</span>
-        <div>
-          <strong>在顶层找白色角块</strong>
-          <p>看顶层的 4 个角，找到一个带白色的角块。</p>
-        </div>
-      </div>
-      <div class="tip-item">
-        <span class="tip-num">2</span>
-        <div>
-          <strong>看它的 3 种颜色</strong>
-          <p>白色 + 另外两种颜色。另外两种颜色决定了它的"家"在哪个角。</p>
-        </div>
-      </div>
-      <div class="tip-item">
-        <span class="tip-num">3</span>
-        <div>
-          <strong>用 U 把它转到"家"的正上方</strong>
-          <p>只转顶层，把角块移到正确位置的正上方。</p>
-        </div>
+    <div class="challenge-area">
+      <div class="ch-label">实操挑战</div>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">完成中间层! 前两层全部对齐，只剩顶层是乱的。</p>
+      <div class="counter-area">
+        <button class="confirm-btn" id="cfm6" onclick="confirmDone(6)">中间层完成!</button>
       </div>
     </div>
-  </div>
 
-  <div class="content-card quiz-card">
-    <h3>测验：一个白色、绿色、橙色的角块，它的"家"在哪里？</h3>
-    <div class="quiz-options" data-correct="2" data-qid="9-1">
-      <button class="quiz-btn" data-idx="1">底层右前角（前面和右面交界）</button>
-      <button class="quiz-btn" data-idx="2">底层左后角（左面和后面交界）</button>
-      <button class="quiz-btn" data-idx="3">底层左前角（前面和左面交界）</button>
-      <button class="quiz-btn" data-idx="4">底层右后角（右面和后面交界）</button>
+    <button class="complete-btn" id="comp6" disabled onclick="completeLevel(6,90,'二楼设计师')">闯关完成! 领取奖励</button>
+  </div>
+</div>
+
+<!-- ======== Level 7 ======== -->
+<div class="level-card locked" id="lv7" data-level="7">
+  <div class="card-header" onclick="toggleCard(7)">
+    <div class="level-num">7</div>
+    <div class="header-info">
+      <h2>三楼黄色屋顶</h2>
+      <span class="subtitle">顶面全变黄</span>
     </div>
-    <div class="quiz-feedback"></div>
+    <span class="header-xp">+100 XP</span>
   </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>绿色中心块在左面，橙色中心块在后面。左面和后面的交界处就是左后角！</p>
+  <div class="card-body">
+    <div class="story-box">
+      <div class="story-label">剧情</div>
+      <p>前两层已经完美! 最后一层 -- 三楼的屋顶。先让顶面全部变成黄色。这里要用到"眼镜公式"，它的核心其实还是我们的R U R' U'!</p>
     </div>
-  </div>
 
-  <button class="complete-btn" id="complete-9" data-requires-quiz disabled>完成本关</button>
-</section>
-
-<!-- ==================== 关卡 10：万能公式 ==================== -->
-<section id="level-10" class="level locked" data-level="10">
-  <div class="level-header">
-    <div class="level-badge">关卡 10</div>
-    <h2 class="level-title">万能口诀：上去下回</h2>
-    <div class="level-meta">
-      <span class="level-time">约 5 分钟</span>
-      <span class="level-xp">+60 XP</span>
+    <div class="know-box">
+      <div class="know-label">方法(占位 -- 后续详细填)</div>
+      <p><strong>黄色十字公式：</strong>F R U R' U' F'</p>
+      <p style="margin-top:4px;color:#888">口诀："前开门 + 上去下回 + 前关门"</p>
+      <p style="margin-top:12px"><strong>小鱼公式(顶面全黄)：</strong>R U R' U R U2 R'</p>
+      <p style="margin-top:4px;color:#888">口诀："右上回 - 上右上上回"</p>
+      <p style="margin-top:12px;color:#888">三种起始情况：一个点(做3次)、L形(做2次)、一字(做1次)。</p>
     </div>
-    <div class="phase-tag">第四阶段：底层角块</div>
-  </div>
 
-  <div class="content-card">
-    <h3>目标：把 4 个白色角块都放好</h3>
-    <div class="goal-visual">
-      <div class="cube-face-display">
-        <span class="face-title">底面全白</span>
-        <div class="grid3 face-large">
-          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-          <span class="s w"></span><span class="s w"></span><span class="s w"></span>
-        </div>
-      </div>
-      <div class="plus-sign">+</div>
-      <div class="cube-face-display">
-        <span class="face-title">侧面底部一行也对齐</span>
-        <div class="grid3 face-large">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s r"></span><span class="s x"></span>
-          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-        </div>
+    <div class="challenge-area">
+      <div class="ch-label">实操挑战</div>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">完成顶面全黄!</p>
+      <div class="counter-area">
+        <button class="confirm-btn" id="cfm7" onclick="confirmDone(7)">顶面全黄了!</button>
       </div>
     </div>
-  </div>
 
-  <div class="content-card">
-    <h3>公式就是你已经会的：R U R' U'</h3>
-    <div class="formula-box">
-      <div class="formula-name">底层角块万能口诀</div>
-      <div class="formula-display">
-        <span class="formula-move">R</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move reverse">R'</span>
-        <span class="formula-move reverse">U'</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">口诀</span>
-        <span class="memory-text">「推上去，拨过去，拉回来，推回来」</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">原理</span>
-        <span class="memory-text">就是你已经练过的上去下回！每做一次，角块会原地转120度。最多做5次，白色就一定会朝下。</span>
+    <button class="complete-btn" id="comp7" disabled onclick="completeLevel(7,100,'屋顶工程师')">闯关完成! 领取奖励</button>
+  </div>
+</div>
+
+<!-- ======== Level 8 ======== -->
+<div class="level-card locked" id="lv8" data-level="8">
+  <div class="card-header" onclick="toggleCard(8)">
+    <div class="level-num">8</div>
+    <div class="header-info">
+      <h2>封顶大吉</h2>
+      <span class="subtitle">顶层位置与方向调整</span>
+    </div>
+    <span class="header-xp">+150 XP</span>
+  </div>
+  <div class="card-body">
+    <div class="story-box">
+      <div class="story-label">剧情</div>
+      <p>最后的最后! 顶面已经全黄，但顶层方块的位置和方向可能还没对齐。调整好它们，魔方就彻底还原了! 你即将成为真正的魔方大师!</p>
+    </div>
+
+    <div class="know-box">
+      <div class="know-label">方法(占位 -- 后续详细填)</div>
+      <p><strong>角块归位公式：</strong>U R U' L' U R' U' L</p>
+      <p style="margin-top:4px;color:#888">口诀："上右回左，上右撇回左" -- 像左右手交替出拳</p>
+      <p style="margin-top:12px"><strong>棱块归位(顺)：</strong>R U' R U R U R U' R' U' R2</p>
+      <p style="margin-top:4px;color:#888">口诀：全程只用R和U，像打鼓节奏</p>
+      <p style="margin-top:12px"><strong>棱块归位(逆)：</strong>R2 U R U R' U' R' U' R' U R'</p>
+      <p style="margin-top:4px;color:#888">口诀：顺时针的"倒带"</p>
+    </div>
+
+    <div class="challenge-area">
+      <div class="ch-label">终极挑战</div>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">还原整个魔方! 六面全部归位!</p>
+      <div class="counter-area">
+        <button class="confirm-btn" id="cfm8" onclick="confirmDone(8)">魔方还原了!!!</button>
       </div>
     </div>
+
+    <button class="complete-btn" id="comp8" disabled onclick="completeLevel(8,150,'魔方大师')">通关! 领取终极称号!</button>
   </div>
-
-  <div class="content-card">
-    <h3>跟着做（5 步走）</h3>
-    <div class="walkthrough">
-      <div class="walk-step">
-        <div class="walk-header">
-          <span class="walk-num">第 1 步</span>
-          <strong>找到一个带白色的角块</strong>
-        </div>
-        <div class="walk-body">
-          <p>在顶层 4 个角里找一个有白色的角块。</p>
-        </div>
-      </div>
-      <div class="walk-step">
-        <div class="walk-header">
-          <span class="walk-num">第 2 步</span>
-          <strong>看 3 种颜色，知道它要去哪</strong>
-        </div>
-        <div class="walk-body">
-          <p>参考关卡 9 学的方法，找到它的"家"。</p>
-        </div>
-      </div>
-      <div class="walk-step">
-        <div class="walk-header">
-          <span class="walk-num">第 3 步</span>
-          <strong>用 U 转到"家"的正上方</strong>
-        </div>
-        <div class="walk-body">
-          <p>只转顶层，把角块移到家的正上方。</p>
-        </div>
-      </div>
-      <div class="walk-step">
-        <div class="walk-header">
-          <span class="walk-num">第 4 步</span>
-          <strong>整体转魔方，让角块在右前方</strong>
-        </div>
-        <div class="walk-body">
-          <p>整个魔方一起转（不是转某一面），让这个角块到你的右手前方。</p>
-        </div>
-      </div>
-      <div class="walk-step">
-        <div class="walk-header">
-          <span class="walk-num">第 5 步</span>
-          <strong>做「上去下回」，没好就再来</strong>
-        </div>
-        <div class="walk-body">
-          <p>做完 4 步后看底面：白色朝下了吗？</p>
-          <p>朝下了 → 搞定！找下一个角块。</p>
-          <p>没朝下 → 别动别的面，原地再做一遍「上去下回」。最多 5 遍一定到位。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>特殊情况：角块卡在底层</h3>
-    <p>如果白色角块已经在底层但位置或方向不对：</p>
-    <div class="scenario-steps">
-      <p>1. 整体转魔方，让那个角块在你的<strong>右前方</strong></p>
-      <p>2. 做一遍「上去下回」 → 角块弹到顶层了</p>
-      <p>3. 接着按上面 5 步走就行了</p>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>练一练</h3>
-    <div class="practice-counter">
-      <button class="practice-btn counter-btn" id="practiceBtn10" data-target="4" data-counter-id="practice-10">我放好了一个角块！</button>
-      <span class="counter-text">已完成 <strong class="practice-count" id="practiceCount10">0</strong> / 4 个角块</span>
-    </div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>如果做了 5 遍还是不对，可能是角块没有放在"家"的正上方。重新看看它的 3 种颜色，确认位置再试。</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-10" data-requires-practice disabled>完成本关</button>
-</section>
-
-<!-- ============================================================ -->
-<!-- 第五阶段：中间层 (关卡 11-12)                                   -->
-<!-- ============================================================ -->
-
-<!-- ==================== 关卡 11：左右滑梯 ==================== -->
-<section id="level-11" class="level locked" data-level="11">
-  <div class="level-header">
-    <div class="level-badge">关卡 11</div>
-    <h2 class="level-title">左右滑梯</h2>
-    <div class="level-meta">
-      <span class="level-time">约 5 分钟</span>
-      <span class="level-xp">+60 XP</span>
-    </div>
-    <div class="phase-tag">第五阶段：中间层</div>
-  </div>
-
-  <div class="content-card">
-    <h3>目标：完成中间那一层</h3>
-    <div class="goal-visual">
-      <div class="cube-face-display">
-        <span class="face-title">侧面看起来这样</span>
-        <div class="grid3 face-large">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-        </div>
-        <p class="face-note">顶层暂时不管</p>
-      </div>
-    </div>
-    <p>底层已经搞定了。现在要把中间层的 4 个棱块也放好。</p>
-  </div>
-
-  <div class="content-card">
-    <h3>先找棱块</h3>
-    <p>在顶层找一个<strong>没有黄色</strong>的棱块。有黄色的棱块是属于顶层的，不是中间层的，先不管它。</p>
-    <p>找到之后，转动顶层 U，让棱块的<strong>正面颜色</strong>跟对应的<strong>中心块颜色</strong>一致。</p>
-    <p>然后看棱块<strong>朝上的颜色</strong>：那个颜色的中心块在左边还是右边？</p>
-    <div class="tip-box">在右边 → 用"右滑梯"公式。在左边 → 用"左滑梯"公式。</div>
-  </div>
-
-  <div class="content-card">
-    <h3>右滑梯（棱块要去右边）</h3>
-    <div class="formula-box">
-      <div class="formula-name">右插公式</div>
-      <div class="formula-display">
-        <span class="formula-move">U</span>
-        <span class="formula-move">R</span>
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move reverse">R'</span>
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move reverse">F'</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move">F</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">口诀</span>
-        <span class="memory-text">分两半记！前 4 步：「上·右·回·回」（把顶层让开）。后 4 步：「回·回·上·前」（把棱块塞进去）。</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">原理</span>
-        <span class="memory-text">前半段像"打开抽屉"——U 把棱块移到右面上方，R 打开右面，U' R' 关上。后半段像"推进抽屉"——U' F' 打开前面，U F 把棱块推进空位。</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>左滑梯（棱块要去左边）</h3>
-    <div class="formula-box">
-      <div class="formula-name">左插公式</div>
-      <div class="formula-display">
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move reverse">L'</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move">L</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move">F</span>
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move reverse">F'</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">口诀</span>
-        <span class="memory-text">和右插完全"镜像"！右插用 R 和 F，左插用 L 和 F，所有方向反过来。</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">原理</span>
-        <span class="memory-text">原理跟右插一模一样，只是方向反了。如果你记住了右插，左插就是"用左手做一遍"。</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <div class="important-box">
-      如果棱块已经在中间层但方向反了？随便用一次右插或左插，把一个顶层棱块塞进去，错误的棱块会被顶到顶层。然后重新处理它就行了。
-    </div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>判断左右的方法：先对齐正面颜色和中心块，然后看棱块顶面的颜色。那个颜色的中心块在你的右手边就用右插，在左手边就用左插。</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-11">完成本关</button>
-</section>
-
-<!-- ==================== 关卡 12：两层封顶 ==================== -->
-<section id="level-12" class="level locked" data-level="12">
-  <div class="level-header">
-    <div class="level-badge">关卡 12</div>
-    <h2 class="level-title">两层封顶</h2>
-    <div class="level-meta">
-      <span class="level-time">约 5 分钟</span>
-      <span class="level-xp">+50 XP</span>
-    </div>
-    <div class="phase-tag">第五阶段：中间层</div>
-  </div>
-
-  <div class="content-card">
-    <h3>挑战：完成前两层！</h3>
-    <p>用关卡 11 学的左右滑梯公式，把中间层的 4 个棱块全部放好。</p>
-    <p>做完之后，你的魔方从底面往上看，前两层应该全部对齐了。只剩顶层还是乱的。</p>
-    <div class="goal-visual">
-      <div class="cube-face-display">
-        <div class="grid3 face-large">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-        </div>
-        <p class="face-note">前面</p>
-      </div>
-      <div class="cube-face-display">
-        <div class="grid3 face-large">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-          <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-        </div>
-        <p class="face-note">右面</p>
-      </div>
-      <div class="cube-face-display">
-        <div class="grid3 face-large">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-          <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-        </div>
-        <p class="face-note">后面</p>
-      </div>
-      <div class="cube-face-display">
-        <div class="grid3 face-large">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-          <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-        </div>
-        <p class="face-note">左面</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card" style="text-align:center;">
-    <p>前两层都对齐了吗？</p>
-    <button class="counter-btn" id="didItBtn12" onclick="document.getElementById('complete-12').disabled=false;" style="margin-top:12px;font-size:18px;padding:16px 40px;">我做到了！</button>
-    <div class="tip-box">做到这里真的很厉害了！你已经完成了三分之二的魔方！</div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>如果顶层找不到不带黄色的棱块了，说明有棱块卡在中间层但方向不对。用一次左插或右插把它弹出来，再重新处理。</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-12" disabled>完成本关</button>
-</section>
-
-<!-- ============================================================ -->
-<!-- 第六阶段：顶层 (关卡 13-18)                                     -->
-<!-- ============================================================ -->
-
-<!-- ==================== 关卡 13：黄色十字 ==================== -->
-<section id="level-13" class="level locked" data-level="13">
-  <div class="level-header">
-    <div class="level-badge">关卡 13</div>
-    <h2 class="level-title">黄色十字</h2>
-    <div class="level-meta">
-      <span class="level-time">约 3 分钟</span>
-      <span class="level-xp">+50 XP</span>
-    </div>
-    <div class="phase-tag">第六阶段：顶层</div>
-  </div>
-
-  <div class="content-card">
-    <h3>目标：顶面出现黄色十字</h3>
-    <div class="goal-visual">
-      <div class="cube-face-display">
-        <span class="face-title">顶面</span>
-        <div class="grid3 face-large">
-          <span class="s x"></span><span class="s y"></span><span class="s x"></span>
-          <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-          <span class="s x"></span><span class="s y"></span><span class="s x"></span>
-        </div>
-        <p class="face-note">角先不管，只要十字</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>公式</h3>
-    <div class="formula-box">
-      <div class="formula-name">黄色十字公式</div>
-      <div class="formula-display">
-        <span class="formula-move">F</span>
-        <span class="formula-move">R</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move reverse">R'</span>
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move reverse">F'</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">口诀</span>
-        <span class="memory-text">「前开门 → 右上右上 → 前关门」—— F 开头 F' 结尾，中间是你最熟悉的 R U R' U'！</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">原理</span>
-        <span class="memory-text">F 把顶层棱块拉到前面（开门），R U R' U' 翻转棱块的方向（黄色从侧面翻到顶面），F' 把棱块送回顶层（关门）。</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>三种起始情况</h3>
-    <p>看你的顶面黄色棱块，会出现下面三种形状之一：</p>
-    <div class="cases-grid">
-      <div class="case-card">
-        <div class="grid3 case-face">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s y"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-        </div>
-        <h4>一个点</h4>
-        <p>只有中心是黄色<br>做 <strong>3 次</strong>公式<br>（随便放就行）</p>
-      </div>
-      <div class="case-card">
-        <div class="grid3 case-face">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s y"></span><span class="s y"></span><span class="s x"></span>
-          <span class="s x"></span><span class="s y"></span><span class="s x"></span>
-        </div>
-        <h4>L 形（拐角）</h4>
-        <p>两个黄色棱块成 L<br>把 L 放在<strong>左下角</strong><br>做 <strong>2 次</strong>公式</p>
-      </div>
-      <div class="case-card">
-        <div class="grid3 case-face">
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-          <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-          <span class="s x"></span><span class="s x"></span><span class="s x"></span>
-        </div>
-        <h4>一字（横线）</h4>
-        <p>两个黄色棱块成一条线<br><strong>横放</strong>（不要竖放）<br>做 <strong>1 次</strong>公式</p>
-      </div>
-    </div>
-    <div class="important-box">
-      L 形要放在左下角（9 点钟和 6 点钟方向）再做公式！一字要横放！方向放错了会多做好几次。
-    </div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>如果分不清是 L 形还是一字：转转顶层 U 试试不同方向，一定能找到 L 形或一字。如果只有一个点，那就随便放直接做公式就行。</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-13">完成本关</button>
-</section>
-
-<!-- ==================== 关卡 14：顶面全黄 ==================== -->
-<section id="level-14" class="level locked" data-level="14">
-  <div class="level-header">
-    <div class="level-badge">关卡 14</div>
-    <h2 class="level-title">顶面全黄</h2>
-    <div class="level-meta">
-      <span class="level-time">约 3 分钟</span>
-      <span class="level-xp">+50 XP</span>
-    </div>
-    <div class="phase-tag">第六阶段：顶层</div>
-  </div>
-
-  <div class="content-card">
-    <h3>目标：顶面 9 格全部变黄</h3>
-    <div class="goal-visual">
-      <div class="cube-face-display">
-        <span class="face-title">顶面</span>
-        <div class="grid3 face-large">
-          <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-          <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-          <span class="s y"></span><span class="s y"></span><span class="s y"></span>
-        </div>
-      </div>
-    </div>
-    <p>十字已经有了，现在要让 4 个角块的黄色也朝上。</p>
-  </div>
-
-  <div class="content-card">
-    <h3>小鱼公式</h3>
-    <div class="formula-box">
-      <div class="formula-name">小鱼公式</div>
-      <div class="formula-display">
-        <span class="formula-move">R</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move reverse">R'</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move">R</span>
-        <span class="formula-move">U2</span>
-        <span class="formula-move reverse">R'</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">口诀</span>
-        <span class="memory-text">只用 R 和 U！前面是老朋友「右·上·回」，后面是「上·右·上上·回」。节奏：「右上回 · 上右上上回」。</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">原理</span>
-        <span class="memory-text">这个公式让顶层的角块"原地翻转"。做一次可以让 1-2 个角块的黄色翻到顶面。U2 表示上面转 2 次（180 度）。</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>怎么摆放？</h3>
-    <div class="tips-list">
-      <div class="tip-item">
-        <span class="tip-num">1</span>
-        <div>
-          <strong>转动顶层，让左上角的角块黄色不在顶面</strong>
-          <p>黄色朝向你或朝左都可以，只要不朝上。</p>
-        </div>
-      </div>
-      <div class="tip-item">
-        <span class="tip-num">2</span>
-        <div>
-          <strong>做一次小鱼公式</strong>
-          <p>做完后重新观察顶面。</p>
-        </div>
-      </div>
-      <div class="tip-item">
-        <span class="tip-num">3</span>
-        <div>
-          <strong>重复直到全黄</strong>
-          <p>调整方向后再做。最多 3 次就能全黄。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>关键是每次做之前要调整好方向：确保左上角的角块黄色不在顶面。如果全部角块的黄色都在顶面了，那就不用做了。</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-14">完成本关</button>
-</section>
-
-<!-- ==================== 关卡 15：角块归位 ==================== -->
-<section id="level-15" class="level locked" data-level="15">
-  <div class="level-header">
-    <div class="level-badge">关卡 15</div>
-    <h2 class="level-title">角块归位</h2>
-    <div class="level-meta">
-      <span class="level-time">约 3 分钟</span>
-      <span class="level-xp">+50 XP</span>
-    </div>
-    <div class="phase-tag">第六阶段：顶层</div>
-  </div>
-
-  <div class="content-card">
-    <h3>目标：角块都到正确的位置</h3>
-    <p>现在顶面全黄了，但角块的<strong>位置</strong>可能还不对。</p>
-    <p>检查方法：看每个角块侧面的 2 种颜色，是不是跟相邻的两个面的中心块颜色一致。</p>
-  </div>
-
-  <div class="content-card">
-    <h3>公式</h3>
-    <div class="formula-box">
-      <div class="formula-name">角块归位公式</div>
-      <div class="formula-display">
-        <span class="formula-move">U</span>
-        <span class="formula-move">R</span>
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move reverse">L'</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move reverse">R'</span>
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move">L</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">口诀</span>
-        <span class="memory-text">两组四步，节奏一样！第一组：「上·右·回·左撇」。第二组：「上·右撇·回·左」。就像左右手交替出拳。</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">原理</span>
-        <span class="memory-text">这个公式让 3 个角块按顺时针方向轮换位置，同时保持第 4 个角块不动。所以你要把不用换的那个放在右前方。</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>操作方法</h3>
-    <div class="tips-list">
-      <div class="tip-item">
-        <span class="tip-num">1</span>
-        <div>
-          <strong>找到一个正确的角块</strong>
-          <p>转动顶层，找一个侧面颜色跟两个相邻面的中心块都匹配的角块。</p>
-        </div>
-      </div>
-      <div class="tip-item">
-        <span class="tip-num">2</span>
-        <div>
-          <strong>让正确的角块在右前方</strong>
-          <p>整体转魔方（不是转顶层），让那个对的角块在你的右前方。</p>
-        </div>
-      </div>
-      <div class="tip-item">
-        <span class="tip-num">3</span>
-        <div>
-          <strong>做公式 1-2 次</strong>
-          <p>做完检查。没全对就再做一次。</p>
-        </div>
-      </div>
-    </div>
-    <div class="tip-box">
-      如果 4 个角块都不对怎么办？随便选一个面朝向你，直接做一次公式。做完就会出现一个正确的角块。
-    </div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>判断角块是否正确：看角块侧面两种颜色，是不是分别跟左边的中心块和右边的中心块一样。比如红-蓝-黄角块应该在红色面和蓝色面的交界处。</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-15">完成本关</button>
-</section>
-
-<!-- ==================== 关卡 16：最终还原 ==================== -->
-<section id="level-16" class="level locked" data-level="16">
-  <div class="level-header">
-    <div class="level-badge">关卡 16</div>
-    <h2 class="level-title">最终还原</h2>
-    <div class="level-meta">
-      <span class="level-time">约 3 分钟</span>
-      <span class="level-xp">+60 XP</span>
-    </div>
-    <div class="phase-tag">第六阶段：顶层</div>
-  </div>
-
-  <div class="content-card">
-    <h3>最后一步！棱块归位！</h3>
-    <p>角块都到位了，现在只剩顶层的 4 个棱块需要调整位置。这是还原的最后一步！</p>
-  </div>
-
-  <div class="content-card">
-    <h3>顺时针三棱换</h3>
-    <div class="formula-box">
-      <div class="formula-name">顺时针换（前→右→后）</div>
-      <div class="formula-display">
-        <span class="formula-move">R</span>
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move">R</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move">R</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move">R</span>
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move reverse">R'</span>
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move">R2</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">口诀</span>
-        <span class="memory-text">全程只用 R 和 U！像打鼓一样记节奏：「右·回 / 右·上 / 右·上 / 右·回 / 回·回 / 右右」。</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">原理</span>
-        <span class="memory-text">这个公式让前、右、后三个面的顶层棱块按顺时针方向轮换。左面的棱块不动。</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>逆时针三棱换</h3>
-    <div class="formula-box">
-      <div class="formula-name">逆时针换（前→左→后）</div>
-      <div class="formula-display">
-        <span class="formula-move">R2</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move">R</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move reverse">R'</span>
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move reverse">R'</span>
-        <span class="formula-move reverse">U'</span>
-        <span class="formula-move reverse">R'</span>
-        <span class="formula-move">U</span>
-        <span class="formula-move reverse">R'</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">口诀</span>
-        <span class="memory-text">顺时针的"倒带"！顺的从 R 开头 R2 结尾，逆的从 R2 开头 R' 结尾。</span>
-      </div>
-      <div class="memory-trick">
-        <span class="memory-label">原理</span>
-        <span class="memory-text">和顺时针方向相反，让三个棱块按逆时针轮换。</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>怎么做？</h3>
-    <div class="tips-list">
-      <div class="tip-item">
-        <span class="tip-num">1</span>
-        <div>
-          <strong>找一个已经对好的面</strong>
-          <p>转动顶层，看有没有一个面的顶层棱块颜色跟中心块一致。</p>
-        </div>
-      </div>
-      <div class="tip-item">
-        <span class="tip-num">2</span>
-        <div>
-          <strong>把对好的面放在后面</strong>
-          <p>整体转魔方，让对好的面背对你。</p>
-        </div>
-      </div>
-      <div class="tip-item">
-        <span class="tip-num">3</span>
-        <div>
-          <strong>看其他三个面的棱块需要怎么换</strong>
-          <p>顺时针轮换 → 用顺时针公式。逆时针轮换 → 用逆时针公式。</p>
-        </div>
-      </div>
-    </div>
-    <div class="tip-box">
-      如果 4 个棱块都不对：随便选一个面放在后面，先做一次顺时针公式，做完就会出现一个对好的面。
-    </div>
-  </div>
-
-  <div class="level-hint">
-    <button class="hint-toggle">需要提示吗？点这里</button>
-    <div class="hint-content">
-      <p>判断顺逆时针：对好的面在后面，看前面棱块的颜色应该去右面还是左面。去右面就是顺时针，去左面就是逆时针。</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-16">完成本关</button>
-</section>
-
-<!-- ==================== 关卡 17：大功告成 ==================== -->
-<section id="level-17" class="level locked" data-level="17">
-  <div class="level-header">
-    <div class="level-badge">关卡 17</div>
-    <h2 class="level-title">大功告成</h2>
-    <div class="level-meta">
-      <span class="level-time">约 1 分钟</span>
-      <span class="level-xp">+100 XP</span>
-    </div>
-    <div class="phase-tag">第六阶段：顶层</div>
-  </div>
-
-  <div class="content-card milestone celebration">
-    <div class="confetti">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-    <h3>恭喜你！魔方还原了！</h3>
-    <p>你完成了一件很多人一辈子都没做到的事——<strong>还原了一个三阶魔方！</strong></p>
-    <div class="goal-visual final-goal">
-      <div class="cube-face-display">
-        <div class="grid3 face-large">
-          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-          <span class="s r"></span><span class="s r"></span><span class="s r"></span>
-        </div>
-      </div>
-      <div class="cube-face-display">
-        <div class="grid3 face-large">
-          <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-          <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-          <span class="s b"></span><span class="s b"></span><span class="s b"></span>
-        </div>
-      </div>
-      <div class="cube-face-display">
-        <div class="grid3 face-large">
-          <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-          <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-          <span class="s o"></span><span class="s o"></span><span class="s o"></span>
-        </div>
-      </div>
-      <div class="cube-face-display">
-        <div class="grid3 face-large">
-          <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-          <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-          <span class="s g"></span><span class="s g"></span><span class="s g"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>你的成就</h3>
-    <div class="achievement-list">
-      <p>&#10003; 认识了魔方的结构（中心块、棱块、角块）</p>
-      <p>&#10003; 学会了 6 个方向的转动记号</p>
-      <p>&#10003; 掌握了 R U R' U' 基本手法</p>
-      <p>&#10003; 完成了白色十字</p>
-      <p>&#10003; 完成了底层角块</p>
-      <p>&#10003; 完成了中间层</p>
-      <p>&#10003; 完成了黄色十字和顶面全黄</p>
-      <p>&#10003; 完成了角块和棱块的最终归位</p>
-    </div>
-  </div>
-
-  <div class="content-card">
-    <h3>下一步目标</h3>
-    <div class="tips-list">
-      <div class="tip-item">
-        <span class="tip-num">1</span>
-        <div>
-          <strong>再做 3 遍</strong>
-          <p>第 1 遍对着教程做，第 2 遍偶尔看一下，第 3 遍手指就记住了。</p>
-        </div>
-      </div>
-      <div class="tip-item">
-        <span class="tip-num">2</span>
-        <div>
-          <strong>挑战速度</strong>
-          <p>第一次还原可能要 30 分钟。目标：5 分钟 → 3 分钟 → 1 分钟！</p>
-        </div>
-      </div>
-      <div class="tip-item">
-        <span class="tip-num">3</span>
-        <div>
-          <strong>教给朋友</strong>
-          <p>教别人是最好的学习方式。把你学到的教给同学或家人吧！</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-17">完成本关</button>
-</section>
-
-<!-- ==================== 关卡 18：公式速查 ==================== -->
-<section id="level-18" class="level locked" data-level="18">
-  <div class="level-header">
-    <div class="level-badge">关卡 18</div>
-    <h2 class="level-title">公式速查</h2>
-    <div class="level-meta">
-      <span class="level-time">随时查看</span>
-      <span class="level-xp">+30 XP</span>
-    </div>
-    <div class="phase-tag">第六阶段：顶层</div>
-  </div>
-
-  <div class="content-card">
-    <h3>把这个表收藏起来！</h3>
-    <p>打印出来贴在桌上，练习时随时看。</p>
-  </div>
-
-  <div class="content-card cheatsheet-card">
-    <table class="cheatsheet-table">
-      <thead>
-        <tr>
-          <th>步骤</th>
-          <th>公式</th>
-          <th>记忆口诀</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>白色十字</td>
-          <td>无固定公式（靠观察）</td>
-          <td>先到顶层→对颜色→F2送下去</td>
-        </tr>
-        <tr>
-          <td>底层角块</td>
-          <td><code>R U R' U'</code>（重复 1-5 次）</td>
-          <td>推上去 拨过去 拉回来 推回来</td>
-        </tr>
-        <tr>
-          <td>中层右插</td>
-          <td><code>U R U' R' U' F' U F</code></td>
-          <td>上右回回 + 回回上前</td>
-        </tr>
-        <tr>
-          <td>中层左插</td>
-          <td><code>U' L' U L U F U' F'</code></td>
-          <td>右插的镜像版</td>
-        </tr>
-        <tr>
-          <td>黄色十字</td>
-          <td><code>F R U R' U' F'</code></td>
-          <td>前开门 + 右上右上 + 前关门</td>
-        </tr>
-        <tr>
-          <td>顶面全黄</td>
-          <td><code>R U R' U R U2 R'</code></td>
-          <td>小鱼公式：右上回·上右上上回</td>
-        </tr>
-        <tr>
-          <td>角块归位</td>
-          <td><code>U R U' L' U R' U' L</code></td>
-          <td>上右回左 + 上右撇回左</td>
-        </tr>
-        <tr>
-          <td>棱块归位（顺）</td>
-          <td><code>R U' R U R U R U' R' U' R2</code></td>
-          <td>只用R和U打鼓节奏</td>
-        </tr>
-        <tr>
-          <td>棱块归位（逆）</td>
-          <td><code>R2 U R U R' U' R' U' R' U R'</code></td>
-          <td>顺时针的倒带</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="content-card">
-    <div class="tip-box">
-      小窍门：所有公式的核心都是 R U R' U'。黄色十字只是外面包了 F 和 F'，小鱼只是多转一次 U，中层公式只是分成前后两半。把 R U R' U' 练到闭着眼睛都能做，其他公式就都不难了。
-    </div>
-  </div>
-
-  <button class="complete-btn" id="complete-18">通关！</button>
-</section>
+</div>
 
 </main>
 
-<!-- Footer -->
 <footer>
-  <p>布斯 & 布小斯 · 2026 · 爸爸和女儿一起学魔方</p>
+  <span>布斯和女儿一起学魔方</span> &middot; 2026
 </footer>
 
-<script src="script.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  // ===== State =====
+  const TOTAL_LEVELS = 8;
+  const SAVE_KEY = 'rubik_game_v2';
+
+  let state = loadState();
+
+  function defaultState(){
+    return {
+      currentLevel: 1,
+      completedLevels: [],
+      xp: 0,
+      badges: [],
+      quizPassed: {},   // { '1': {1:true,2:true,3:true} }
+      counters: {},     // { '2': 7 }
+      confirms: {}      // { '3': true }
+    };
+  }
+
+  function loadState(){
+    try {
+      const s = JSON.parse(localStorage.getItem(SAVE_KEY));
+      if(s && s.currentLevel) return s;
+    } catch(e){}
+    return defaultState();
+  }
+
+  function saveState(){
+    localStorage.setItem(SAVE_KEY, JSON.stringify(state));
+  }
+
+  // ===== UI Update =====
+  function updateUI(){
+    const pct = Math.round((state.completedLevels.length / TOTAL_LEVELS) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('xpDisplay').textContent = state.xp + ' XP';
+    const latestBadge = state.badges.length ? state.badges[state.badges.length - 1] : '学徒';
+    document.getElementById('badgeDisplay').textContent = latestBadge;
+
+    for(let i = 1; i <= TOTAL_LEVELS; i++){
+      const card = document.getElementById('lv' + i);
+      if(!card) continue;
+      const completed = state.completedLevels.includes(i);
+      const unlocked = i <= state.currentLevel;
+
+      card.classList.toggle('locked', !unlocked);
+      card.classList.toggle('completed', completed);
+
+      // Show lock icon
+      const hdr = card.querySelector('.card-header');
+      let lockEl = hdr.querySelector('.lock-icon');
+      if(!unlocked){
+        if(!lockEl){
+          lockEl = document.createElement('span');
+          lockEl.className = 'lock-icon';
+          lockEl.textContent = '🔒';
+          hdr.appendChild(lockEl);
+        }
+      } else if(lockEl){
+        lockEl.remove();
+      }
+    }
+
+    // Restore quiz states
+    Object.keys(state.quizPassed).forEach(lv => {
+      const quizzes = state.quizPassed[lv];
+      // disable answered quiz buttons
+      Object.keys(quizzes).forEach(qn => {
+        const container = document.getElementById('q' + lv + '-' + qn);
+        if(container){
+          const btns = container.querySelectorAll('.quiz-btn');
+          btns.forEach(b => b.disabled = true);
+        }
+      });
+    });
+
+    // Check complete button states
+    checkCompleteButtons();
+  }
+
+  function checkCompleteButtons(){
+    // Level 1: needs 3 quizzes
+    const q1 = state.quizPassed['1'] || {};
+    if(q1[1] && q1[2] && q1[3]){
+      const b = document.getElementById('comp1');
+      if(b) b.disabled = false;
+    }
+
+    // Level 2: needs counter >= 10
+    if((state.counters['2'] || 0) >= 10){
+      const b = document.getElementById('comp2');
+      if(b) b.disabled = false;
+    }
+
+    // Levels 3-8: need confirm
+    for(let i = 3; i <= 8; i++){
+      if(state.confirms[i]){
+        const b = document.getElementById('comp' + i);
+        if(b) b.disabled = false;
+      }
+    }
+
+    // Disable completed level buttons
+    state.completedLevels.forEach(lv => {
+      const b = document.getElementById('comp' + lv);
+      if(b){b.disabled = true; b.textContent = '已完成';}
+    });
+  }
+
+  // ===== Toggle Card =====
+  window.toggleCard = function(lv){
+    const card = document.getElementById('lv' + lv);
+    if(!card || card.classList.contains('locked')) return;
+    // Close others
+    document.querySelectorAll('.level-card.active').forEach(c => {
+      if(c !== card) c.classList.remove('active');
+    });
+    card.classList.toggle('active');
+  };
+
+  // ===== Quiz =====
+  window.checkQuiz = function(btn, level, qNum, correct){
+    const container = btn.parentElement;
+    const btns = container.querySelectorAll('.quiz-btn');
+    btns.forEach(b => b.disabled = true);
+
+    const resultEl = document.getElementById('qr' + level + '-' + qNum);
+
+    if(correct){
+      btn.classList.add('correct');
+      resultEl.textContent = '正确!';
+      resultEl.style.color = '#00ffaa';
+
+      if(!state.quizPassed[level]) state.quizPassed[level] = {};
+      state.quizPassed[level][qNum] = true;
+      saveState();
+      checkCompleteButtons();
+    } else {
+      btn.classList.add('wrong');
+      resultEl.textContent = '再想想... 答错了也没关系!';
+      resultEl.style.color = '#ff4466';
+      // Re-enable after 1.5s
+      setTimeout(() => {
+        btns.forEach(b => {b.disabled = false; b.classList.remove('wrong');});
+        resultEl.textContent = '';
+      }, 1500);
+    }
+  };
+
+  // ===== Counter =====
+  window.incrementCounter = function(level){
+    if(!state.counters[level]) state.counters[level] = 0;
+    state.counters[level]++;
+    const display = document.getElementById('cnt' + level);
+    if(display) display.textContent = state.counters[level];
+    saveState();
+    checkCompleteButtons();
+  };
+
+  // ===== Confirm =====
+  window.confirmDone = function(level){
+    state.confirms[level] = true;
+    const btn = document.getElementById('cfm' + level);
+    if(btn){btn.textContent = '太棒了!'; btn.disabled = true; btn.style.background = '#00ffaa';}
+    saveState();
+    checkCompleteButtons();
+  };
+
+  // ===== Complete Level =====
+  window.completeLevel = function(level, xp, badge){
+    if(state.completedLevels.includes(level)) return;
+
+    state.completedLevels.push(level);
+    state.xp += xp;
+    if(badge) state.badges.push(badge);
+    if(level >= state.currentLevel){
+      state.currentLevel = Math.min(level + 1, TOTAL_LEVELS);
+    }
+    saveState();
+
+    // Show reward
+    showReward(level, xp, badge);
+
+    // Celebration particles
+    spawnParticles();
+
+    updateUI();
+
+    // Auto expand next level
+    setTimeout(() => {
+      const next = document.getElementById('lv' + (level + 1));
+      if(next && !next.classList.contains('locked')){
+        document.querySelectorAll('.level-card.active').forEach(c => c.classList.remove('active'));
+        next.classList.add('active');
+        next.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }, 800);
+  };
+
+  // ===== Reward Popup =====
+  function showReward(level, xp, badge){
+    const overlay = document.getElementById('reward-overlay');
+    document.getElementById('rwStars').textContent = level === 8 ? '★★★★★' : '★★★';
+    document.getElementById('rwTitle').textContent = level === 8 ? '恭喜通关! 你是魔方大师!' : '第' + level + '关 闯关成功!';
+    document.getElementById('rwXp').textContent = '+' + xp + ' XP';
+    document.getElementById('rwBadge').textContent = badge ? ('获得称号: ' + badge) : '';
+    overlay.classList.add('show');
+  }
+
+  window.closeReward = function(){
+    document.getElementById('reward-overlay').classList.remove('show');
+  };
+
+  // ===== Particles =====
+  function spawnParticles(){
+    const symbols = ['★','✦','✨','✶','◆','❤'];
+    const colors = ['#ffd700','#00ffaa','#00ccff','#ff88aa','#aa66ff','#ff6633'];
+    for(let i = 0; i < 30; i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      p.style.left = (Math.random() * 100) + 'vw';
+      p.style.top = (Math.random() * 30 - 10) + 'vh';
+      p.style.color = colors[Math.floor(Math.random() * colors.length)];
+      p.style.fontSize = (16 + Math.random() * 20) + 'px';
+      p.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+      p.style.animationDelay = (Math.random() * 0.5) + 's';
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 2500);
+    }
+  }
+
+  // ===== Restore counter displays =====
+  function restoreCounters(){
+    Object.keys(state.counters).forEach(lv => {
+      const display = document.getElementById('cnt' + lv);
+      if(display) display.textContent = state.counters[lv];
+    });
+    Object.keys(state.confirms).forEach(lv => {
+      const btn = document.getElementById('cfm' + lv);
+      if(btn && state.confirms[lv]){
+        btn.textContent = '太棒了!'; btn.disabled = true; btn.style.background = '#00ffaa';
+      }
+    });
+  }
+
+  // ===== Init =====
+  function init(){
+    restoreCounters();
+    updateUI();
+
+    // Auto-expand current active level
+    const activeLv = state.completedLevels.length < TOTAL_LEVELS
+      ? state.currentLevel
+      : TOTAL_LEVELS;
+    const activeCard = document.getElementById('lv' + activeLv);
+    if(activeCard && !activeCard.classList.contains('locked')){
+      document.querySelectorAll('.level-card').forEach(c => c.classList.remove('active'));
+      activeCard.classList.add('active');
+    }
+  }
+
+  init();
+})();
+</script>
 </body>
 </html>
