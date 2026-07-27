@@ -237,14 +237,31 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
 .complete-btn:active{transform:scale(.95)}
 .complete-btn:disabled{background:#333;color:#666;cursor:default;box-shadow:none;transform:none}
 
-/* ===== Formula Display ===== */
-.formula-display{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
-.f-move{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:42px;height:42px;border-radius:8px;font-size:16px;font-weight:900;
-  background:#252550;color:#00ccff;border:1px solid rgba(0,204,255,.3);
-}
-.f-move.rev{color:#ff88aa;border-color:rgba(255,136,170,.3)}
+/* ===== Step Cards ===== */
+.step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;margin:16px 0}
+.step-card{background:#1a2a4a;padding:12px;border-radius:12px}
+.step-card .step-emoji{font-size:32px}
+.step-card .step-name{color:#00ff88;font-weight:700;font-size:14px;margin-top:4px}
+.step-card .step-desc{color:#888;font-size:12px;margin-top:2px}
+
+/* ===== Emoji Cube Face ===== */
+.cube-face{text-align:center;font-size:28px;letter-spacing:8px;line-height:1.4;margin:16px 0}
+.cube-face-small{text-align:center;font-size:24px;line-height:1.4;margin:16px 0}
+
+/* ===== Role Cards ===== */
+.role-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.role-card{background:#1a2a3a;border-radius:12px;padding:14px 8px;text-align:center;border:1px solid rgba(0,255,170,.15)}
+.role-card .role-emoji{font-size:28px}
+.role-card .role-name{color:#00ffaa;font-weight:700;font-size:14px;margin-top:4px}
+.role-card .role-count{color:#ffd700;font-size:13px;margin-top:2px}
+.role-card .role-trait{color:#888;font-size:11px;margin-top:2px}
+
+/* ===== Situation Cards ===== */
+.situation-card{background:#1a2a3a;border-radius:12px;padding:14px;margin:10px 0;border-left:3px solid #00ccff}
+.situation-card .sit-title{color:#00ccff;font-weight:700;font-size:14px;margin-bottom:6px}
+.situation-card .sit-emoji{font-size:24px;text-align:center;margin:8px 0}
+.situation-card .sit-desc{color:#ccc;font-size:13px;line-height:1.6}
+.situation-card .sit-action{color:#00ff88;font-size:13px;margin-top:6px;font-weight:700}
 
 /* ===== Floating XP Text ===== */
 .floating-xp{
@@ -338,6 +355,10 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
   .quiz-opts{flex-direction:row;flex-wrap:wrap}
   .quiz-btn{flex:1;min-width:45%}
 }
+@media(max-width:380px){
+  .step-grid{grid-template-columns:repeat(2,1fr)}
+  .role-cards{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -366,46 +387,68 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
 
 <main>
 
-<!-- ======== Level 1 ======== -->
+<!-- ======== Level 1: 勇者降临 ======== -->
 <div class="level-card active" id="lv1" data-level="1">
   <div class="card-header" onclick="toggleCard(1)">
     <div class="level-num">1</div>
     <div class="header-info">
-      <h2>魔方世界的入口</h2>
+      <h2>勇者降临</h2>
       <span class="subtitle">认识你的魔方</span>
     </div>
     <span class="header-xp">+30 XP</span>
   </div>
   <div class="card-body">
     <div class="story-box">
-      <div class="story-label">剧情</div>
-      <p>在遥远的色彩王国，有一座神奇的魔方城堡。城堡被黑暗巫师打乱了，每一面都变得混乱不堪。你，一位勇敢的小魔法师，被选中来拯救这座城堡。冒险开始了!</p>
+      <div class="story-label">第一章 命运的召唤</div>
+      <p>色彩王国曾经是最美丽的地方。城堡的每一面都闪耀着纯净的颜色——热情的红、宁静的蓝、生机的绿、温暖的橙、阳光的黄、纯洁的白。直到有一天，黑暗巫师施展了混乱咒语，所有的颜色都被打乱了！国王发出了英雄召集令，而你，被命运选中的勇者，踏上了拯救色彩王国的旅程。</p>
     </div>
 
     <div class="know-box">
-      <div class="know-label">知识点</div>
-      <p>一个标准三阶魔方的基本结构：</p>
-      <ul>
-        <li><strong>6个面</strong> -- 白、黄、红、橙、蓝、绿</li>
-        <li><strong>中心块</strong>(6个) -- 每面正中间那个，它<strong>永远不会动</strong>!</li>
-        <li><strong>棱块</strong>(12个) -- 在两个面的交界处，有2种颜色</li>
-        <li><strong>角块</strong>(8个) -- 在三个面的交汇处，有3种颜色</li>
-      </ul>
-      <p style="margin-top:8px">总共 6 + 12 + 8 = <strong>26个小方块</strong>组成了魔方。</p>
+      <div class="know-label">城堡里住着谁？</div>
+      <p>城堡有6面墙，每面墙都有一种颜色：</p>
+      <div class="cube-face">
+        🟥🟥🟥<br>🟥🟥🟥<br>🟥🟥🟥
+      </div>
+      <p style="text-align:center;color:#aaa;margin-bottom:16px;">每个面都是一种颜色，中间那块不会动——它是"国王"，永远站在自己的位置</p>
+
+      <p style="margin-bottom:8px;">城堡里住着三种角色：</p>
+      <div class="role-cards">
+        <div class="role-card">
+          <div class="role-emoji">👑</div>
+          <div class="role-name">国王</div>
+          <div class="role-count">6个</div>
+          <div class="role-trait">中心块，永远不动</div>
+        </div>
+        <div class="role-card">
+          <div class="role-emoji">💂</div>
+          <div class="role-name">卫兵</div>
+          <div class="role-count">12个</div>
+          <div class="role-trait">棱块，有两张脸</div>
+        </div>
+        <div class="role-card">
+          <div class="role-emoji">🧚</div>
+          <div class="role-name">精灵</div>
+          <div class="role-count">8个</div>
+          <div class="role-trait">角块，有三张脸</div>
+        </div>
+      </div>
+
+      <p style="margin-top:12px">总共 6 + 12 + 8 = <strong>26个小方块</strong>组成了魔方城堡。</p>
+      <p style="margin-top:6px;color:#aaa;">记住：<strong>国王永远不动</strong>，所以每面墙的颜色由国王决定。红国王在的那面就是红色面!</p>
     </div>
 
     <details class="funfact">
       <summary>你知道吗？</summary>
       <div class="funfact-body">
-        魔方的世界纪录是惊人的 <strong>3.13秒</strong>! 但别紧张，我们不追求速度。能把魔方还原出来，你就已经超越了全世界93%的人。慢慢来，享受过程。
+        魔方的发明者鲁比克教授，在1974年发明魔方之后，自己花了<strong>整整一个月</strong>才第一次还原成功！所以不用急，慢慢来，能还原出来你就超越了全世界93%的人。
       </div>
     </details>
 
     <div class="challenge-area">
-      <div class="ch-label">闯关挑战</div>
-      <p style="font-size:14px;color:#aaa;margin-bottom:14px">回答下面3个问题，全部答对即可过关!</p>
+      <div class="ch-label">勇者考验</div>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">回答下面3个问题，证明你理解了城堡的结构，即可踏上征途!</p>
 
-      <div class="quiz-q">Q1: 魔方一共有几个面？</div>
+      <div class="quiz-q">Q1: 城堡（魔方）一共有几个面？</div>
       <div class="quiz-opts" id="q1-1">
         <button class="quiz-btn" onclick="checkQuiz(this,1,1,false,'6个')">4个</button>
         <button class="quiz-btn" onclick="checkQuiz(this,1,1,true,'')">6个</button>
@@ -413,7 +456,7 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
       </div>
       <div class="quiz-result" id="qr1-1"></div>
 
-      <div class="quiz-q" style="margin-top:16px">Q2: 魔方有几个角块？</div>
+      <div class="quiz-q" style="margin-top:16px">Q2: 城堡里有几个精灵（角块）？</div>
       <div class="quiz-opts" id="q1-2">
         <button class="quiz-btn" onclick="checkQuiz(this,1,2,false,'8个')">6个</button>
         <button class="quiz-btn" onclick="checkQuiz(this,1,2,true,'')">8个</button>
@@ -421,7 +464,7 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
       </div>
       <div class="quiz-result" id="qr1-2"></div>
 
-      <div class="quiz-q" style="margin-top:16px">Q3: 中心块会动吗？</div>
+      <div class="quiz-q" style="margin-top:16px">Q3: 国王（中心块）会动吗？</div>
       <div class="quiz-opts" id="q1-3">
         <button class="quiz-btn" onclick="checkQuiz(this,1,3,false,'不会动')">会动</button>
         <button class="quiz-btn" onclick="checkQuiz(this,1,3,true,'')">不会动</button>
@@ -433,46 +476,61 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
   </div>
 </div>
 
-<!-- ======== Level 2 ======== -->
+<!-- ======== Level 2: 获得秘籍 ======== -->
 <div class="level-card locked" id="lv2" data-level="2">
   <div class="card-header" onclick="toggleCard(2)">
     <div class="level-num">2</div>
     <div class="header-info">
-      <h2>认识你的武器</h2>
+      <h2>获得秘籍</h2>
       <span class="subtitle">学会"上去下回"</span>
     </div>
     <span class="header-xp">+50 XP</span>
   </div>
   <div class="card-body">
     <div class="story-box">
-      <div class="story-label">剧情</div>
-      <p>城堡守护者交给你一本秘籍，上面只写了四个字——上去下回。"记住这四个字，"守护者说，"它是你最强大的武器。"</p>
+      <div class="story-label">第二章 古老的秘术</div>
+      <p>城堡守护者是一位白发苍苍的老魔法师。他拿出一本泛黄的秘籍，翻到第一页，上面只写了四个字：<strong>上去下回</strong>。"这是色彩王国最古老的魔法，"老魔法师说，"学会了它，你就掌握了还原魔方最核心的力量。全世界的魔方高手，都是靠这四个字起步的。"</p>
     </div>
 
     <div class="know-box">
-      <div class="know-label">核心招式：上去下回</div>
-      <p><strong>R U R' U'</strong> -- 魔方界最经典的4步组合</p>
-      <div class="formula-display" style="margin:16px 0">
-        <span class="f-move">R</span>
-        <span class="f-move">U</span>
-        <span class="f-move rev">R'</span>
-        <span class="f-move rev">U'</span>
+      <div class="know-label">核心秘术：上去下回</div>
+      <p style="margin-bottom:12px;">这是魔方界最经典的4步组合，也是你最强大的武器。只要学会这一招，后面所有关卡都要用到它!</p>
+
+      <div class="step-grid">
+        <div class="step-card">
+          <div class="step-emoji">👆</div>
+          <div class="step-name">推上去</div>
+          <div class="step-desc">右手那一列往上推</div>
+        </div>
+        <div class="step-card">
+          <div class="step-emoji">👉</div>
+          <div class="step-name">拨过去</div>
+          <div class="step-desc">顶上那一层往右拨</div>
+        </div>
+        <div class="step-card">
+          <div class="step-emoji">👇</div>
+          <div class="step-name">拉回来</div>
+          <div class="step-desc">右手那一列往下拉</div>
+        </div>
+        <div class="step-card">
+          <div class="step-emoji">👈</div>
+          <div class="step-name">推回来</div>
+          <div class="step-desc">顶上那一层往左推</div>
+        </div>
       </div>
-      <ul>
-        <li><strong>R</strong> 推上去 -- 右手把右面向上推</li>
-        <li><strong>U</strong> 拨过去 -- 顶面向左拨</li>
-        <li><strong>R'</strong> 拉回来 -- 右面拉回来(向下)</li>
-        <li><strong>U'</strong> 推回来 -- 顶面推回来(向右)</li>
-      </ul>
+
       <p style="margin-top:10px;padding:10px;background:rgba(0,255,170,.08);border-radius:8px">
-        <strong>比喻：</strong>像开门进屋 -- 推开门(R)，挪东西(U)，关门(R')，放回去(U')。
+        <strong>记忆口诀：</strong>像开门进屋——推开门（推上去），挪东西（拨过去），关上门（拉回来），放回去（推回来）。
+      </p>
+      <p style="margin-top:8px;padding:10px;background:rgba(255,215,0,.08);border-radius:8px;color:#ffd700;">
+        做<strong>6遍</strong>"上去下回"，魔方会完美地变回原样! 不信你试试——这就是数学的魔法，6次循环回到起点。
       </p>
     </div>
 
     <details class="funfact">
       <summary>你知道吗？</summary>
       <div class="funfact-body">
-        做<strong>6遍</strong>"上去下回"(R U R' U')，魔方会完美地变回原样! 不信你试试。这就是群论(一种数学)的魔法 -- 6次循环回到起点。
+        世界纪录保持者Max Park，<strong>3.13秒</strong>还原一个魔方! 但他也是从"上去下回"开始练的。每个高手都是这么起步的，你现在和他学的是同一招!
       </div>
     </details>
 
@@ -490,32 +548,45 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
   </div>
 </div>
 
-<!-- ======== Level 3 ======== -->
+<!-- ======== Level 3: 小黄花盛开 ======== -->
 <div class="level-card locked" id="lv3" data-level="3">
   <div class="card-header" onclick="toggleCard(3)">
     <div class="level-num">3</div>
     <div class="header-info">
       <h2>小黄花盛开</h2>
-      <span class="subtitle">白色棱块上顶面</span>
+      <span class="subtitle">白色卫兵上屋顶</span>
     </div>
     <span class="header-xp">+60 XP</span>
   </div>
   <div class="card-body">
     <div class="story-box">
-      <div class="story-label">剧情</div>
-      <p>你来到城堡一楼。地板一片狼藉，白色瓷砖散落各处。守护者说："先在屋顶种一朵小黄花，它会指引你找到每一块白色瓷砖的位置。"</p>
+      <div class="story-label">第三章 屋顶的花园</div>
+      <p>老魔法师带你来到城堡的一楼。白色地砖散落一地。"别急，"他说，"先到屋顶去，种一朵小黄花。花开了，白色地砖就会听话地回到一楼。"你抬头看向屋顶——那里是黄色的世界，你要做的，就是把4块白色卫兵送到屋顶，组成一朵花的形状。</p>
     </div>
 
     <div class="know-box">
       <div class="know-label">怎么做</div>
-      <p>把白色面朝下(黄色朝上)，开始找白色棱块：</p>
-      <ul>
-        <li>顶部不动，转右边那列(R) 3次，看看有没有白色棱块被带上来</li>
-        <li>没有的话，转底下两层换个方向再来</li>
-        <li>每找到一个白色棱块到顶面，就处理下一个</li>
-      </ul>
-      <p style="margin-top:10px;padding:10px;background:rgba(0,255,170,.08);border-radius:8px">
-        <strong>"找家长"法则：</strong>每个白色棱块都要找到同色中心块这个"家长"。棱块的另一面颜色是什么，就要对准那个颜色的中心块。
+      <div style="background:#1a3a2a;padding:16px;border-radius:12px;border-left:3px solid #00ff88;margin:12px 0;">
+        <p style="color:#00ff88;font-weight:700;margin-bottom:8px;">🌼 种花三步法：</p>
+        <p style="color:#ccc;margin:6px 0;">1️⃣ 把黄色面朝上（黄国王在顶上）</p>
+        <p style="color:#ccc;margin:6px 0;">2️⃣ 找一个白色卫兵，把它转到右边那一列</p>
+        <p style="color:#ccc;margin:6px 0;">3️⃣ 右边那一列往上推3下，看看白色有没有到顶上</p>
+        <p style="color:#ccc;margin:6px 0;">4️⃣ 到了就好! 没到就转一下底下两层，再推3下</p>
+        <p style="color:#ccc;margin:6px 0;">5️⃣ 4个白色卫兵都送上去，小黄花就开了🌼</p>
+      </div>
+
+      <div class="cube-face-small" style="margin-top:16px;">
+        <p style="color:#aaa;margin-bottom:8px;">目标：顶面出现小黄花</p>
+        <div>
+          ⬜🟡⬜<br>
+          🟡🟡🟡<br>
+          ⬜🟡⬜
+        </div>
+        <p style="color:#666;font-size:12px;margin-top:4px;">白色 = 白色卫兵到位了!</p>
+      </div>
+
+      <p style="margin-top:12px;padding:10px;background:rgba(0,255,170,.08);border-radius:8px">
+        <strong>"找家长"法则：</strong>每个白色卫兵都有两张脸，另一面是什么颜色，那个颜色的国王就是它的"家长"。先别管对不对，把白色卫兵都送到屋顶就行!
       </p>
     </div>
 
@@ -528,7 +599,7 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
 
     <div class="challenge-area">
       <div class="ch-label">实操挑战</div>
-      <p style="font-size:14px;color:#aaa;margin-bottom:14px">在你的真实魔方上，拼出顶面的"小黄花"(4个白色棱块到顶面)。做到了就点下面的按钮!</p>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">在你的真实魔方上，拼出顶面的"小黄花"（4个白色卫兵到顶面）。做到了就点下面的按钮!</p>
       <div class="counter-area">
         <button class="confirm-btn" id="cfm3" onclick="confirmDone(3)">我做到了!</button>
       </div>
@@ -538,32 +609,45 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
   </div>
 </div>
 
-<!-- ======== Level 4 ======== -->
+<!-- ======== Level 4: 白色十字降临 ======== -->
 <div class="level-card locked" id="lv4" data-level="4">
   <div class="card-header" onclick="toggleCard(4)">
     <div class="level-num">4</div>
     <div class="header-info">
       <h2>白色十字降临</h2>
-      <span class="subtitle">棱块翻到底面</span>
+      <span class="subtitle">卫兵找到家长，翻身回一楼</span>
     </div>
     <span class="header-xp">+70 XP</span>
   </div>
   <div class="card-body">
     <div class="story-box">
-      <div class="story-label">剧情</div>
-      <p>小黄花绽放了! 花瓣指向四个方向。现在你要顺着花瓣的指引，把白色瓷砖一块块翻到一楼地板上，拼成一个闪耀的白色十字。</p>
+      <div class="story-label">第四章 花瓣的指引</div>
+      <p>小黄花在屋顶绽放了! 四片白色花瓣指向四个方向。"现在，"老魔法师指着一楼地板说，"让花瓣翻下来，变成一楼的白色十字地板。但要注意——每片花瓣要找到自己的家长! 红色卫兵要站在红国王旁边，蓝色卫兵要站在蓝国王旁边。对齐了，才能翻下来。"</p>
     </div>
 
     <div class="know-box">
-      <div class="know-label">操作方法</div>
-      <p>找棱块<strong>侧面颜色</strong>的"家长"(同色中心块)，对齐后向下转两下(180度)。</p>
-      <p style="margin-top:8px;font-weight:700">4种情况：</p>
-      <ul>
-        <li><strong>白色在顶面朝上</strong> -- 最简单! 对齐侧面颜色，转两下送下去</li>
-        <li><strong>白色朝侧面</strong> -- 需要多一步翻转：F U' R U</li>
-        <li><strong>在中间层</strong> -- 先弹出来(R U R')，变成上面的情况再处理</li>
-        <li><strong>在底面但方向反了</strong> -- 先F2弹到顶层，重新对齐再放回去</li>
-      </ul>
+      <div class="know-label">操作方法：找家长 + 翻身术</div>
+      <div style="background:#1a3a2a;padding:16px;border-radius:12px;border-left:3px solid #00ff88;margin:12px 0;">
+        <p style="color:#00ff88;font-weight:700;margin-bottom:8px;">🔍 找家长三步走：</p>
+        <p style="color:#ccc;margin:6px 0;">1️⃣ 看屋顶上白色卫兵的<strong>另一面</strong>是什么颜色</p>
+        <p style="color:#ccc;margin:6px 0;">2️⃣ 转动顶层，让那个颜色<strong>对准</strong>同色国王（中心块）</p>
+        <p style="color:#ccc;margin:6px 0;">3️⃣ 对齐后做<strong>"翻身术"</strong>——那一面向下翻两下（转180度）</p>
+        <p style="color:#ccc;margin:6px 0;">4️⃣ 4个卫兵都找到家长翻下去，白色十字就完成了!</p>
+      </div>
+
+      <div class="cube-face-small" style="margin-top:16px;">
+        <p style="color:#aaa;margin-bottom:8px;">目标：底面出现白色十字</p>
+        <div>
+          ⬛⬜⬛<br>
+          ⬜⬜⬜<br>
+          ⬛⬜⬛
+        </div>
+        <p style="color:#666;font-size:12px;margin-top:4px;">而且每个卫兵的侧面颜色要和旁边的国王一致!</p>
+      </div>
+
+      <p style="margin-top:12px;padding:10px;background:rgba(255,215,0,.08);border-radius:8px;color:#ffd700;">
+        <strong>小提示：</strong>如果白色卫兵被卡在中间层或者底层位置不对，先把它转到侧面，再推到顶层重新来。别怕多动几下!
+      </p>
     </div>
 
     <details class="funfact">
@@ -575,7 +659,7 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
 
     <div class="challenge-area">
       <div class="ch-label">实操挑战</div>
-      <p style="font-size:14px;color:#aaa;margin-bottom:14px">在真实魔方上拼出白色十字 -- 底面十字全白，且每个棱块的侧面颜色和中心块一致。</p>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">在真实魔方上拼出白色十字——底面十字全白，且每个卫兵的侧面颜色和国王（中心块）一致。</p>
       <div class="counter-area">
         <button class="confirm-btn" id="cfm4" onclick="confirmDone(4)">我做到了!</button>
       </div>
@@ -585,37 +669,56 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
   </div>
 </div>
 
-<!-- ======== Level 5 ======== -->
+<!-- ======== Level 5: 警察追小偷 ======== -->
 <div class="level-card locked" id="lv5" data-level="5">
   <div class="card-header" onclick="toggleCard(5)">
     <div class="level-num">5</div>
     <div class="header-info">
-      <h2>一楼装修完成</h2>
-      <span class="subtitle">底面全白 + 角块归位</span>
+      <h2>警察追小偷</h2>
+      <span class="subtitle">角块精灵全部归位</span>
     </div>
     <span class="header-xp">+80 XP</span>
   </div>
   <div class="card-body">
     <div class="story-box">
-      <div class="story-label">剧情</div>
-      <p>十字地板铺好了! 但四个角落还空着。城堡的角落住着四个迷路的角块精灵，它们有三张脸，你需要帮每个精灵找到自己的家。</p>
+      <div class="story-label">第五章 捉拿逃犯</div>
+      <p>十字地板铺好了! 但四个角落还空着。老魔法师说："角落里住着四个小精灵，每个精灵有三张脸。它们被黑暗巫师吓跑了，躲在城堡各处。你要像警察追小偷一样，把它们一个个带回家。"</p>
     </div>
 
     <div class="know-box">
-      <div class="know-label">角块3种情况</div>
-      <p>把白色角块放到它"家"的正上方(看角块的3种颜色决定位置)，然后：</p>
-      <ul>
-        <li><strong>角块在三楼侧面</strong> -- 白色朝向你 -> 做1次"上去下回"(R U R' U')</li>
-        <li><strong>角块白色在顶部朝上</strong> -- 做3次"上去下回"</li>
-        <li><strong>角块在底部位置不对</strong> -- 先做一次"上去下回"弹出来，再处理</li>
-      </ul>
-      <div class="formula-display" style="margin:12px 0">
-        <span class="f-move">R</span>
-        <span class="f-move">U</span>
-        <span class="f-move rev">R'</span>
-        <span class="f-move rev">U'</span>
+      <div class="know-label">追小偷秘籍</div>
+      <p style="margin-bottom:8px;">先找到精灵应该住在哪里（看它三张脸的颜色，找到对应的三个国王交汇的角落），然后把它"追"到正上方。接下来，根据它的姿势决定追几次：</p>
+
+      <div class="situation-card">
+        <div class="sit-title">🚨 情况一：小偷在三楼走廊（白色朝侧面）</div>
+        <div class="sit-emoji">
+          🧚👉 这里白色朝向你
+        </div>
+        <div class="sit-desc">精灵在顶层侧面，白色那张脸朝着你。</div>
+        <div class="sit-action">做1次"上去下回"，精灵就乖乖回家了!</div>
       </div>
-      <p style="text-align:center;color:#888;font-size:13px">最多做5次，白色一定会朝下</p>
+
+      <div class="situation-card">
+        <div class="sit-title">🚨 情况二：小偷在屋顶（白色朝上）</div>
+        <div class="sit-emoji">
+          🧚👆 白色朝天
+        </div>
+        <div class="sit-desc">精灵在顶层，但白色那张脸朝上。它比较顽固!</div>
+        <div class="sit-action">连续做3次"上去下回"，白色才会翻到朝下!</div>
+      </div>
+
+      <div class="situation-card">
+        <div class="sit-title">🚨 情况三：小偷在一楼但躲错了房间</div>
+        <div class="sit-emoji">
+          🧚❌ 位置不对或方向反了
+        </div>
+        <div class="sit-desc">精灵已经在底层，但不在正确的角落，或者方向反了。</div>
+        <div class="sit-action">先做1次"上去下回"把它赶到三楼，再重新追!</div>
+      </div>
+
+      <p style="margin-top:12px;padding:10px;background:rgba(0,255,170,.08);border-radius:8px">
+        <strong>核心要诀：</strong>不管哪种情况，都是用"上去下回"! 最多做5次，白色一定会朝下。这就是你在第二关学会的秘术!
+      </p>
     </div>
 
     <details class="funfact">
@@ -627,7 +730,7 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
 
     <div class="challenge-area">
       <div class="ch-label">实操挑战</div>
-      <p style="font-size:14px;color:#aaa;margin-bottom:14px">完成全白底面! 底面9格全白，且每个角块的侧面颜色也要和中心块对齐。</p>
+      <p style="font-size:14px;color:#aaa;margin-bottom:14px">完成全白底面! 底面9格全白，且每个精灵的侧面颜色也要和国王对齐。一楼装修完毕!</p>
       <div class="counter-area">
         <button class="confirm-btn" id="cfm5" onclick="confirmDone(5)">全白底面完成!</button>
       </div>
@@ -637,31 +740,37 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
   </div>
 </div>
 
-<!-- ======== Level 6 ======== -->
+<!-- ======== Level 6: 二楼装墙板 ======== -->
 <div class="level-card locked" id="lv6" data-level="6">
   <div class="card-header" onclick="toggleCard(6)">
     <div class="level-num">6</div>
     <div class="header-info">
       <h2>二楼装墙板</h2>
-      <span class="subtitle">中间层棱块归位</span>
+      <span class="subtitle">中间层卫兵归位</span>
     </div>
     <span class="header-xp">+90 XP</span>
   </div>
   <div class="card-body">
     <div class="story-box">
-      <div class="story-label">剧情</div>
-      <p>一楼完工! 你踏上楼梯来到二楼。这里的墙壁颜色错乱，每面墙都混着不同的颜色。守护者教你新招式——开门→上去→关门。</p>
+      <div class="story-label">第六章 旋转楼梯</div>
+      <p>一楼装修完毕! 你踏上旋转楼梯来到二楼。这里的墙壁一团糟，卫兵们东倒西歪。老魔法师教你"左插右插"——像插抽屉一样，把每个卫兵推到正确的位置。"看清楚卫兵要去左边还是右边，"他说，"然后把抽屉拉开，放进去，再推回去。"</p>
     </div>
 
     <div class="know-box">
-      <div class="know-label">方法(占位 -- 后续详细填)</div>
-      <p>在顶层找一个<strong>没有黄色</strong>的棱块，对齐正面颜色和中心块，然后看顶面颜色决定往左还是往右插入：</p>
-      <ul>
-        <li><strong>右插公式：</strong>U R U' R' U' F' U F</li>
-        <li><strong>左插公式：</strong>U' L' U L U F U' F'</li>
-      </ul>
-      <p style="margin-top:8px;color:#888">口诀："分两半记"。前4步打开抽屉，后4步推进棱块。</p>
-      <p style="margin-top:8px;color:#888">如果棱块已在中间层但方向反了，随便用一次左插或右插把它弹出来，再重新处理。</p>
+      <div class="know-label">左插右插秘术</div>
+      <p>在顶层找一个<strong>没有黄色</strong>的卫兵（两张脸都不是黄色），然后：</p>
+
+      <div style="background:#1a3a2a;padding:16px;border-radius:12px;border-left:3px solid #00ff88;margin:12px 0;">
+        <p style="color:#00ff88;font-weight:700;margin-bottom:8px;">📦 插抽屉三步法：</p>
+        <p style="color:#ccc;margin:6px 0;">1️⃣ 转动顶层，让卫兵的<strong>正面颜色</strong>对准同色国王</p>
+        <p style="color:#ccc;margin:6px 0;">2️⃣ 看卫兵<strong>顶上那张脸</strong>的颜色在左边还是右边</p>
+        <p style="color:#ccc;margin:6px 0;">3️⃣ 颜色在右边 → 用"右插"：先把顶层往右拨开，再做"上去下回"的变招</p>
+        <p style="color:#ccc;margin:6px 0;">4️⃣ 颜色在左边 → 用"左插"：先把顶层往左拨开，再做左手版"上去下回"</p>
+      </div>
+
+      <p style="margin-top:8px;padding:10px;background:rgba(255,215,0,.08);border-radius:8px;color:#ffd700;">
+        <strong>核心原理：</strong>左插和右插本质上都是"开门→拨顶→关门"的变体。如果卫兵已在中间层但方向反了，随便用一次左插或右插把它弹出来，再重新处理。
+      </p>
     </div>
 
     <div class="challenge-area">
@@ -676,7 +785,7 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
   </div>
 </div>
 
-<!-- ======== Level 7 ======== -->
+<!-- ======== Level 7: 三楼黄色屋顶 ======== -->
 <div class="level-card locked" id="lv7" data-level="7">
   <div class="card-header" onclick="toggleCard(7)">
     <div class="level-num">7</div>
@@ -688,17 +797,26 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
   </div>
   <div class="card-body">
     <div class="story-box">
-      <div class="story-label">剧情</div>
-      <p>二楼装修完毕! 你终于来到三楼屋顶。黄色的屋顶瓦片需要重新排列。守护者拿出了最后的秘密武器——眼镜公式。</p>
+      <div class="story-label">第七章 金色眼镜</div>
+      <p>终于来到三楼屋顶! 黄色瓦片需要重新排列。老魔法师拿出最后一件宝物——一副金色眼镜。"戴上它，你就能看清瓦片应该怎么摆。"这就是传说中的<strong>眼镜公式</strong>! 把眼镜戴上、做个"上去下回"、再把眼镜摘下——屋顶就会一步步变成全黄!</p>
     </div>
 
     <div class="know-box">
-      <div class="know-label">方法(占位 -- 后续详细填)</div>
-      <p><strong>黄色十字公式：</strong>F R U R' U' F'</p>
-      <p style="margin-top:4px;color:#888">口诀："前开门 + 上去下回 + 前关门"</p>
-      <p style="margin-top:12px"><strong>小鱼公式(顶面全黄)：</strong>R U R' U R U2 R'</p>
-      <p style="margin-top:4px;color:#888">口诀："右上回 - 上右上上回"</p>
-      <p style="margin-top:12px;color:#888">三种起始情况：一个点(做3次)、L形(做2次)、一字(做1次)。</p>
+      <div class="know-label">眼镜秘术</div>
+
+      <div style="background:#1a3a2a;padding:16px;border-radius:12px;border-left:3px solid #00ff88;margin:12px 0;">
+        <p style="color:#00ff88;font-weight:700;margin-bottom:8px;">🤓 先拼黄色十字：</p>
+        <p style="color:#ccc;margin:6px 0;">像戴眼镜一样的手势——前面翻开（戴眼镜）→ 做一遍"上去下回" → 前面翻回来（摘眼镜）</p>
+        <p style="color:#ccc;margin:6px 0;">口诀：<strong>"戴眼镜 → 上去下回 → 摘眼镜"</strong></p>
+      </div>
+
+      <div style="background:#1a3a2a;padding:16px;border-radius:12px;border-left:3px solid #ffd700;margin:12px 0;">
+        <p style="color:#ffd700;font-weight:700;margin-bottom:8px;">🐟 再拼全黄（小鱼术）：</p>
+        <p style="color:#ccc;margin:6px 0;">找到像小鱼形状的图案，让小鱼头朝左下角</p>
+        <p style="color:#ccc;margin:6px 0;">然后做：<strong>推上去 → 拨过去 → 拉回来 → 拨过去 → 推上去 → 拨两下 → 拉回来</strong></p>
+      </div>
+
+      <p style="margin-top:12px;color:#888">三种起始情况：一个点（做3次眼镜术）、L形（做2次）、一字（做1次）。做完十字后，再用小鱼术把全部变黄。</p>
     </div>
 
     <div class="challenge-area">
@@ -713,30 +831,40 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-in
   </div>
 </div>
 
-<!-- ======== Level 8 ======== -->
+<!-- ======== Level 8: 封顶大吉 ======== -->
 <div class="level-card locked" id="lv8" data-level="8">
   <div class="card-header" onclick="toggleCard(8)">
     <div class="level-num">8</div>
     <div class="header-info">
       <h2>封顶大吉</h2>
-      <span class="subtitle">顶层位置与方向调整</span>
+      <span class="subtitle">色彩王国复活!</span>
     </div>
     <span class="header-xp">+150 XP</span>
   </div>
   <div class="card-body">
     <div class="story-box">
-      <div class="story-label">剧情</div>
-      <p>屋顶快完成了! 最后一步——调整每块瓦片的方向，让整个城堡焕然一新。黑暗巫师的魔咒被彻底打破! 色彩王国重新恢复了光明!</p>
+      <div class="story-label">最终章 光明回归</div>
+      <p>屋顶的黄色瓦片全部归位! 最后一步——调整每块瓦片的方向。你举起魔杖，念出最后的咒语......金光闪烁，色彩王国的每一面都恢复了纯净的颜色! 黑暗巫师的咒语被彻底打破了! 勇者，你拯救了整个王国! 🏆</p>
     </div>
 
     <div class="know-box">
-      <div class="know-label">方法(占位 -- 后续详细填)</div>
-      <p><strong>角块归位公式：</strong>U R U' L' U R' U' L</p>
-      <p style="margin-top:4px;color:#888">口诀："上右回左，上右撇回左" -- 像左右手交替出拳</p>
-      <p style="margin-top:12px"><strong>棱块归位(顺)：</strong>R U' R U R U R U' R' U' R2</p>
-      <p style="margin-top:4px;color:#888">口诀：全程只用R和U，像打鼓节奏</p>
-      <p style="margin-top:12px"><strong>棱块归位(逆)：</strong>R2 U R U R' U' R' U' R' U R'</p>
-      <p style="margin-top:4px;color:#888">口诀：顺时针的"倒带"</p>
+      <div class="know-label">最终秘术</div>
+
+      <div style="background:#1a3a2a;padding:16px;border-radius:12px;border-left:3px solid #00ff88;margin:12px 0;">
+        <p style="color:#00ff88;font-weight:700;margin-bottom:8px;">🏠 精灵归位术：</p>
+        <p style="color:#ccc;margin:6px 0;">让顶层的精灵（角块）回到各自正确的角落。</p>
+        <p style="color:#ccc;margin:6px 0;">方法：找到一个已经在正确位置的精灵，把它放在右前方，然后做<strong>"左右交替出拳"</strong>——像左右手轮流拍球一样，拨顶→推右→拨回→推左，循环做。</p>
+      </div>
+
+      <div style="background:#1a3a2a;padding:16px;border-radius:12px;border-left:3px solid #ffd700;margin:12px 0;">
+        <p style="color:#ffd700;font-weight:700;margin-bottom:8px;">🔄 卫兵归位术：</p>
+        <p style="color:#ccc;margin:6px 0;">最后把顶层的卫兵（棱块）也送回正确位置。</p>
+        <p style="color:#ccc;margin:6px 0;">方法：观察哪些卫兵需要顺时针换位、哪些逆时针换位，然后像<strong>"打鼓"</strong>一样有节奏地推右和拨顶，把它们轮换到位。</p>
+      </div>
+
+      <p style="margin-top:12px;padding:10px;background:rgba(255,215,0,.15);border-radius:8px;color:#ffd700;font-weight:700;text-align:center;font-size:16px;">
+        六面归位，色彩王国重生! 你就是传说中的魔方英雄!
+      </p>
     </div>
 
     <div class="challenge-area">
