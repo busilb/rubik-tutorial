@@ -12,17 +12,54 @@
 html{font-size:16px;scroll-behavior:smooth}
 body{
   font-family:'Noto Sans SC',sans-serif;
-  background:#0d0d1a;
+  background:linear-gradient(180deg,#0a0a2e 0%,#1a0a3e 100%);
   color:#e0e0e0;
   min-height:100vh;
   padding-bottom:80px;
   -webkit-tap-highlight-color:transparent;
+  overflow-x:hidden;
+  position:relative;
 }
+
+/* ===== Starry Background ===== */
+body::before,body::after{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;
+}
+body::before{
+  background:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,.6) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 50% 10%, rgba(255,255,255,.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 90% 80%, rgba(255,255,255,.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 35%, rgba(255,255,255,.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 65% 75%, rgba(255,255,255,.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 50%, rgba(255,255,255,.6) 0%, transparent 100%);
+  animation:twinkle1 4s ease-in-out infinite alternate;
+}
+body::after{
+  background:
+    radial-gradient(1px 1px at 5% 45%, rgba(200,200,255,.7) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 20% 75%, rgba(200,200,255,.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 15%, rgba(200,200,255,.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 55%, rgba(200,200,255,.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 75% 25%, rgba(200,200,255,.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 95% 65%, rgba(200,200,255,.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 90%, rgba(200,200,255,.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 60% 5%, rgba(200,200,255,.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 50%, rgba(200,200,255,.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 12% 30%, rgba(200,200,255,.6) 0%, transparent 100%);
+  animation:twinkle2 5s ease-in-out infinite alternate;
+}
+@keyframes twinkle1{0%{opacity:.6}100%{opacity:1}}
+@keyframes twinkle2{0%{opacity:1}100%{opacity:.5}}
 
 /* ===== Top Bar ===== */
 #topbar{
   position:fixed;top:0;left:0;right:0;z-index:1000;
-  background:rgba(13,13,26,.95);backdrop-filter:blur(12px);
+  background:rgba(10,10,46,.92);backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(0,255,170,.15);
   padding:8px 16px;display:flex;align-items:center;gap:10px;
 }
@@ -34,22 +71,56 @@ body{
   font-size:11px;color:#0d0d1a;background:#ffd700;padding:2px 8px;border-radius:10px;
   font-weight:700;white-space:nowrap;
 }
+.topbar-role{
+  font-size:18px;white-space:nowrap;
+  animation:roleBounce 2s ease-in-out infinite;
+}
+@keyframes roleBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 
 /* ===== Main ===== */
-main{max-width:600px;margin:0 auto;padding:72px 16px 24px}
+main{max-width:600px;margin:0 auto;padding:72px 16px 24px;position:relative;z-index:1}
 
 /* ===== Level Cards ===== */
 .level-card{
-  background:#1a1a2e;border-radius:16px;margin-bottom:20px;overflow:hidden;
+  background:rgba(26,26,46,.85);border-radius:16px;margin-bottom:20px;overflow:hidden;
   border:1px solid rgba(0,255,170,.1);transition:all .4s ease;
+  box-shadow:0 4px 20px rgba(0,0,0,.3), 0 0 40px rgba(100,100,255,.05);
+  position:relative;
 }
-.level-card.locked{opacity:.5;pointer-events:none;filter:grayscale(.6)}
+.level-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 30px rgba(0,0,0,.4), 0 0 50px rgba(100,100,255,.1);
+}
+.level-card.locked{
+  opacity:.5;pointer-events:none;filter:grayscale(.6);
+  transform:none !important;
+}
 .level-card.locked .card-body{display:none}
 .level-card.completed{border-color:rgba(0,255,170,.4)}
 .level-card.completed .card-header{background:linear-gradient(135deg,rgba(0,255,170,.15),rgba(0,204,255,.1))}
 
+/* Left color bar for each level */
+.level-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:5px;
+  border-radius:16px 0 0 16px;z-index:2;
+}
+.level-card[data-level="1"]::before{background:linear-gradient(180deg,#ff6b6b,#ee5a5a)}
+.level-card[data-level="2"]::before{background:linear-gradient(180deg,#ffa502,#ff8800)}
+.level-card[data-level="3"]::before{background:linear-gradient(180deg,#ffd700,#ffcc00)}
+.level-card[data-level="4"]::before{background:linear-gradient(180deg,#2ed573,#20bf55)}
+.level-card[data-level="5"]::before{background:linear-gradient(180deg,#00ccff,#0099dd)}
+.level-card[data-level="6"]::before{background:linear-gradient(180deg,#6c5ce7,#5a4bd1)}
+.level-card[data-level="7"]::before{background:linear-gradient(180deg,#e056a0,#d63384)}
+.level-card[data-level="8"]::before{background:linear-gradient(180deg,#ffd700,#ffaa00)}
+
+/* Locked overlay with big lock */
+.level-card.locked .card-header::after{
+  content:'🔒';position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  font-size:28px;opacity:.6;
+}
+
 .card-header{
-  padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;
+  padding:16px 20px 16px 28px;cursor:pointer;display:flex;align-items:center;gap:12px;
   background:linear-gradient(135deg,rgba(30,30,60,.8),rgba(20,20,40,.9));
   position:relative;
 }
@@ -61,7 +132,7 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px}
 }
 .level-card.locked .level-num{background:#333;color:#666}
 .level-card.completed .level-num{background:linear-gradient(135deg,#ffd700,#ffaa00)}
-.level-card.completed .level-num::after{content:'\\2713';position:absolute}
+.level-card.completed .level-num::after{content:'\2713';position:absolute}
 .header-info{flex:1;min-width:0}
 .header-info h2{font-size:17px;font-weight:700;color:#fff;margin-bottom:2px}
 .header-info .subtitle{font-size:12px;color:#888}
@@ -115,46 +186,56 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px}
 .quiz-q{font-size:15px;font-weight:700;color:#fff;margin-bottom:12px}
 .quiz-opts{display:flex;flex-direction:column;gap:8px}
 .quiz-btn{
-  background:#252545;border:2px solid #3a3a6a;border-radius:10px;padding:12px 16px;
-  font-size:15px;color:#ddd;text-align:left;cursor:pointer;transition:all .2s;
-  font-family:inherit;
+  background:#252545;border:2px solid #3a3a6a;border-radius:14px;padding:14px 18px;
+  font-size:15px;color:#ddd;text-align:left;cursor:pointer;transition:all .25s;
+  font-family:inherit;position:relative;overflow:hidden;
 }
+.quiz-btn:hover{background:#2d2d55;border-color:#5a5a8a;transform:translateY(-1px)}
 .quiz-btn:active{transform:scale(.97)}
-.quiz-btn.correct{background:#1a3a1a;border-color:#00ffaa;color:#00ffaa}
-.quiz-btn.wrong{background:#3a1a1a;border-color:#ff4466;color:#ff4466}
+.quiz-btn.correct{background:#1a3a1a;border-color:#00ffaa;color:#00ffaa;animation:correctPop .3s ease}
+.quiz-btn.wrong{background:#3a1a1a;border-color:#ff4466;color:#ff4466;animation:shakeWrong .4s ease}
 .quiz-btn:disabled{cursor:default;opacity:.7}
 .quiz-result{margin-top:10px;font-size:14px;font-weight:700;min-height:20px}
 
+@keyframes correctPop{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes shakeWrong{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+
 /* Counter */
-.counter-area{text-align:center;padding:12px 0}
+.counter-area{text-align:center;padding:12px 0;position:relative}
 .counter-btn{
   background:linear-gradient(135deg,#00ccff,#00ffaa);color:#0d0d1a;
-  border:none;border-radius:12px;padding:14px 28px;font-size:16px;font-weight:700;
+  border:none;border-radius:16px;padding:16px 32px;font-size:17px;font-weight:700;
   cursor:pointer;transition:all .2s;font-family:inherit;
+  box-shadow:0 4px 15px rgba(0,204,255,.3);
 }
-.counter-btn:active{transform:scale(.95)}
+.counter-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,204,255,.4)}
+.counter-btn:active{transform:scale(.93);box-shadow:0 2px 10px rgba(0,204,255,.2)}
 .counter-text{display:block;margin-top:10px;font-size:18px;font-weight:700;color:#00ffaa}
 .counter-sub{font-size:13px;color:#888;margin-top:4px}
 
 /* Confirm Button */
 .confirm-btn{
-  display:block;width:100%;padding:14px;margin-top:16px;
+  display:block;width:100%;padding:16px;margin-top:16px;
   background:linear-gradient(135deg,#00ccff,#00ffaa);color:#0d0d1a;
-  border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;
+  border:none;border-radius:16px;font-size:17px;font-weight:700;cursor:pointer;
   transition:all .2s;font-family:inherit;
+  box-shadow:0 4px 15px rgba(0,204,255,.3);
 }
-.confirm-btn:active{transform:scale(.97)}
-.confirm-btn:disabled{background:#333;color:#666;cursor:default}
+.confirm-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,204,255,.4)}
+.confirm-btn:active{transform:scale(.95)}
+.confirm-btn:disabled{background:#333;color:#666;cursor:default;box-shadow:none;transform:none}
 
 /* Complete Button */
 .complete-btn{
-  display:block;width:100%;padding:16px;margin-top:20px;
+  display:block;width:100%;padding:18px;margin-top:20px;
   background:linear-gradient(135deg,#ffd700,#ffaa00);color:#0d0d1a;
-  border:none;border-radius:14px;font-size:17px;font-weight:900;cursor:pointer;
+  border:none;border-radius:16px;font-size:18px;font-weight:900;cursor:pointer;
   transition:all .2s;font-family:inherit;letter-spacing:1px;
+  box-shadow:0 4px 20px rgba(255,215,0,.3);
 }
-.complete-btn:active{transform:scale(.96)}
-.complete-btn:disabled{background:#333;color:#666;cursor:default}
+.complete-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,215,0,.4)}
+.complete-btn:active{transform:scale(.95)}
+.complete-btn:disabled{background:#333;color:#666;cursor:default;box-shadow:none;transform:none}
 
 /* ===== Formula Display ===== */
 .formula-display{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
@@ -165,6 +246,28 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px}
 }
 .f-move.rev{color:#ff88aa;border-color:rgba(255,136,170,.3)}
 
+/* ===== Floating XP Text ===== */
+.floating-xp{
+  position:fixed;z-index:3000;pointer-events:none;
+  font-size:20px;font-weight:900;color:#00ffaa;
+  text-shadow:0 0 10px rgba(0,255,170,.5);
+  animation:floatUp 1.2s ease-out forwards;
+}
+@keyframes floatUp{
+  0%{opacity:1;transform:translateY(0) scale(1)}
+  100%{opacity:0;transform:translateY(-80px) scale(1.3)}
+}
+
+/* ===== Flying Star ===== */
+.flying-star{
+  position:absolute;z-index:3000;pointer-events:none;font-size:18px;
+  animation:starFly 0.8s ease-out forwards;
+}
+@keyframes starFly{
+  0%{opacity:1;transform:translate(0,0) scale(1) rotate(0deg)}
+  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0.3) rotate(360deg)}
+}
+
 /* ===== Reward Popup ===== */
 #reward-overlay{
   display:none;position:fixed;inset:0;z-index:2000;
@@ -173,18 +276,31 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px}
 }
 #reward-overlay.show{display:flex}
 .reward-card{
-  background:#1a1a2e;border:2px solid #ffd700;border-radius:20px;padding:32px 28px;
-  text-align:center;max-width:340px;width:90%;animation:popIn .4s ease;
+  background:linear-gradient(135deg,#1a1a2e,#2a1a3e);border:2px solid #ffd700;border-radius:24px;padding:36px 32px;
+  text-align:center;max-width:360px;width:90%;
+  animation:rewardBounce .6s cubic-bezier(.175,.885,.32,1.275) forwards;
+  box-shadow:0 0 60px rgba(255,215,0,.2), 0 20px 40px rgba(0,0,0,.5);
 }
-@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes rewardBounce{
+  0%{transform:scale(.3);opacity:0}
+  50%{transform:scale(1.08);opacity:1}
+  70%{transform:scale(.95)}
+  100%{transform:scale(1)}
+}
+.reward-card .rw-emoji{font-size:48px;margin-bottom:8px;animation:rewardSpin 1s ease-out}
+@keyframes rewardSpin{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
 .reward-card .rw-stars{font-size:28px;margin-bottom:8px;color:#ffd700}
-.reward-card h3{font-size:20px;color:#ffd700;margin-bottom:12px}
-.reward-card .rw-xp{font-size:28px;font-weight:900;color:#00ffaa;margin:8px 0}
-.reward-card .rw-title{font-size:15px;color:#aa66ff;margin:8px 0 16px;font-weight:700}
+.reward-card h3{font-size:22px;color:#ffd700;margin-bottom:12px;font-weight:900}
+.reward-card .rw-xp{font-size:32px;font-weight:900;color:#00ffaa;margin:8px 0;text-shadow:0 0 20px rgba(0,255,170,.3)}
+.reward-card .rw-title{font-size:16px;color:#aa66ff;margin:8px 0 6px;font-weight:700}
+.reward-card .rw-unlock{font-size:13px;color:#888;margin-bottom:16px}
 .reward-card .rw-close{
-  background:#ffd700;color:#0d0d1a;border:none;border-radius:10px;padding:12px 32px;
-  font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;
+  background:linear-gradient(135deg,#ffd700,#ffaa00);color:#0d0d1a;border:none;border-radius:14px;padding:14px 36px;
+  font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;
+  box-shadow:0 4px 15px rgba(255,215,0,.3);transition:all .2s;
 }
+.reward-card .rw-close:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,215,0,.4)}
+.reward-card .rw-close:active{transform:scale(.95)}
 
 /* ===== Celebration Particles ===== */
 .particle{
@@ -196,9 +312,26 @@ main{max-width:600px;margin:0 auto;padding:72px 16px 24px}
   100%{opacity:0;transform:translateY(100vh) rotate(720deg) scale(0)}
 }
 
-/* ===== Footer ===== */
-footer{text-align:center;padding:40px 16px 20px;color:#555;font-size:13px}
-footer span{color:#ffd700}
+/* ===== Confetti ===== */
+.confetti{
+  position:fixed;pointer-events:none;z-index:2001;
+  width:8px;height:14px;border-radius:2px;
+  animation:confettiFall var(--fall-duration,2.5s) ease-out forwards;
+}
+@keyframes confettiFall{
+  0%{opacity:1;transform:translateY(0) rotate(0deg) scale(1)}
+  50%{opacity:1}
+  100%{opacity:0;transform:translateY(100vh) rotate(var(--spin,720deg)) scale(0.5)}
+}
+
+/* ===== Adventure Log (footer) ===== */
+.adventure-log{
+  text-align:center;padding:30px 20px 20px;color:#666;font-size:13px;
+  position:relative;z-index:1;
+}
+.adventure-log .log-title{color:#aa66ff;font-size:14px;font-weight:700;margin-bottom:6px}
+.adventure-log .log-family{color:#888;margin-bottom:4px}
+.adventure-log .log-motto{font-size:11px;color:#555;font-style:italic}
 
 /* ===== Responsive ===== */
 @media(min-width:640px){
@@ -214,16 +347,19 @@ footer span{color:#ffd700}
   <span class="topbar-title">魔方闯关</span>
   <div class="topbar-progress"><div class="topbar-fill" id="progressFill" style="width:0%"></div></div>
   <span class="topbar-xp" id="xpDisplay">0 XP</span>
-  <span class="topbar-badge" id="badgeDisplay">学徒</span>
+  <span class="topbar-role" id="roleDisplay">🧒</span>
+  <span class="topbar-badge" id="badgeDisplay">魔方新手</span>
 </div>
 
 <!-- Reward Overlay -->
 <div id="reward-overlay">
   <div class="reward-card">
+    <div class="rw-emoji" id="rwEmoji"></div>
     <div class="rw-stars" id="rwStars"></div>
     <h3 id="rwTitle">闯关成功!</h3>
     <div class="rw-xp" id="rwXp">+0 XP</div>
     <div class="rw-title" id="rwBadge"></div>
+    <div class="rw-unlock" id="rwUnlock"></div>
     <button class="rw-close" onclick="closeReward()">继续冒险</button>
   </div>
 </div>
@@ -243,7 +379,7 @@ footer span{color:#ffd700}
   <div class="card-body">
     <div class="story-box">
       <div class="story-label">剧情</div>
-      <p>欢迎来到魔方世界! 你是一名刚刚踏入这个奇妙世界的魔方学徒。在这里，每一次转动都是一次探索，每一个颜色都有它的位置。让我们从最基本的认识开始，揭开魔方的神秘面纱。</p>
+      <p>在遥远的色彩王国，有一座神奇的魔方城堡。城堡被黑暗巫师打乱了，每一面都变得混乱不堪。你，一位勇敢的小魔法师，被选中来拯救这座城堡。冒险开始了!</p>
     </div>
 
     <div class="know-box">
@@ -271,24 +407,24 @@ footer span{color:#ffd700}
 
       <div class="quiz-q">Q1: 魔方一共有几个面？</div>
       <div class="quiz-opts" id="q1-1">
-        <button class="quiz-btn" onclick="checkQuiz(this,1,1,false)">4个</button>
-        <button class="quiz-btn" onclick="checkQuiz(this,1,1,true)">6个</button>
-        <button class="quiz-btn" onclick="checkQuiz(this,1,1,false)">8个</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,1,false,'6个')">4个</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,1,true,'')">6个</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,1,false,'6个')">8个</button>
       </div>
       <div class="quiz-result" id="qr1-1"></div>
 
       <div class="quiz-q" style="margin-top:16px">Q2: 魔方有几个角块？</div>
       <div class="quiz-opts" id="q1-2">
-        <button class="quiz-btn" onclick="checkQuiz(this,1,2,false)">6个</button>
-        <button class="quiz-btn" onclick="checkQuiz(this,1,2,true)">8个</button>
-        <button class="quiz-btn" onclick="checkQuiz(this,1,2,false)">12个</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,2,false,'8个')">6个</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,2,true,'')">8个</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,2,false,'8个')">12个</button>
       </div>
       <div class="quiz-result" id="qr1-2"></div>
 
       <div class="quiz-q" style="margin-top:16px">Q3: 中心块会动吗？</div>
       <div class="quiz-opts" id="q1-3">
-        <button class="quiz-btn" onclick="checkQuiz(this,1,3,false)">会动</button>
-        <button class="quiz-btn" onclick="checkQuiz(this,1,3,true)">不会动</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,3,false,'不会动')">会动</button>
+        <button class="quiz-btn" onclick="checkQuiz(this,1,3,true,'')">不会动</button>
       </div>
       <div class="quiz-result" id="qr1-3"></div>
     </div>
@@ -310,7 +446,7 @@ footer span{color:#ffd700}
   <div class="card-body">
     <div class="story-box">
       <div class="story-label">剧情</div>
-      <p>每个魔方高手都有自己的"武功秘籍"。而我们的秘籍，核心其实只有4个动作。掌握了这4招，你就掌握了还原魔方的根基。准备好了吗？让我们开始修炼!</p>
+      <p>城堡守护者交给你一本秘籍，上面只写了四个字——上去下回。"记住这四个字，"守护者说，"它是你最强大的武器。"</p>
     </div>
 
     <div class="know-box">
@@ -367,7 +503,7 @@ footer span{color:#ffd700}
   <div class="card-body">
     <div class="story-box">
       <div class="story-label">剧情</div>
-      <p>想象魔方是一栋三层楼的房子。一楼地板要铺白色瓷砖，但我们不能直接铺 -- 要先在屋顶(顶面)种一朵"小黄花"。所谓小黄花，就是让4个白色棱块都到顶面，形成十字形。这是铺地板的第一步!</p>
+      <p>你来到城堡一楼。地板一片狼藉，白色瓷砖散落各处。守护者说："先在屋顶种一朵小黄花，它会指引你找到每一块白色瓷砖的位置。"</p>
     </div>
 
     <div class="know-box">
@@ -415,7 +551,7 @@ footer span{color:#ffd700}
   <div class="card-body">
     <div class="story-box">
       <div class="story-label">剧情</div>
-      <p>小黄花在屋顶盛开了! 现在要把花瓣翻到一楼，让底面形成完美的白色十字。这一步的关键是"找家长" -- 每个棱块都要找到自己的家。</p>
+      <p>小黄花绽放了! 花瓣指向四个方向。现在你要顺着花瓣的指引，把白色瓷砖一块块翻到一楼地板上，拼成一个闪耀的白色十字。</p>
     </div>
 
     <div class="know-box">
@@ -462,7 +598,7 @@ footer span{color:#ffd700}
   <div class="card-body">
     <div class="story-box">
       <div class="story-label">剧情</div>
-      <p>白色十字地板铺好了! 现在要把四个角落也铺上白色，让整个一楼底面变成纯白色。好消息是 -- 你需要的公式就是你已经学会的"上去下回"!</p>
+      <p>十字地板铺好了! 但四个角落还空着。城堡的角落住着四个迷路的角块精灵，它们有三张脸，你需要帮每个精灵找到自己的家。</p>
     </div>
 
     <div class="know-box">
@@ -514,7 +650,7 @@ footer span{color:#ffd700}
   <div class="card-body">
     <div class="story-box">
       <div class="story-label">剧情</div>
-      <p>一楼装修完工! 现在上二楼，把中间层的4个棱块全部归位。这一步用到的新招式叫"开门-上去-关门"，其实本质还是我们的老朋友"上去下回"的变体。</p>
+      <p>一楼完工! 你踏上楼梯来到二楼。这里的墙壁颜色错乱，每面墙都混着不同的颜色。守护者教你新招式——开门→上去→关门。</p>
     </div>
 
     <div class="know-box">
@@ -553,7 +689,7 @@ footer span{color:#ffd700}
   <div class="card-body">
     <div class="story-box">
       <div class="story-label">剧情</div>
-      <p>前两层已经完美! 最后一层 -- 三楼的屋顶。先让顶面全部变成黄色。这里要用到"眼镜公式"，它的核心其实还是我们的R U R' U'!</p>
+      <p>二楼装修完毕! 你终于来到三楼屋顶。黄色的屋顶瓦片需要重新排列。守护者拿出了最后的秘密武器——眼镜公式。</p>
     </div>
 
     <div class="know-box">
@@ -590,7 +726,7 @@ footer span{color:#ffd700}
   <div class="card-body">
     <div class="story-box">
       <div class="story-label">剧情</div>
-      <p>最后的最后! 顶面已经全黄，但顶层方块的位置和方向可能还没对齐。调整好它们，魔方就彻底还原了! 你即将成为真正的魔方大师!</p>
+      <p>屋顶快完成了! 最后一步——调整每块瓦片的方向，让整个城堡焕然一新。黑暗巫师的魔咒被彻底打破! 色彩王国重新恢复了光明!</p>
     </div>
 
     <div class="know-box">
@@ -617,13 +753,36 @@ footer span{color:#ffd700}
 
 </main>
 
-<footer>
-  <span>布斯和女儿一起学魔方</span> &middot; 2026
-</footer>
+<!-- Adventure Log -->
+<div class="adventure-log">
+  <p class="log-title">&#x1F3F0; 色彩王国冒险日志</p>
+  <p class="log-family">&#x1F468;&#x200D;&#x1F467; 布斯和女儿一起学魔方</p>
+  <p class="log-motto">先跑通一个方法，再优化找更好的办法</p>
+</div>
 
 <script>
 (function(){
   'use strict';
+
+  // ===== Rank System =====
+  const RANKS = [
+    { xp: 0,   title: '魔方新手',     emoji: '🧒' },
+    { xp: 30,  title: '上去下回学徒', emoji: '🧙‍♂️' },
+    { xp: 90,  title: '花匠',         emoji: '🌼' },
+    { xp: 160, title: '十字骑士',     emoji: '⚔️' },
+    { xp: 240, title: '一楼包工头',   emoji: '🏗️' },
+    { xp: 330, title: '二楼设计师',   emoji: '🎨' },
+    { xp: 430, title: '屋顶工程师',   emoji: '⭐' },
+    { xp: 580, title: '魔方大师',     emoji: '👑' }
+  ];
+
+  function getCurrentRank(xp){
+    let rank = RANKS[0];
+    for(let i = RANKS.length - 1; i >= 0; i--){
+      if(xp >= RANKS[i].xp){ rank = RANKS[i]; break; }
+    }
+    return rank;
+  }
 
   // ===== State =====
   const TOTAL_LEVELS = 8;
@@ -637,9 +796,9 @@ footer span{color:#ffd700}
       completedLevels: [],
       xp: 0,
       badges: [],
-      quizPassed: {},   // { '1': {1:true,2:true,3:true} }
-      counters: {},     // { '2': 7 }
-      confirms: {}      // { '3': true }
+      quizPassed: {},
+      counters: {},
+      confirms: {}
     };
   }
 
@@ -660,8 +819,10 @@ footer span{color:#ffd700}
     const pct = Math.round((state.completedLevels.length / TOTAL_LEVELS) * 100);
     document.getElementById('progressFill').style.width = pct + '%';
     document.getElementById('xpDisplay').textContent = state.xp + ' XP';
-    const latestBadge = state.badges.length ? state.badges[state.badges.length - 1] : '学徒';
-    document.getElementById('badgeDisplay').textContent = latestBadge;
+
+    const rank = getCurrentRank(state.xp);
+    document.getElementById('roleDisplay').textContent = rank.emoji;
+    document.getElementById('badgeDisplay').textContent = rank.title;
 
     for(let i = 1; i <= TOTAL_LEVELS; i++){
       const card = document.getElementById('lv' + i);
@@ -671,26 +832,11 @@ footer span{color:#ffd700}
 
       card.classList.toggle('locked', !unlocked);
       card.classList.toggle('completed', completed);
-
-      // Show lock icon
-      const hdr = card.querySelector('.card-header');
-      let lockEl = hdr.querySelector('.lock-icon');
-      if(!unlocked){
-        if(!lockEl){
-          lockEl = document.createElement('span');
-          lockEl.className = 'lock-icon';
-          lockEl.textContent = '🔒';
-          hdr.appendChild(lockEl);
-        }
-      } else if(lockEl){
-        lockEl.remove();
-      }
     }
 
     // Restore quiz states
     Object.keys(state.quizPassed).forEach(lv => {
       const quizzes = state.quizPassed[lv];
-      // disable answered quiz buttons
       Object.keys(quizzes).forEach(qn => {
         const container = document.getElementById('q' + lv + '-' + qn);
         if(container){
@@ -700,7 +846,6 @@ footer span{color:#ffd700}
       });
     });
 
-    // Check complete button states
     checkCompleteButtons();
   }
 
@@ -733,11 +878,38 @@ footer span{color:#ffd700}
     });
   }
 
+  // ===== Floating XP =====
+  function showFloatingXP(el, text){
+    const rect = el.getBoundingClientRect();
+    const float = document.createElement('div');
+    float.className = 'floating-xp';
+    float.textContent = text;
+    float.style.left = rect.left + rect.width / 2 - 40 + 'px';
+    float.style.top = rect.top - 10 + 'px';
+    document.body.appendChild(float);
+    setTimeout(() => float.remove(), 1300);
+  }
+
+  // ===== Flying Star =====
+  function showFlyingStar(el){
+    const rect = el.getBoundingClientRect();
+    const star = document.createElement('div');
+    star.className = 'flying-star';
+    star.textContent = '⭐';
+    const dx = (Math.random() - 0.5) * 120;
+    const dy = -(30 + Math.random() * 60);
+    star.style.setProperty('--dx', dx + 'px');
+    star.style.setProperty('--dy', dy + 'px');
+    star.style.left = rect.left + rect.width / 2 - 9 + 'px';
+    star.style.top = rect.top + 'px';
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 900);
+  }
+
   // ===== Toggle Card =====
   window.toggleCard = function(lv){
     const card = document.getElementById('lv' + lv);
     if(!card || card.classList.contains('locked')) return;
-    // Close others
     document.querySelectorAll('.level-card.active').forEach(c => {
       if(c !== card) c.classList.remove('active');
     });
@@ -745,7 +917,7 @@ footer span{color:#ffd700}
   };
 
   // ===== Quiz =====
-  window.checkQuiz = function(btn, level, qNum, correct){
+  window.checkQuiz = function(btn, level, qNum, correct, correctAnswer){
     const container = btn.parentElement;
     const btns = container.querySelectorAll('.quiz-btn');
     btns.forEach(b => b.disabled = true);
@@ -757,19 +929,22 @@ footer span{color:#ffd700}
       resultEl.textContent = '正确!';
       resultEl.style.color = '#00ffaa';
 
+      // Floating XP
+      showFloatingXP(btn, '✅ +10 XP');
+
       if(!state.quizPassed[level]) state.quizPassed[level] = {};
       state.quizPassed[level][qNum] = true;
       saveState();
       checkCompleteButtons();
     } else {
       btn.classList.add('wrong');
-      resultEl.textContent = '再想想... 答错了也没关系!';
+      resultEl.innerHTML = '答错啦~ 正确答案是: <strong style="color:#00ffaa">' + correctAnswer + '</strong>';
       resultEl.style.color = '#ff4466';
-      // Re-enable after 1.5s
+      // Re-enable after 2s
       setTimeout(() => {
         btns.forEach(b => {b.disabled = false; b.classList.remove('wrong');});
         resultEl.textContent = '';
-      }, 1500);
+      }, 2000);
     }
   };
 
@@ -779,6 +954,11 @@ footer span{color:#ffd700}
     state.counters[level]++;
     const display = document.getElementById('cnt' + level);
     if(display) display.textContent = state.counters[level];
+
+    // Flying star effect
+    const btn = document.getElementById('cnt' + level + 'btn');
+    if(btn) showFlyingStar(btn);
+
     saveState();
     checkCompleteButtons();
   };
@@ -804,11 +984,11 @@ footer span{color:#ffd700}
     }
     saveState();
 
+    // Full-screen confetti
+    spawnConfetti();
+
     // Show reward
     showReward(level, xp, badge);
-
-    // Celebration particles
-    spawnParticles();
 
     updateUI();
 
@@ -826,10 +1006,22 @@ footer span{color:#ffd700}
   // ===== Reward Popup =====
   function showReward(level, xp, badge){
     const overlay = document.getElementById('reward-overlay');
+    const rank = getCurrentRank(state.xp);
+
+    document.getElementById('rwEmoji').textContent = rank.emoji;
     document.getElementById('rwStars').textContent = level === 8 ? '★★★★★' : '★★★';
-    document.getElementById('rwTitle').textContent = level === 8 ? '恭喜通关! 你是魔方大师!' : '第' + level + '关 闯关成功!';
+    document.getElementById('rwTitle').textContent = level === 8 ? '恭喜通关! 色彩王国已拯救!' : '第' + level + '关 闯关成功!';
     document.getElementById('rwXp').textContent = '+' + xp + ' XP';
-    document.getElementById('rwBadge').textContent = badge ? ('获得称号: ' + badge) : '';
+    document.getElementById('rwBadge').textContent = badge ? ('新称号: ' + rank.emoji + ' ' + badge) : '';
+
+    // Unlock info
+    const unlockEl = document.getElementById('rwUnlock');
+    if(level < TOTAL_LEVELS){
+      unlockEl.textContent = '已解锁第 ' + (level + 1) + ' 关!';
+    } else {
+      unlockEl.textContent = '全部关卡已完成!';
+    }
+
     overlay.classList.add('show');
   }
 
@@ -837,17 +1029,32 @@ footer span{color:#ffd700}
     document.getElementById('reward-overlay').classList.remove('show');
   };
 
-  // ===== Particles =====
-  function spawnParticles(){
-    const symbols = ['★','✦','✨','✶','◆','❤'];
-    const colors = ['#ffd700','#00ffaa','#00ccff','#ff88aa','#aa66ff','#ff6633'];
-    for(let i = 0; i < 30; i++){
+  // ===== Confetti =====
+  function spawnConfetti(){
+    const colors = ['#ffd700','#00ffaa','#00ccff','#ff88aa','#aa66ff','#ff6633','#ff4466','#44ff88'];
+    for(let i = 0; i < 60; i++){
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      c.style.left = (Math.random() * 100) + 'vw';
+      c.style.top = (Math.random() * -20 - 5) + 'vh';
+      c.style.background = colors[Math.floor(Math.random() * colors.length)];
+      c.style.setProperty('--fall-duration', (1.5 + Math.random() * 2) + 's');
+      c.style.setProperty('--spin', (360 + Math.random() * 720) + 'deg');
+      c.style.width = (6 + Math.random() * 6) + 'px';
+      c.style.height = (10 + Math.random() * 10) + 'px';
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      c.style.animationDelay = (Math.random() * 0.6) + 's';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 4000);
+    }
+    // Also spawn emoji particles
+    const symbols = ['★','✦','✨','✶','🎉','🎊'];
+    for(let i = 0; i < 20; i++){
       const p = document.createElement('div');
       p.className = 'particle';
       p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
       p.style.left = (Math.random() * 100) + 'vw';
       p.style.top = (Math.random() * 30 - 10) + 'vh';
-      p.style.color = colors[Math.floor(Math.random() * colors.length)];
       p.style.fontSize = (16 + Math.random() * 20) + 'px';
       p.style.animationDuration = (1 + Math.random() * 1.5) + 's';
       p.style.animationDelay = (Math.random() * 0.5) + 's';
